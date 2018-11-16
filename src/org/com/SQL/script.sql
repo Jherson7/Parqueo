@@ -171,7 +171,7 @@ ENGINE = InnoDB;
 -- inserciones de rol
 insert into rol (nombre_rol) values('admin'),('usuario');
 
-
+-- procedimientos 
 
 -- procedimiento para actualizar el ticket
 delimiter //
