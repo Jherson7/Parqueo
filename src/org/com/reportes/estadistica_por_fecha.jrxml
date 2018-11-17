@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estadistica_por_fecha" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c0fc8797-d473-43f7-ab3a-5e5bb9a424fe">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fecha_desde" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha_hasta" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select sum(total) as TOTAL, DATE_FORMAT(hora_ingreso,"%M %d %Y") as FECHA from ticket WHERE hora_ingreso between $P{fecha_desde} and $P{fecha_hasta}  group by(hora_ingreso);]]>
+	</queryString>
+	<field name="TOTAL" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FECHA" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="112" splitType="Stretch">
+			<staticText>
+				<reportElement x="60" y="0" width="446" height="33" uuid="c198082b-7841-4101-b10a-43a2213ac9e5"/>
+				<textElement textAlignment="Center">
+					<font fontName="MS Reference Sans Serif" size="24" isBold="true" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE VENTAS POR FECHA]]></text>
+			</staticText>
+			<line>
+				<reportElement x="86" y="61" width="372" height="1" uuid="8666ce92-3f70-43a9-b742-65011574b985"/>
+			</line>
+			<staticText>
+				<reportElement x="358" y="33" width="45" height="20" uuid="3baf3327-2910-4759-baab-ffea504770e2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="234" y="61" width="104" height="20" uuid="56599533-2952-478c-910a-11bdbf1450b1"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rango de fechas]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement x="60" y="84" width="446" height="20" uuid="e28d4047-8f4c-4077-9a93-b63e2623f947"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="71" y="87" width="72" height="16" uuid="3ccd4d9a-0512-49a1-a17b-38f1f5507bf0"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Inicial:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="331" y="87" width="72" height="16" uuid="ce55f391-f392-442e-a0d8-37a963780b0b"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Final:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="143" y="87" width="117" height="16" uuid="0ad8a05a-22e0-44b8-85a7-f861a8bd1609"/>
+				<textFieldExpression><![CDATA[
+new SimpleDateFormat("dd-MM-yyyy").format($P{fecha_desde})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="402" y="86" width="100" height="20" uuid="7fd66d46-c4a3-46af-85dd-1549115e1daa"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fecha_hasta})]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="406" y="33" width="100" height="20" uuid="797da764-cc87-4607-8490-0f02b8e22bbf"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="690" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="34" width="555" height="393" uuid="d1164529-265f-4815-8692-149bbdd66315"/>
+			</rectangle>
+			<barChart>
+				<chart>
+					<reportElement x="23" y="122" width="499" height="292" uuid="f09ed3fa-b8ca-4e70-96be-86150c08eb62"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Ingreso por fechas"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{FECHA}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{TOTAL}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<staticText>
+				<reportElement x="46" y="66" width="446" height="33" uuid="80f8ccc6-8cb1-4bef-a8bf-b25fffaf21dd"/>
+				<textElement textAlignment="Center">
+					<font fontName="MS Reference Sans Serif" size="18" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ESTADISTICAS DE INGRESO]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

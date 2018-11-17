@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e306afe4-7642-413d-856b-27d190b1cde3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="24"/>
+	<parameter name="fecha" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select  hour(hora_salida) as 'Hora  Salida', sum(total) as total,DATE_FORMAT(hora_ingreso,"%d-%m-%Y") 
+as fecha from ticket where CAST(hora_ingreso as date) = $P{fecha}
+group by hour(hora_salida), day(hora_salida)]]>
+	</queryString>
+	<field name="Hora  Salida" class="java.lang.Integer"/>
+	<field name="total" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="115" splitType="Stretch">
+			<line>
+				<reportElement x="82" y="65" width="372" height="1" uuid="c226a3f8-b387-47c9-991b-d73503da44f7"/>
+			</line>
+			<staticText>
+				<reportElement x="327" y="91" width="72" height="16" uuid="e87802c8-2c2e-4047-8142-4e789467d027"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Final:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="37" width="45" height="20" uuid="7d94aae1-859e-46ad-b8a1-fd544d4a5770"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="65" width="124" height="20" uuid="ac7def5c-bdc5-4265-8ba7-c377bae4ecde"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora vrs Ganancias]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement x="59" y="88" width="446" height="20" uuid="4a866a58-6ae3-4b60-8bab-7f400c640662"/>
+			</rectangle>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="402" y="37" width="100" height="20" uuid="5ba2a69e-e327-43bf-bf33-b2b9bdb97892"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="253" y="92" width="117" height="16" uuid="f844cf0c-ec83-4504-ab97-02898d4da2d2"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fecha})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="4" width="555" height="33" uuid="59e019bc-3337-4bcd-b8e7-7c5ff097380c"/>
+				<textElement textAlignment="Center">
+					<font fontName="MS Reference Sans Serif" size="24" isBold="true" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE VENTAS POR FECHA Y HORA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="208" y="91" width="41" height="16" uuid="508d818c-b07f-4bc7-add7-1b8df691ba30"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="613" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="34" y="9" width="468" height="568" uuid="7fa4348f-5898-4c9e-aed2-fbfc122d3c5c"/>
+			</rectangle>
+			<stackedBarChart>
+				<chart>
+					<reportElement x="59" y="29" width="427" height="528" uuid="08c9e74c-6d00-4013-aa8e-34a1ce80a802"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{Hora  Salida} +" Hrs"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{Hora  Salida}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{total}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</stackedBarChart>
+		</band>
+	</detail>
+</jasperReport>

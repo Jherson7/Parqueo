@@ -1,0 +1,363 @@
+package org.com.vistas;
+
+import java.awt.GridLayout;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import org.com.Serial.EscritorSerial;
+import org.com.bens.descuento;
+import org.com.bens.ticket;
+import org.com.controler.descuento_controller;
+import org.com.logica.Cobro;
+import org.com.logica.Controlador;
+import org.com.logica.monto_cobro;
+
+/**
+ *
+ * @author Jherson
+ */
+public class cobrar_ticket extends javax.swing.JInternalFrame {
+    private String codigo="";
+    monto_cobro temp;
+    
+    public cobrar_ticket() {
+       
+        
+        initComponents();
+        combo_descuento.setModel(descuento_controller.getCombo());
+        combo_descuento.setEnabled(false);
+        iniciar_hilo();
+    }
+
+  
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        combo_descuento = new javax.swing.JComboBox();
+        chk_descuento = new javax.swing.JCheckBox();
+        panel_cobro = new javax.swing.JPanel();
+        btn_cobrar1 = new javax.swing.JButton();
+        scroll_detalles = new javax.swing.JScrollPane();
+        chk_extraviado = new javax.swing.JCheckBox();
+        txt_codigo = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        lbl_estado = new javax.swing.JLabel();
+
+        combo_descuento.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
+        combo_descuento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combo_descuento.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                combo_descuentoItemStateChanged(evt);
+            }
+        });
+
+        chk_descuento.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 11)); // NOI18N
+        chk_descuento.setText("Aplicar Descuento?");
+        chk_descuento.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                chk_descuentoStateChanged(evt);
+            }
+        });
+        chk_descuento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chk_descuentoActionPerformed(evt);
+            }
+        });
+
+        panel_cobro.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalles del Cobro"));
+
+        btn_cobrar1.setBackground(new java.awt.Color(0, 153, 153));
+        btn_cobrar1.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 18)); // NOI18N
+        btn_cobrar1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_cobrar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/com/pictures/dinero.png"))); // NOI18N
+        btn_cobrar1.setText("COBRAR");
+        btn_cobrar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cobrar1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel_cobroLayout = new javax.swing.GroupLayout(panel_cobro);
+        panel_cobro.setLayout(panel_cobroLayout);
+        panel_cobroLayout.setHorizontalGroup(
+            panel_cobroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btn_cobrar1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+            .addComponent(scroll_detalles)
+        );
+        panel_cobroLayout.setVerticalGroup(
+            panel_cobroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_cobroLayout.createSequentialGroup()
+                .addComponent(scroll_detalles, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_cobrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        chk_extraviado.setFont(new java.awt.Font("MS Gothic", 2, 12)); // NOI18N
+        chk_extraviado.setText("Ticket Extraviado");
+        chk_extraviado.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                chk_extraviadoStateChanged(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
+        jLabel1.setText("Leyendo Ticket:");
+
+        lbl_estado.setFont(new java.awt.Font("MS Reference Sans Serif", 3, 12)); // NOI18N
+        lbl_estado.setText("Estado");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chk_descuento)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(combo_descuento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(panel_cobro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addComponent(chk_extraviado))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_estado)))
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lbl_estado))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(chk_descuento)
+                .addGap(7, 7, 7)
+                .addComponent(combo_descuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chk_extraviado)
+                .addGap(12, 12, 12)
+                .addComponent(panel_cobro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void chk_descuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chk_descuentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chk_descuentoActionPerformed
+
+    private void realizar_calculo() {
+        int id_desc = 0;
+
+        if (!"Listo!".equals(lbl_estado.getText())) {
+            JOptionPane.showMessageDialog(this, "No se ha detectado codigo, por favor intente de nuevo!", "ERROR", 0);
+            iniciar_hilo();
+            return;
+        }
+        if (combo_descuento.getSelectedIndex() >= 0&& chk_descuento.isSelected()) {
+            descuento desc = (descuento) combo_descuento.getSelectedItem();
+            id_desc = desc.getId_descuento();
+        }
+        temp = Cobro.calcular_costo("45786", id_desc);//cambiar por el codigo escaneado
+        mostrar_calculo();
+        
+    }
+    
+    private void mostrar_calculo(){
+        
+        JPanel panel_detalles = new JPanel();
+        panel_detalles.setLayout(new GridLayout(temp.detalles.size()+5, 1));
+        
+        for(String s:temp.detalles){
+            JLabel lable = new JLabel(s);
+            panel_detalles.add(lable);
+        }
+        
+        panel_detalles.add(new JLabel("------------------------------"));
+        panel_detalles.add(new JLabel("Sub Total:   Q."+temp.getTicket().getSubtotal()));
+        panel_detalles.add(new JLabel("Descuento:   Q."+temp.getTicket().getDescuento()));
+        panel_detalles.add(new JLabel("Total:       Q."+temp.getTicket().getTotal()));
+        panel_detalles.add(new JLabel("------------------------------"));
+        
+        panel_detalles.repaint();
+        scroll_detalles.setViewportView(panel_detalles);
+        scroll_detalles.repaint();
+    }
+    
+    private void chk_descuentoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chk_descuentoStateChanged
+        // TODO add your handling code here:
+        if(chk_descuento.isSelected()){
+            combo_descuento.setEnabled(true);
+        }else{
+            if(temp!=null){
+                temp.getTicket().setDescuento(0);
+                temp.getTicket().setTotal(temp.getTicket().getSubtotal());
+                mostrar_calculo();
+            }
+            combo_descuento.setEnabled(false);
+        }
+    }//GEN-LAST:event_chk_descuentoStateChanged
+
+    private void chk_extraviadoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chk_extraviadoStateChanged
+      if (chk_extraviado.isSelected()) {
+            setearTotalTicketExtraviado();
+      }
+    }//GEN-LAST:event_chk_extraviadoStateChanged
+
+    private void btn_cobrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cobrar1ActionPerformed
+        // TODO add your handling code here:
+        if (chk_extraviado.isSelected()) {
+            int a = Cobro.realizar_cobro_extraviado(temp.getTicket());
+            if (a != 1) {
+                JOptionPane.showMessageDialog(null, "Se inserto correctamente el ticket extraviado:" + codigo, "Panel de Cobro", 1);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR al insertar el ticket extraviado: " + codigo, "Panel de Cobro", 0);
+            }
+        }else{
+            if(temp!=null){
+             int a = Cobro.realizar_cobro(temp.getTicket());
+                if (a != 1) {
+                    JOptionPane.showMessageDialog(null, "Se cobro correctamente el ticket", "Panel de Cobro", 1);
+                    EscritorSerial.escribir_en_serial("abrir");//se envia a la dispensadora el mensaje para apertura
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR al cobrar el ticket", "Panel de Cobro", 0);
+                    //estado= "Fallido";
+                }
+            }
+            else
+                JOptionPane.showMessageDialog(this, "No se ha detectado ticket!","ERROR",0);
+        }
+
+        
+    }//GEN-LAST:event_btn_cobrar1ActionPerformed
+
+    private void combo_descuentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo_descuentoItemStateChanged
+        // TODO add your handling code here:
+        float descuento;
+        if(combo_descuento.getSelectedIndex()>0){
+            if (temp==null){
+                JOptionPane.showMessageDialog(this, "No se ha detectado ticket, por favor escanee ticket","ERROR",0);;
+            }else{
+                descuento desc = (descuento) combo_descuento.getSelectedItem();
+                if (desc.getPorcetaje() > 0) {
+                   float res = desc.getPorcetaje();
+                   res = res/100;
+                   descuento=   (float) (res *temp.getTicket().getSubtotal());//descuento por porcentaje
+                    
+                } else {
+                    float calculo = desc.getMinutos_descuento();
+                    calculo = calculo / 60;
+                    descuento = (float) (calculo * temp.getTarifa());//descuento por minutos
+                }
+                
+                temp.getTicket().setDescuento(descuento);
+                temp.getTicket().setTotal(temp.getTicket().getSubtotal()-descuento);
+                mostrar_calculo();
+            }
+        }
+        
+        
+    }//GEN-LAST:event_combo_descuentoItemStateChanged
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_cobrar1;
+    private javax.swing.JCheckBox chk_descuento;
+    private javax.swing.JCheckBox chk_extraviado;
+    private javax.swing.JComboBox combo_descuento;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lbl_estado;
+    private javax.swing.JPanel panel_cobro;
+    private javax.swing.JScrollPane scroll_detalles;
+    private javax.swing.JTextField txt_codigo;
+    // End of variables declaration//GEN-END:variables
+
+   private void iniciar_hilo() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int numero =0;
+                for (int i = 0; i < 60; i++,numero++) {
+                    //System.out.println("Cerdo " + i);
+                    txt_codigo.requestFocus();
+                    if(!"".equals(txt_codigo.getText())){
+
+                        codigo = txt_codigo.getText();
+                        //JOptionPane.showMessageDialog(null, codigo);
+                        lbl_estado.setText("Listo!");
+                        chk_extraviado.setEnabled(false);
+                        realizar_calculo();
+                        return;
+                    }
+                    
+                    String esperando ="esperando";
+                    for(int x =0; x< numero; x++)
+                        esperando+=".";
+                    lbl_estado.setText(esperando);
+                    
+                    if(numero>=4)
+                        numero =0;
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        
+        thread.start();
+    }
+
+    private void setearTotalTicketExtraviado() {
+        ticket tick = new ticket();
+        
+        tick.setDescuento(0);
+        tick.setSubtotal(100.0);
+        tick.setTotal(100.0);
+        tick.setTurno(Controlador.getTurno_actual().getId_turno());
+        
+        JLabel total = new JLabel("Total:     Q.100");
+        JLabel sub = new JLabel("Subtotal:    Q.100");
+        JLabel desc = new JLabel("Descuento:  Q.0");
+        //JLabel estado = new JLabel("Estado:\t\tExitoso");
+        JLabel line = new JLabel("-----------------------");
+        
+        JPanel panel_detalles = new JPanel();
+        panel_detalles.setLayout(new GridLayout(5, 1));
+        
+        panel_detalles.add(total);
+        panel_detalles.add(sub);
+        panel_detalles.add(desc);
+        panel_detalles.add(line);
+        panel_detalles.repaint();
+        
+        if(temp==null){
+            temp= new monto_cobro();
+        }
+        
+        temp.setTicket(tick);//ver como le hago con el id
+       
+        scroll_detalles.setViewportView(panel_detalles);
+        scroll_detalles.repaint();
+        
+        chk_descuento.setSelected(false);
+        
+    }
+}
