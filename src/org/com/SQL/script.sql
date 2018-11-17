@@ -193,8 +193,6 @@ set @maxid = (select max(idturno) from turno);
 select * from turno where idturno = @maxid;
 end//
 
-drop procedure aperturar_turno;
-
 
 delimiter //
 create procedure consultar_turno(parqueo int) 
