@@ -2,11 +2,14 @@ package org.com.db;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import org.com.bens.reporte_estadistica;
 import org.com.bens.reporte_hora_fecha_beans;
+import org.com.bens.reporte_tickets;
+import org.com.bens.reporte_turno;
 
 /**
  *
@@ -93,4 +96,47 @@ public class reportes_db {
         return lista;
     }
     
+    public List<reporte_turno> retornar_reporte_por_turno(Date date,Date fin, int parqueo){
+        List<reporte_turno> lista = new LinkedList<>();
+        String fecha_incio =new SimpleDateFormat("yyyy-MM-dd").format(date);
+        String fecha_fin =new SimpleDateFormat("yyyy-MM-dd").format(fin);
+        
+        String query ="call get_total_por_turno('"+fecha_incio+"','"+fecha_fin+"',?)";
+        
+        try {
+            con.setPreparado(con.getConn().prepareStatement(query));
+            con.getPreparado().setInt(1, parqueo);
+            
+            res=con.getPreparado().executeQuery();
+            while(res.next()){
+                reporte_turno rep= new reporte_turno(res.getString(1),  res.getString(2),res.getString(3),res.getDouble(4));
+                lista.add(rep);
+            }
+        } catch (SQLException ex) {
+            System.out.println("ERROR en el reporte de ganancia turno "+ex.getLocalizedMessage());
+        }
+     
+        return lista;
+    }
+    
+    public List<reporte_tickets> reporte_tickets_pendientes(int parqueo){
+        List<reporte_tickets> lista = new LinkedList<>();
+
+        String query ="select DATE_FORMAT(t.hora_ingreso,\"%d-%m-%Y\") as 'Fecha Ingreso', t.codigo from ticket t \n" +
+                      "inner join turno tu on tu.idturno = t.fturno where t.total is NULL and tu.fparqueo =?";
+        try {
+            con.setPreparado(con.getConn().prepareStatement(query));
+            con.getPreparado().setInt(1, parqueo);
+            
+            res=con.getPreparado().executeQuery();
+            int contador=1;
+            while(res.next()){
+                reporte_tickets rep= new reporte_tickets(contador++,res.getString(1),  res.getString(2));
+                lista.add(rep);
+            }
+        } catch (SQLException ex) {
+            System.out.println("ERROR en el reporte de tickets extraviados "+ex.getLocalizedMessage());
+        }
+        return lista;
+    }
 }

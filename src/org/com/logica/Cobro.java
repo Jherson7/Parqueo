@@ -99,7 +99,8 @@ public class Cobro {
         if (Math.abs(dias - dia_inicio_parqueo) >= 1) {//tarifa de dias
             mon.detalles.add("Total dias: " + Math.abs(dias - dia_inicio_parqueo));
             mon.costo = Math.abs(dias - dia_inicio_parqueo) * 100.0;
-            return mon;
+            return retonar_cobro_por_dias(tick,lista,actual,Math.abs(dias - dia_inicio_parqueo));
+            //return mon;
         } else {
             //verifico en tarifas nocturas
             for (tarifa f : lista) {
@@ -225,8 +226,15 @@ public class Cobro {
         ticket.setHora_salida(timestamp);
         
         return cobro.insertar_ticket_extraviado(ticket);
+    }
+
+    private static monto_cobro retonar_cobro_por_dias(ticket tick, LinkedList<tarifa> lista, Timestamp actual,int dias) {
         
+        if(dias==1){
+            
+        }
         
+        return null;
         
     }
     

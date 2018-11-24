@@ -105,5 +105,33 @@ public class manejador_de_reportes {
             System.out.println(e.getMessage());
         }
     }
+ 
+ 
+ 
+ public static void reporte_ganancia_por_turno(Date de, Date hasta,int parqueo){
+        Conexion con;
+         try {
+            JasperReport  jr= (JasperReport) JRLoader.
+                   loadObject(manejador_de_reportes.
+                           class.getResourceAsStream("/org/com/reportes/reporte_ganancias_turno.jasper"));
+            
+            con=Conexion.getInstancia();
+            
+            Map parametros = new HashMap();
+            parametros.put("fecha_desde", de);
+            parametros.put("fecha_hasta", hasta);
+            parametros.put("parqueo", parqueo);
+            
+            JasperPrint jp;
+            jp = JasperFillManager.fillReport(jr, parametros, con.getConn());
+            JasperViewer visor = new JasperViewer(jp,false);
+            visor.setTitle("Reporte de ganancias por turno");
+            visor.setVisible(true);
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+        }
+       
+    }
+    
      
 }

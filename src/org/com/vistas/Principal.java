@@ -21,7 +21,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setExtendedState(MAXIMIZED_BOTH);
-        Controlador.iniciar_programa();
+      //  Controlador.iniciar_programa();
        
         /*if (Controlador.getUsuarioActual().getfRol()!=1){
             menu_administrador.setEnabled(false);
@@ -64,11 +64,14 @@ public class Principal extends javax.swing.JFrame {
         menu_fecha = new javax.swing.JMenuItem();
         menu_reporte_fecha_hora = new javax.swing.JMenuItem();
         menu_reporte_tiempo_promedio = new javax.swing.JMenuItem();
+        ganancia_turno = new javax.swing.JMenuItem();
+        tickets_pendientes = new javax.swing.JMenuItem();
         menu_administrador = new javax.swing.JMenu();
         menu_parqueo = new javax.swing.JMenuItem();
         menu_usuario = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         menu_descuentos = new javax.swing.JMenuItem();
+        menu_horario = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -184,6 +187,22 @@ public class Principal extends javax.swing.JFrame {
         });
         menu_reporte.add(menu_reporte_tiempo_promedio);
 
+        ganancia_turno.setText("Ganancia por turnos");
+        ganancia_turno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ganancia_turnoActionPerformed(evt);
+            }
+        });
+        menu_reporte.add(ganancia_turno);
+
+        tickets_pendientes.setText("Tickets pendientes de cobro");
+        tickets_pendientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tickets_pendientesActionPerformed(evt);
+            }
+        });
+        menu_reporte.add(tickets_pendientes);
+
         jMenuBar1.add(menu_reporte);
 
         menu_administrador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/com/pictures/bloqueado.png"))); // NOI18N
@@ -229,6 +248,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         menu_administrador.add(menu_descuentos);
+
+        menu_horario.setText("Horario Laboral");
+        menu_horario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_horarioActionPerformed(evt);
+            }
+        });
+        menu_administrador.add(menu_horario);
 
         jMenuBar1.add(menu_administrador);
 
@@ -316,6 +343,22 @@ public class Principal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(jMenu1, "El saldo de su ultimo turno fue de: Q."+res,"SALDO",1);
     }//GEN-LAST:event_ultimo_saldoActionPerformed
 
+    private void menu_horarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_horarioActionPerformed
+        // TODO add your handling code here:
+        hora_inicio_fin_parqueo hora = new hora_inicio_fin_parqueo();
+        mostrarVentanasInternas(hora, "Gestion de horario laboral");
+    }//GEN-LAST:event_menu_horarioActionPerformed
+
+    private void ganancia_turnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ganancia_turnoActionPerformed
+        // TODO add your handling code here:
+        mostrarVentanasInternas(new reporte_ganancia_por_turno(), "Reporte Ganancia por turno");
+    }//GEN-LAST:event_ganancia_turnoActionPerformed
+
+    private void tickets_pendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tickets_pendientesActionPerformed
+        // TODO add your handling code here:
+        mostrarVentanasInternas(new reporte_tickets_pendientes(), "Tickets Pendientes");
+    }//GEN-LAST:event_tickets_pendientesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -352,6 +395,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem ganancia_turno;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
@@ -364,12 +408,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu menu_cobro;
     private javax.swing.JMenuItem menu_descuentos;
     private javax.swing.JMenuItem menu_fecha;
+    private javax.swing.JMenuItem menu_horario;
     private javax.swing.JMenuItem menu_parqueo;
     private javax.swing.JMenu menu_reporte;
     private javax.swing.JMenuItem menu_reporte_fecha_hora;
     private javax.swing.JMenuItem menu_reporte_tiempo_promedio;
     private javax.swing.JMenu menu_usuairo;
     private javax.swing.JMenuItem menu_usuario;
+    private javax.swing.JMenuItem tickets_pendientes;
     private javax.swing.JMenuItem ultimo_saldo;
     // End of variables declaration//GEN-END:variables
 }

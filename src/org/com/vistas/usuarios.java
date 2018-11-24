@@ -235,7 +235,7 @@ public class usuarios extends javax.swing.JInternalFrame {
                 btnEliminar.setEnabled(false);
                 btnSalir.setEnabled(true);
                 
-                 combo_hora_fin.setEnabled(false);
+                combo_hora_fin.setEnabled(false);
                 combo_min_fin.setEnabled(false);
                 combo_min_inicio.setEnabled(false);
                 combo_hora_inicio.setEnabled(false);

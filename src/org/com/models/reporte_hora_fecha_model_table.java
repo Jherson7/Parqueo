@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.com.models;
 
 import java.text.SimpleDateFormat;
@@ -12,7 +16,7 @@ import org.com.db.reportes_db;
  *
  * @author Jherson
  */
-public class reporte_hora_fecha_model_table  extends AbstractTableModel{
+public class reporte_hora_fecha_model_table extends AbstractTableModel{
     public List<reporte_hora_fecha_beans>lista;
     public String [] cabecera = {"Hora","Total","Fecha"};
     private reportes_db reportedb;

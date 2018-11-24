@@ -166,12 +166,13 @@ public class usuario_db {
         return -1;
     }
       
-    public usuario login(String user,String contrasenia){
+    public usuario login(String user,String contrasenia,String parqueo){
         usuario usu = null;
         try {
-            con.setPreparado(con.getConn().prepareStatement("select * from usuario where usuario=? and password=?"));
+            con.setPreparado(con.getConn().prepareStatement("select * from usuario where usuario=? and password=? and fparqueo = ? "));
             con.getPreparado().setString(1, user);
             con.getPreparado().setString(2, contrasenia);
+            con.getPreparado().setString(3, parqueo);
             
             res=con.getPreparado().executeQuery();
 

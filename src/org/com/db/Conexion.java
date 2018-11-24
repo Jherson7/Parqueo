@@ -1,5 +1,6 @@
 package org.com.db;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -27,8 +28,10 @@ public class Conexion {
     public Conexion() {
         try {
             Properties prop = new Properties();
-            InputStream input = Conexion.class.getResourceAsStream("/org/com/db/db_properties.properties");
+            //InputStream input = Conexion.class.getResourceAsStream("src/db_properties.properties");
+            InputStream input = new FileInputStream("src/db_properties.properties");
             prop.load(input);
+            
             
             String driver   = prop.getProperty(("driver"));
             String user     = prop.getProperty("user");

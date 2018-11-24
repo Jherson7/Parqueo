@@ -2,7 +2,9 @@ package org.com.controler;
 
 import java.util.Date;
 import org.com.models.reporte_hora_fecha_model_table;
+import org.com.models.reporte_ganancia_turno;
 import org.com.models.reporte_por_fecha_model_table;
+import org.com.models.reporte_ticket_pendient_table;
 import org.com.models.reporte_vehiculos_promedio_model_table;
 import org.com.vistas.reporte_promedio_vehiculos;
 
@@ -29,4 +31,15 @@ public class reportes_controller {
         tabla_vehiculos = new reporte_vehiculos_promedio_model_table(desde,hasta);
         return tabla_vehiculos;
     }
+    
+  
+    public static reporte_ganancia_turno get_reporte_ganancia_turno(Date desde,Date hasta,int parqueo){
+        return new reporte_ganancia_turno(desde, hasta, parqueo);
+    }
+    
+    public static reporte_ticket_pendient_table get_table_tickets(int parqueo){
+        return new reporte_ticket_pendient_table(parqueo);
+    }
+    
+    
 }
