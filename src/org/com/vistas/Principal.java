@@ -24,9 +24,10 @@ public class Principal extends javax.swing.JFrame {
         setExtendedState(MAXIMIZED_BOTH);
       //  Controlador.iniciar_programa();
        
-        /*if (Controlador.getUsuarioActual().getfRol()!=1){
-            menu_administrador.setEnabled(false);
-        }*/
+        if (Controlador.getUsuarioActual().getfRol()!=1){
+            menu_administrador.setVisible(false);
+            menu_reporte.setVisible(false);
+        }
             
     }
 
