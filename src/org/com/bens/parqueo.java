@@ -9,6 +9,9 @@ public class parqueo {
     private Integer id_parqueo;
     private String nombre_parqueo;
     private String direccion;
+    
+    private int hora_inicio;
+    private int hora_fin;
 
     public parqueo() {
     }
@@ -46,6 +49,22 @@ public class parqueo {
     @Override
     public String toString() {
         return nombre_parqueo ;
+    }
+
+    public int getHora_inicio() {
+        return hora_inicio;
+    }
+
+    public void setHora_inicio(int hora_inicio) {
+        this.hora_inicio = hora_inicio;
+    }
+
+    public int getHora_fin() {
+        return hora_fin;
+    }
+
+    public void setHora_fin(int hora_fin) {
+        this.hora_fin = hora_fin;
     }
     
     

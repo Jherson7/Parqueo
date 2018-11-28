@@ -17,6 +17,7 @@ public class apertura_turno extends javax.swing.JInternalFrame {
     public apertura_turno() {
         initComponents();
         lblUsuario.setText(Controlador.getUsuarioActual().getNombre());
+        Controlador.insertar_tickets_pendientes();
     }
 
     /**

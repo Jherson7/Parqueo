@@ -31,6 +31,7 @@ public class parqueo_db {
         try {
             while(res.next()){
                 parqueo par= new parqueo(res.getInt(1),  res.getString(2),res.getString(3));
+                agregar_horario_parqueo(par);
                 lista.add(par);
             }
         } catch (SQLException ex) {
@@ -100,17 +101,34 @@ public class parqueo_db {
     }
     
     public parqueo get_parqueo_id(int id){
-         parqueo par =null;
+        parqueo par =null;
         try {
             String query = "select * from parqueo where idparqueo = "+id;
             con.setPreparado(con.getConn().prepareStatement(query));
             res = con.getPreparado().executeQuery();
             if(res.next()){
                 par= new parqueo(res.getInt(1),  res.getString(2),res.getString(3));
+                agregar_horario_parqueo(par);//le seteamos su horario
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return par;
     }
+
+    private void agregar_horario_parqueo(parqueo par){
+        try {
+            String query = "select * from horario_parqueo where idparqueo = "+par.getId_parqueo();
+            con.setPreparado(con.getConn().prepareStatement(query));
+            ResultSet resy = con.getPreparado().executeQuery();
+            if(resy.next()){
+                par.setHora_inicio(resy.getTime(2).getHours());
+                par.setHora_fin(resy.getTime(3).getHours());
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al setear el horario del parqueo "+ ex.getMessage());
+        }
+    }
+
+
 }

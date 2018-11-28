@@ -33,7 +33,7 @@ public class last extends javax.swing.JFrame implements SerialPortEventListener 
 	SerialPort serialPort;
         /** The port we're normally going to use. */
 	private static final String PORT_NAMES[] = { 
-			"COM3","COM5", // Windows
+			"COM3","COM5","COM6",Controlador.cod_puerto,// Windows
 	};
 	/**
 	* A BufferedReader which will be fed by a InputStreamReader 
@@ -116,8 +116,10 @@ public class last extends javax.swing.JFrame implements SerialPortEventListener 
 			try {
 				String codigo=input.readLine();
                                 String res = getRandomHexa();
+                               
                                 Cobro.insertar_ticket(res);
-				System.out.println("Recibido: "+codigo+","+res);
+				
+                                System.out.println("Recibido: "+codigo+","+res);
 			} catch (Exception e) {
 				System.err.println("Hay error recibiendo "+e.toString());
 			}

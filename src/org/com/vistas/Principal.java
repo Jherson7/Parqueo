@@ -1,5 +1,6 @@
 package org.com.vistas;
 
+import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import org.com.bens.turno;
@@ -13,12 +14,12 @@ import org.com.logica.Controlador;
  * @author Jherson
  */
 public class Principal extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Principal
-     */
+    
+    ImageIcon img= new ImageIcon("src/org/com/pictures/aparcamiento.png");
+    
     public Principal() {
         initComponents();
+        this.setIconImage(img.getImage());
         setLocationRelativeTo(null);
         setExtendedState(MAXIMIZED_BOTH);
       //  Controlador.iniciar_programa();
@@ -57,7 +58,6 @@ public class Principal extends javax.swing.JFrame {
         menu_usuairo = new javax.swing.JMenu();
         menu_apertura = new javax.swing.JMenuItem();
         menu_cierre = new javax.swing.JMenuItem();
-        ultimo_saldo = new javax.swing.JMenuItem();
         menu_cobro = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         menu_reporte = new javax.swing.JMenu();
@@ -72,6 +72,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         menu_descuentos = new javax.swing.JMenuItem();
         menu_horario = new javax.swing.JMenuItem();
+        ultimo_saldo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -126,15 +127,6 @@ public class Principal extends javax.swing.JFrame {
         });
         menu_usuairo.add(menu_cierre);
 
-        ultimo_saldo.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
-        ultimo_saldo.setText("Saldo ultimo turno");
-        ultimo_saldo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ultimo_saldoActionPerformed(evt);
-            }
-        });
-        menu_usuairo.add(ultimo_saldo);
-
         jMenuBar1.add(menu_usuairo);
 
         menu_cobro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/com/pictures/lucro.png"))); // NOI18N
@@ -187,6 +179,7 @@ public class Principal extends javax.swing.JFrame {
         });
         menu_reporte.add(menu_reporte_tiempo_promedio);
 
+        ganancia_turno.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
         ganancia_turno.setText("Ganancia por turnos");
         ganancia_turno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,6 +188,7 @@ public class Principal extends javax.swing.JFrame {
         });
         menu_reporte.add(ganancia_turno);
 
+        tickets_pendientes.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
         tickets_pendientes.setText("Tickets pendientes de cobro");
         tickets_pendientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,6 +243,7 @@ public class Principal extends javax.swing.JFrame {
         });
         menu_administrador.add(menu_descuentos);
 
+        menu_horario.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
         menu_horario.setText("Horario Laboral");
         menu_horario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -256,6 +251,15 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         menu_administrador.add(menu_horario);
+
+        ultimo_saldo.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
+        ultimo_saldo.setText("Saldo ultimo turno");
+        ultimo_saldo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ultimo_saldoActionPerformed(evt);
+            }
+        });
+        menu_administrador.add(ultimo_saldo);
 
         jMenuBar1.add(menu_administrador);
 

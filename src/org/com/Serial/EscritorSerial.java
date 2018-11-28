@@ -32,13 +32,12 @@ public class EscritorSerial extends Thread{
             
             Controlador.detener_puerto_escuchando();
             
-            
             ports = CommPortIdentifier.getPortIdentifiers();
             
             while (ports.hasMoreElements()) {
                 pID = (CommPortIdentifier) ports.nextElement();
                 if (pID.getPortType() == CommPortIdentifier.PORT_SERIAL) {
-                    if (pID.getName().equals("COM5")) {
+                    if (pID.getName().equals(Controlador.cod_puerto)) {
                         
                         try {
                             //aqui es el puerto que se reconocio
