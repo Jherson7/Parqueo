@@ -57,10 +57,10 @@ public class horario_db {
     
     public int modificar_horario_parqueo(horario_parqueo horario){
         try {
-            con.setPreparado(con.getConn().prepareStatement("update horario_parqueo set hora_inicio = ?, hora_fin=? where id_horario =?"));
+            con.setPreparado(con.getConn().prepareStatement("update horario_parqueo set hora_inicio = ?, hora_fin=? where idparqueo =?"));
             con.getPreparado().setTime(1, horario.getHora_inicio());
             con.getPreparado().setTime(2, horario.getHora_fin());
-            con.getPreparado().setInt(3, horario.getId_horario());
+            con.getPreparado().setInt(3, horario.getFparqueo());
             con.getPreparado().executeUpdate();
         } catch (SQLException ex) {
             System.out.println("Error al modificar el horario Parqueo a DB"+ex.getLocalizedMessage());
@@ -68,4 +68,18 @@ public class horario_db {
         }
         return 0;
     }
+    
+    
+    public int eliminar_horario_parqueo(horario_parqueo horario){
+        try {
+            con.setPreparado(con.getConn().prepareStatement("delete from horario_parqueo where idparqueo = ?"));
+            con.getPreparado().setInt(1, horario.getId_horario());
+            con.getPreparado().executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Error al eliminar el horario Parqueo a DB"+ex.getLocalizedMessage());
+            return 1;
+        }
+        return 0;
+    }
+    
 }

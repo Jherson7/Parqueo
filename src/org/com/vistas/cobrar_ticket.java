@@ -1,6 +1,8 @@
 package org.com.vistas;
 
 import java.awt.GridLayout;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -8,6 +10,7 @@ import org.com.Serial.EscritorSerial;
 import org.com.bens.descuento;
 import org.com.bens.ticket;
 import org.com.controler.descuento_controller;
+import org.com.db.cobro_db;
 import org.com.logica.Cobro;
 import org.com.logica.Controlador;
 import org.com.logica.monto_cobro;
@@ -17,19 +20,26 @@ import org.com.logica.monto_cobro;
  * @author Jherson
  */
 public class cobrar_ticket extends javax.swing.JInternalFrame {
-    private String codigo="";
+
+    private String codigo = "";
     monto_cobro temp;
+    int abrir = 230;
     
+    int[] PrintCm = {0x10, 0x04, 0x01, 0x10, 0x04, 0x01, 0x10, 0x04, 0x01, 0x10, 0x04, 0x01, 0x10, 0x04, 0x01};
+    int[] PirntEnd = {0x0a, 0x0a};
+    int[] CodeBar = {0x10, 0x04, 0x01, 0x10, 0x04, 0x01, 0x10, 0x04, 0x01, 0x10, 0x04, 0x01, 0x10, 0x04, 0x01, 0x1b, 0x40, 0x1b, 0x32, 0x1d};
+    int[] CodeBar2 = {0x68, 0x50, 0x1d, 0x48, 0x02, 0x0a, 0x0a, 0x1d, 0x6b, 0x06};
+    int[] CodeBarEnd = {0x00, 0x0a, 0x0a, 0x0a};
+    int[] PrintCut = {0x1b, 0x40, 0x0d, 0x0a, 0x0a, 0x0a, 0x1b, 0x6d};
+
     public cobrar_ticket() {
-       
-        
+
         initComponents();
         combo_descuento.setModel(descuento_controller.getCombo());
         combo_descuento.setEnabled(false);
         iniciar_hilo();
     }
 
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -109,7 +119,7 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
         lbl_estado.setFont(new java.awt.Font("MS Reference Sans Serif", 3, 12)); // NOI18N
         lbl_estado.setText("Estado");
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Probar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -180,42 +190,43 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
             iniciar_hilo();
             return;
         }
-        if (combo_descuento.getSelectedIndex() >= 0&& chk_descuento.isSelected()) {
+        if (combo_descuento.getSelectedIndex() >= 0 && chk_descuento.isSelected()) {
             descuento desc = (descuento) combo_descuento.getSelectedItem();
             id_desc = desc.getId_descuento();
         }
-        temp = Cobro.calcular_costo("0B6DB", id_desc);//cambiar por el codigo escaneado
+        //temp = Cobro.calcular_costo("0B6DB", id_desc);//cambiar por el codigo escaneado
+        temp = Cobro.calcular_costo(codigo, id_desc);//cambiar por el codigo escaneado
         mostrar_calculo();
-        
+
     }
-    
-    private void mostrar_calculo(){
-        
+
+    private void mostrar_calculo() {
+
         JPanel panel_detalles = new JPanel();
-        panel_detalles.setLayout(new GridLayout(temp.detalles.size()+5, 1));
-        
-        for(String s:temp.detalles){
+        panel_detalles.setLayout(new GridLayout(temp.detalles.size() + 5, 1));
+
+        for (String s : temp.detalles) {
             JLabel lable = new JLabel(s);
             panel_detalles.add(lable);
         }
-        
+
         panel_detalles.add(new JLabel("------------------------------"));
-        panel_detalles.add(new JLabel("Sub Total:   Q."+temp.getTicket().getSubtotal()));
-        panel_detalles.add(new JLabel("Descuento:   Q."+temp.getTicket().getDescuento()));
-        panel_detalles.add(new JLabel("Total:       Q."+temp.getTicket().getTotal()));
+        panel_detalles.add(new JLabel("Sub Total:      Q." + temp.getTicket().getSubtotal()));
+        panel_detalles.add(new JLabel("Descuento:   Q." + temp.getTicket().getDescuento()));
+        panel_detalles.add(new JLabel("Total:              Q." + temp.getTicket().getTotal()));
         panel_detalles.add(new JLabel("------------------------------"));
-        
+
         panel_detalles.repaint();
         scroll_detalles.setViewportView(panel_detalles);
         scroll_detalles.repaint();
     }
-    
+
     private void chk_descuentoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chk_descuentoStateChanged
         // TODO add your handling code here:
-        if(chk_descuento.isSelected()){
+        if (chk_descuento.isSelected()) {
             combo_descuento.setEnabled(true);
-        }else{
-            if(temp!=null){
+        } else {
+            if (temp != null) {
                 temp.getTicket().setDescuento(0);
                 temp.getTicket().setTotal(temp.getTicket().getSubtotal());
                 mostrar_calculo();
@@ -225,9 +236,9 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_chk_descuentoStateChanged
 
     private void chk_extraviadoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chk_extraviadoStateChanged
-      if (chk_extraviado.isSelected()) {
+        if (chk_extraviado.isSelected()) {
             setearTotalTicketExtraviado();
-      }
+        }
     }//GEN-LAST:event_chk_extraviadoStateChanged
 
     private void btn_cobrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cobrar1ActionPerformed
@@ -236,62 +247,139 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
             int a = Cobro.realizar_cobro_extraviado(temp.getTicket());
             if (a != 1) {
                 JOptionPane.showMessageDialog(null, "Se inserto correctamente el ticket extraviado:" + codigo, "Panel de Cobro", 1);
+                //tendria que escribir abrir
+                Controlador.escribir_en_serial(abrir);
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "ERROR al insertar el ticket extraviado: " + codigo, "Panel de Cobro", 0);
             }
-        }else{
-            if(temp!=null){
-             int a = Cobro.realizar_cobro(temp.getTicket());
+        } else {
+            if (temp != null) {
+                int a = Cobro.realizar_cobro(temp.getTicket());
                 if (a != 1) {
                     JOptionPane.showMessageDialog(null, "Se cobro correctamente el ticket", "Panel de Cobro", 1);
-                    EscritorSerial.escribir_en_serial("abrir");//se envia a la dispensadora el mensaje para apertura
+                    Controlador.escribir_en_serial(abrir);
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "ERROR al cobrar el ticket", "Panel de Cobro", 0);
                     //estado= "Fallido";
                 }
+            } else {
+                JOptionPane.showMessageDialog(this, "No se ha detectado ticket!", "ERROR", 0);
             }
-            else
-                JOptionPane.showMessageDialog(this, "No se ha detectado ticket!","ERROR",0);
         }
 
-        
+
     }//GEN-LAST:event_btn_cobrar1ActionPerformed
 
     private void combo_descuentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo_descuentoItemStateChanged
         // TODO add your handling code here:
         float descuento;
-        if(combo_descuento.getSelectedIndex()>0){
-            if (temp==null){
-                JOptionPane.showMessageDialog(this, "No se ha detectado ticket, por favor escanee ticket","ERROR",0);;
-            }else{
+        if (combo_descuento.getSelectedIndex() > 0) {
+            if (temp == null) {
+                JOptionPane.showMessageDialog(this, "No se ha detectado ticket, por favor escanee ticket", "ERROR", 0);;
+            } else {
                 descuento desc = (descuento) combo_descuento.getSelectedItem();
                 if (desc.getPorcetaje() > 0) {
-                   float res = desc.getPorcetaje();
-                   res = res/100;
-                   descuento=   (float) (res *temp.getTicket().getSubtotal());//descuento por porcentaje
-                    
+                    float res = desc.getPorcetaje();
+                    res = res / 100;
+                    descuento = (float) (res * temp.getTicket().getSubtotal());//descuento por porcentaje
+
                 } else {
                     float calculo = desc.getMinutos_descuento();
                     calculo = calculo / 60;
                     descuento = (float) (calculo * temp.getTarifa());//descuento por minutos
                 }
-                
+
                 temp.getTicket().setDescuento(descuento);
-                temp.getTicket().setTotal(temp.getTicket().getSubtotal()-descuento);
+                temp.getTicket().setTotal(temp.getTicket().getSubtotal() - descuento);
                 mostrar_calculo();
             }
         }
-        
-        
+
+
     }//GEN-LAST:event_combo_descuentoItemStateChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        temp = Cobro.calcular_costo("0B6DB", 0);//cambiar por el codigo escaneado
+       /* temp = Cobro.calcular_costo("0B6DB", 0);//cambiar por el codigo escaneado
         mostrar_calculo();
+*/
+        //cobro_db nuevo = new cobro_db();
+        //nuevo.insertar_y_obtener_ticket(Controlador.getParqueo().getId_parqueo());
+        String mensaje
+                = "         TICKET DE CONTROL\n"
+                + "             GAPRI S.A.\n"
+                + "     4ta. Avenida 16-10 ZONA 10\n"
+                + "          " + get_fecha_hora() + "\n"
+                + "    ACCESO: B    CORRELATIVO: 123456\n";
+    try {
+            String toSerial = InitText()+
+            mensaje+
+            EndText()+
+            InitCodebar()+
+            ("A123456A")+
+            EndCodebar()+
+            PrinterCut();
+            
+            //EscritorSerial.escribir_en_serial(toSerial);
+            String open = 230+"";
+                    
+            //Controlador.escribir_en_serial(toSerial);
+            Controlador.escribir_en_serial(230);
+        } catch (Exception e) {
+        }
+    
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    String InitText() {
+        String txt = "";
+        for (int i = 0; i <= 14; i++) {
+            
+            txt += (char)PrintCm[i];
+        }
+        return txt;
+    }
+
+    String EndText() {
+        String txt = ""+(char)0x0a+(char)0x0a;        
+        return txt;
+    }
+
+    String InitCodebar() {
+        String txt = "";
+        for (int i = 0; i <= 19; i++) {
+            txt += (char)CodeBar[i];
+        }
+        for (int i = 0; i <= 9; i++) {
+            txt += (char)CodeBar2[i];
+        }
+        return txt;
+    }
+
+    String EndCodebar() {
+        String txt = "";
+        for (int i = 0; i <= 3; i++) {
+            txt += (char)CodeBarEnd[i];
+        }
+        return txt;
+    }
+
+    String PrinterCut() {
+        String txt = "";
+        for (int i = 0; i <= 7; i++) {
+            txt += (char)PrintCut[i];
+        }
+        return txt;
+    }
+
+    private String get_fecha_hora() {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        String fecha = new SimpleDateFormat("dd/MM/yyyy").format(timestamp);
+        String hora = new SimpleDateFormat("HH:mm:ss").format(timestamp);
+
+        return "FECHA:" + fecha + " HORA:" + hora;
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cobrar1;
@@ -306,31 +394,35 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_codigo;
     // End of variables declaration//GEN-END:variables
 
-   private void iniciar_hilo() {
+    private void iniciar_hilo() {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                int numero =0;
-                for (int i = 0; i < 60; i++,numero++) {
+                int numero = 0;
+                for (int i = 0; i < 60; i++, numero++) {
                     //System.out.println("Cerdo " + i);
                     txt_codigo.requestFocus();
-                    if(!"".equals(txt_codigo.getText())){
+                    if (!"".equals(txt_codigo.getText())) {
 
                         codigo = txt_codigo.getText();
                         //JOptionPane.showMessageDialog(null, codigo);
                         lbl_estado.setText("Listo!");
                         chk_extraviado.setEnabled(false);
+
                         realizar_calculo();
+
                         return;
                     }
-                    
-                    String esperando ="esperando";
-                    for(int x =0; x< numero; x++)
-                        esperando+=".";
+
+                    String esperando = "esperando";
+                    for (int x = 0; x < numero; x++) {
+                        esperando += ".";
+                    }
                     lbl_estado.setText(esperando);
-                    
-                    if(numero>=4)
-                        numero =0;
+
+                    if (numero >= 4) {
+                        numero = 0;
+                    }
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException e) {
@@ -339,43 +431,43 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
                 }
             }
         });
-        
+
         thread.start();
     }
 
     private void setearTotalTicketExtraviado() {
         ticket tick = new ticket();
-        
+
         tick.setDescuento(0);
         tick.setSubtotal(100.0);
         tick.setTotal(100.0);
         tick.setTurno(Controlador.getTurno_actual().getId_turno());
-        
+
         JLabel total = new JLabel("Total:     Q.100");
         JLabel sub = new JLabel("Subtotal:    Q.100");
         JLabel desc = new JLabel("Descuento:  Q.0");
         //JLabel estado = new JLabel("Estado:\t\tExitoso");
         JLabel line = new JLabel("-----------------------");
-        
+
         JPanel panel_detalles = new JPanel();
         panel_detalles.setLayout(new GridLayout(5, 1));
-        
+
         panel_detalles.add(total);
         panel_detalles.add(sub);
         panel_detalles.add(desc);
         panel_detalles.add(line);
         panel_detalles.repaint();
-        
-        if(temp==null){
-            temp= new monto_cobro();
+
+        if (temp == null) {
+            temp = new monto_cobro();
         }
-        
+
         temp.setTicket(tick);//ver como le hago con el id
-       
+
         scroll_detalles.setViewportView(panel_detalles);
         scroll_detalles.repaint();
-        
+
         chk_descuento.setSelected(false);
-        
+
     }
 }

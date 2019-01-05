@@ -1,6 +1,8 @@
 
 package org.com.bens;
 
+import java.sql.Time;
+
 /**
  *
  * @author Jherson
@@ -10,9 +12,12 @@ public class parqueo {
     private String nombre_parqueo;
     private String direccion;
     
-    private int hora_inicio;
-    private int hora_fin;
+    public Time hora_inicio;
+    public Time hora_fin;
 
+    public String encabezado;
+    public String pie;
+    
     public parqueo() {
     }
 
@@ -20,6 +25,8 @@ public class parqueo {
         this.id_parqueo = id_parqueo;
         this.nombre_parqueo = nombre_parqueo;
         this.direccion = direccion;
+        this.encabezado="";
+        this.pie="";
     }
 
     public Integer getId_parqueo() {
@@ -52,18 +59,18 @@ public class parqueo {
     }
 
     public int getHora_inicio() {
-        return hora_inicio;
+        return hora_inicio.getHours();
     }
 
-    public void setHora_inicio(int hora_inicio) {
+    public void setHora_inicio(Time hora_inicio) {
         this.hora_inicio = hora_inicio;
     }
 
     public int getHora_fin() {
-        return hora_fin;
+        return hora_fin.getHours();
     }
 
-    public void setHora_fin(int hora_fin) {
+    public void setHora_fin(Time hora_fin) {
         this.hora_fin = hora_fin;
     }
     

@@ -10,7 +10,9 @@ import java.util.LinkedList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.com.Serial.EscritorSerial;
+import org.com.Serial.impresion_de_ticket;
 import org.com.Serial.last;
 import org.com.bens.parqueo;
 import org.com.bens.ticket;
@@ -24,16 +26,16 @@ public class Controlador {
     private static parqueo parqueo;
     private static int turno;
     private static turno turno_actual =null;
-    private static last serial = new last();
+    private static last serial ;
     private static Thread hora_fecha;    
     private static Thread scanner;
     public static boolean puerto;
-    public static String cod_puerto;
+    private static String cod_puerto;
     //public static  SerialPort serialPort;
     static LinkedList<ticket> pendientes = new LinkedList<>();
     
     public static void iniciar_serial() {
-        
+        serial = new last();
         serial.initialize();
         Thread t = new Thread() {
             public void run() {
@@ -65,9 +67,11 @@ public class Controlador {
     public static  void iniciar_programa(){
         get_codigo_com();//metodo que obtiene el puerto com establecido
         iniciar_serial();
-        iniciar_hilo_hora_fecha();
-        /// hilo que esta verificando que este bien el puerto serial
-        scanner = new Thread(){
+        iniciar_hilo_hora_fecha();   
+        
+        impresion_de_ticket.obtener_parametros_del_parqueo();
+        
+        scanner = new Thread(){/// hilo que esta verificando que este bien el puerto serial
             public void run(){
                 while(true){
                     try {
@@ -109,10 +113,16 @@ public class Controlador {
     }
     
     private static void enviar_hora_fecha(){
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        String fecha =new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(timestamp);
-        EscritorSerial.escribir_en_serial(fecha);
+        String fecha=get_fecha_actual();
+        //EscritorSerial.escribir_en_serial(fecha);
+        escribir_en_serial(fecha);
         System.out.println(fecha);
+        
+    }
+    
+    public static String get_fecha_actual(){
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(timestamp);
         
     }
     
@@ -156,7 +166,8 @@ public class Controlador {
             input = new FileInputStream("src/db_properties.properties");
             prop.load(input);
             
-            cod_puerto = prop.getProperty("com");
+            cod_puerto = prop.getProperty("com").trim();
+            System.out.println("Codigo Recibido:>"+cod_puerto+"<");
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
@@ -187,6 +198,27 @@ public class Controlador {
             cobro.insertar_ticket(tick);
         }
         pendientes.clear();//se limpian todos los tickets pendientes
+    }
+    
+    
+    public static void escribir_en_serial(String men){
+        if(puerto)
+            serial.escribir_en_serial(men);
+        else
+            JOptionPane.showMessageDialog(null, "Aun no se ha detectado señal del puerto serial","ERROR",0);
+        
+    }
+    
+    public static void escribir_en_serial(int men){
+        if(puerto)
+            serial.escribir_en_serial(men);
+        else
+            JOptionPane.showMessageDialog(null, "Aun no se ha detectado señal del puerto serial","ERROR",0);
+        
+    }
+    
+    public static String retornar_cod_puerto(){
+        return cod_puerto;
     }
     
 }

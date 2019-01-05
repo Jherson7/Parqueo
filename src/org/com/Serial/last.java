@@ -24,16 +24,20 @@ import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent; 
 import gnu.io.SerialPortEventListener; 
+import java.io.IOException;
 import java.util.Enumeration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.com.logica.Cobro;
 import org.com.logica.Controlador;
 
 
 public class last extends javax.swing.JFrame implements SerialPortEventListener  {
 	SerialPort serialPort;
+        int comando=230;
         /** The port we're normally going to use. */
 	private static final String PORT_NAMES[] = { 
-			"COM3","COM5","COM6",Controlador.cod_puerto,// Windows
+			"COM3","COM6","COM8","COM9",Controlador.retornar_cod_puerto(),// Windows
 	};
 	/**
 	* A BufferedReader which will be fed by a InputStreamReader 
@@ -51,7 +55,7 @@ public class last extends javax.swing.JFrame implements SerialPortEventListener 
 	public void initialize() {
                 // the next line is for Raspberry Pi and 
                 // gets us into the while loop and was suggested here was suggested http://www.raspberrypi.org/phpBB3/viewtopic.php?f=81&t=32186
-        
+                
                 CommPortIdentifier portId = null;
 		Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
 
@@ -108,24 +112,50 @@ public class last extends javax.swing.JFrame implements SerialPortEventListener 
 		}
 	}
 
+        
 	/**
 	 * Handle an event on the serial port. Read the data and print it.
 	 */
 	public synchronized void serialEvent(SerialPortEvent oEvent) {
-		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
+		String codigo="";
+                if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
-				String codigo=input.readLine();
-                                String res = getRandomHexa();
-                               
-                                Cobro.insertar_ticket(res);
+				codigo=input.readLine();
+                                leer_del_puerto(codigo);
+                                //String res = getRandomHexa();
 				
-                                System.out.println("Recibido: "+codigo+","+res);
+                                System.out.println("Recibido: "+codigo);
 			} catch (Exception e) {
-				System.err.println("Hay error recibiendo "+e.toString());
-			}
+				System.err.println("Hay error recibiendo: "+codigo+","+e.toString());
 		}
 		// Ignore all the other eventTypes, but you should consider the other ones.
-	}
+	}			}
+
+        
+        
+        private void leer_del_puerto(String codigo){
+            if("listo".equals(codigo)){
+                impresion_de_ticket.insertar_y_obtener_codigo();
+                escribir_en_serial(comando);//para que abra la puerta
+            }
+            
+        }
+        
+        public void escribir_en_serial(String men){
+            try {
+                output.write(men.getBytes());
+            } catch (IOException ex) {
+                System.out.println("Erro al escribir el mensaje: "+men+", "+ex.getMessage());
+            }
+        }
+        
+        public void escribir_en_serial(int men){
+            try {
+                output.write(men);
+            } catch (IOException ex) {
+                System.out.println("Erro al escribir el mensaje: "+men+", "+ex.getMessage());
+            }
+        }
 
 	/*public static void main(String[] args) throws Exception {
 		last main = new last();

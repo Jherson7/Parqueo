@@ -19,7 +19,7 @@ public class parqueo_table_model extends AbstractTableModel {
     public parqueo_table_model() {
         parqueodb =new parqueo_db();
         lista=parqueodb.retornarLista();
-        maxid=parqueodb.get_max_id();
+        maxid=-1;
     }
     
     public parqueo elementAt(int indice){
@@ -66,8 +66,9 @@ public class parqueo_table_model extends AbstractTableModel {
      * @param par******************/
     
     public void agregar_parqueo(parqueo par){
-        par.setId_parqueo(++maxid);
+        
         int a = parqueodb.agregar_parqueo(par);
+        
         if(a!=1){
             JOptionPane.showMessageDialog(null,  "Se guardo correctamente el parqueo: "+par.getNombre_parqueo(),"Panel de Parqueo", 1);  
             this.lista.add(par);

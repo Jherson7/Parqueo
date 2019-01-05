@@ -12,6 +12,7 @@ import org.com.logica.Controlador;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import org.com.controler.parqueo_controller;
 
@@ -69,6 +70,12 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(244, 240, 171));
         jLabel2.setText("Contraseña");
+
+        txt_password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_passwordKeyReleased(evt);
+            }
+        });
 
         btn_login.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 18)); // NOI18N
         btn_login.setText("LOGIN");
@@ -154,6 +161,10 @@ public class Login extends javax.swing.JFrame {
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         // TODO add your handling code here:
+        login();
+    }//GEN-LAST:event_btn_loginActionPerformed
+
+    private void login(){
         try {
             String user = txt_usuario.getText();
             String pass = txt_password.getText();
@@ -179,12 +190,18 @@ public class Login extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }//GEN-LAST:event_btn_loginActionPerformed
-
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txt_passwordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyReleased
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER ) {
+            login();
+        }
+    }//GEN-LAST:event_txt_passwordKeyReleased
 
     /**
      * @param args the command line arguments

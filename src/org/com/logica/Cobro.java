@@ -28,6 +28,15 @@ public class Cobro {
         
         cobro = new cobro_db();
         
+        codigo = codigo.substring(codigo.indexOf("+")+1);
+        int i =0;
+        for(; i< codigo.length();i++)
+        {
+            char x = codigo.charAt(i);
+            if(x!='0')
+                break;
+        }
+        codigo = codigo.substring(i);
         ticket tick = cobro.get_ticket_por_codigo(codigo);
         
         monto_cobro monto = get_tarifa_por_parqueo_y_horario(Controlador.getParqueo().getId_parqueo(),tick);
@@ -75,10 +84,8 @@ public class Cobro {
         ticki.setTurno(Controlador.getTurno_actual().getId_turno());
         ticki.setHora_ingreso(timestamp);
         
-        System.out.println(codigo);
-        
-        //descomentar esta linea para insertar el ticket
-       /* cobro = new cobro_db();
+        //descomentar estas lineas para insertar el ticket
+        cobro = new cobro_db();
         int a =cobro.insertar_ticket(ticki);
         
         if (a != 1) {
@@ -97,13 +104,12 @@ public class Cobro {
 
         monto_cobro mon = new monto_cobro();
        
-        //fecha actual
-        int dias = actual.getDate();
-
-        int dia_inicio_parqueo = tick.getHora_ingreso().getDate();
-
-        if (Math.abs(dias - dia_inicio_parqueo) >= 1) {//tarifa de dias
-            return retonar_cobro_por_dias(tick, lista, actual, Math.abs(dias - dia_inicio_parqueo));
+        String fecha = new SimpleDateFormat("yyyy/MM/dd").format(tick.getHora_ingreso());
+        int diferencia = cobro.diferencia_entre_dias(fecha,get_fecha());
+        
+        //if (Math.abs(dias - dia_inicio_parqueo) >= 1) {//tarifa de dias
+        if (diferencia >= 1) {//tarifa de dias
+            return retonar_cobro_por_dias(tick, lista, actual, diferencia);
         } else {    
             return realizar_cobro_normal(parqueo_actual, lista, tick, actual, mon);
         }
@@ -124,32 +130,38 @@ public class Cobro {
             if (t_hora_salida <= parqueo_actual.getHora_fin()) {
                 //es porque ingreso despues de media noche
                 //y salio antes del horario de finalizacion
-                total_horas=  (float) ((double)(t_min_salida) / 60.0);
+               /* total_horas=  (float) ((double)(t_min_salida) / 60.0);
                 total_horas+= ((double)(60-t_min_ingreso))/ 60;
                 total_horas += (t_hora_salida - t_hora_ingreso);
                 
                 mon.costo += total_horas * lista.getLast().getPrecio();//se multiplica por el costo de la ultima tarifa
                 mon.costo = Double.parseDouble(formatter.format(mon.costo));//formateamos el costo
-                
+                */
+               
                 String men = t_hora_ingreso+":"+t_min_ingreso + " - " + new SimpleDateFormat("HH:mm").format(actual);
-                men+=" Q."+ Double.parseDouble(formatter.format(total_horas * lista.getLast().getPrecio()));
-                
+               // men+=" Q."+ Double.parseDouble(formatter.format(total_horas * lista.getLast().getPrecio()));
+              // mon.costo=lista.getLast().getPrecio(); 
+               //men+=" Q."+ Double.parseDouble(formatter.format(lista.getLast().getPrecio()));
+                men+=" Q.0.00";//+ Double.parseDouble(formatter.format(lista.getLast().getPrecio()));
                 mon.detalles.add(men);
                 return mon;
             } else {
                 //es porque salio antes que comenzara el horario de apertura y se cobran 100 
-                if (t_hora_ingreso <= parqueo_actual.getHora_fin() && t_hora_salida <= parqueo_actual.getHora_inicio()) {
-                    total_horas =  (float) ((double)(t_min_salida) / 60.0);
+                if (t_hora_ingreso <= parqueo_actual.getHora_fin() && t_hora_salida < parqueo_actual.getHora_inicio()) {
+                   /* total_horas =  (float) ((double)(t_min_salida) / 60.0);
                     if(t_min_ingreso>0)
                         total_horas += ((double)(60-t_min_ingreso) )/ 60;
                     
                     total_horas += (parqueo_actual.getHora_fin() - t_hora_ingreso);
                     
                     mon.costo += total_horas * lista.getLast().getPrecio();//se multiplica por el costo de la ultima tarifa
-                    mon.costo = Double.parseDouble(formatter.format(mon.costo));
                     
+                    mon.costo = Double.parseDouble(formatter.format(mon.costo));
+                    */
+                    //mon.costo = lista.getLast().getPrecio();
                     String men = new SimpleDateFormat("HH:mm").format(tick.getHora_ingreso())+" - " +parqueo_actual.getHora_fin()+":00";
-                    men+=" Q."+ Double.parseDouble(formatter.format(total_horas * lista.getLast().getPrecio()));
+                    //men+=" Q."+ Double.parseDouble(formatter.format(total_horas * lista.getLast().getPrecio()));
+                    men+=" Q.0.00";//+ Double.parseDouble(formatter.format(lista.getLast().getPrecio()));
                     
                     mon.detalles.add(men);
 
@@ -164,13 +176,15 @@ public class Cobro {
                 //esta condicion es porque salio despues del horario de apertura
                 //por tanto debe realizarse el cobro de los demas horarios
                 if (t_hora_ingreso <= parqueo_actual.getHora_fin() && t_hora_salida >= parqueo_actual.getHora_inicio()) {
-                    if(t_min_ingreso>0)
+                   
+                    /*if(t_min_ingreso>0)
                         total_horas =  (float) ((double)((60-t_min_ingreso)) / 60.0);
                     total_horas += (parqueo_actual.getHora_fin() - t_hora_ingreso);
                     mon.costo += total_horas * lista.getLast().getPrecio();//se multiplica por el costo de la ultima tarifa
-                    
+                    */
+                    //mon.costo+=lista.getLast().getPrecio();
                     String men = new SimpleDateFormat("HH:mm").format(tick.getHora_ingreso())+" - " +parqueo_actual.getHora_fin()+":00";
-                    men+=" Q."+ Double.parseDouble(formatter.format(total_horas * lista.getLast().getPrecio()));
+                    men+=" Q.0.00";//+ Double.parseDouble(formatter.format(lista.getLast().getPrecio()));
                     mon.detalles.add(men);
                     
                     mon.costo += 100;
@@ -192,17 +206,45 @@ public class Cobro {
 
                     if (t_hora_ingreso   >= hora_inicio && t_hora_salida <= hora_fin) {//tarifa noctura
                         men = new SimpleDateFormat("HH:mm").format(f.getHora_inicio_tarifa()) + " - " + new SimpleDateFormat("HH:mm").format(f.getHora_fin_tarifa());
-                        total_horas = t_hora_salida - t_hora_ingreso;
                         
                         if(t_min_ingreso>0)
-                            total_horas +=(float) ((double)((60-t_min_ingreso)) / 60.0);//se suman los minutos
+                            total_horas = t_hora_salida - t_hora_ingreso-1;//se resta - 1 porque ahi van los minutos
+                        else 
+                            total_horas = t_hora_salida - t_hora_ingreso;
+                                    
+                        if(total_horas<0)
+                            total_horas=0;
                         
-                        total_horas += (double)actual.getMinutes() / 60;//se suman los minutos
-                        men += ": Q." + formatter.format(total_horas * f.getPrecio());
-                        mon.costo += total_horas * f.getPrecio();
+                        if(t_min_ingreso>0){//minutos de ingreso
+                            if((60-t_min_ingreso)<=30)
+                                total_horas +=.5;//se suman los minutos
+                            else
+                                total_horas+=1;
+                        }
+                        //minutos de salida
+                            if(actual.getMinutes()<=30)
+                                total_horas +=.5;//se suman los minutos
+                            else
+                                total_horas+=1;
+                           // total_horas += (double)actual.getMinutes() / 60;//se suman los minutos
+                        
+                            
+                        //total_horas= roundToHalf(total_horas);
+                        //se agrega una nueva condicion si es la ultima tarifa
+                        //es decir la ultima solo se cobra el precio, no se multiplica por las horas
+                        
+                        if (f == lista.getLast()) {
+                            mon.costo+=f.getPrecio();
+                            men += ": Q." + formatter.format(f.getPrecio());
+                        } else {
+                            mon.costo += total_horas * f.getPrecio();
+                            mon.setTarifa(f.getPrecio());//seteo el precio de la tarifa para descuentos
+                            men += ": Q." + formatter.format(total_horas * f.getPrecio());
+                        }
+
                         mon.detalles.add(men);
-                        mon.setTarifa(f.getPrecio());//seteo el precio de la tarifa para descuentos
                         mon.costo = Double.parseDouble(formatter.format(mon.costo));
+                       
                         return mon;
                     }
                 }
@@ -211,7 +253,10 @@ public class Cobro {
             }
     }
     
-    
+    private static double roundToHalf(double d) {
+        System.out.println(Math.round(d));
+        return Math.round(d * 2) / 2.0;
+    }
     
     private static monto_cobro calculo_varias_tarifas(LinkedList<tarifa> lista_actual, ticket tick,Timestamp actual,monto_cobro mon){
         
@@ -232,18 +277,34 @@ public class Cobro {
             tarifa f = lista.get(i);
             int hora_inicio = f.getHora_inicio_tarifa().getHours();
             int hora_fin = f.getHora_fin_tarifa().getHours();
-            float total_horas = 0;
+            int t_min_ingreso=tick.getHora_ingreso().getMinutes();
+            double total_horas = 0;
             String men = "";
             men = new SimpleDateFormat("HH:mm").format(f.getHora_inicio_tarifa()) + " - " + new SimpleDateFormat("HH:mm").format(f.getHora_fin_tarifa());
             if (i == 0) {//primer horario 
                 mon.setTarifa(f.getPrecio());//seteo la primer tarifa para descuentos
                 //se resta la hora de ingreso del vehiculo - la 
-                total_horas = hora_fin - tick.getHora_ingreso().getHours();
-                total_horas += (double)(60-tick.getHora_ingreso().getMinutes())/60;//se suman los minutos
-               
-            } else if (i == lista.size()-1) {
-                total_horas = actual.getHours() - hora_inicio;
-                total_horas += (double)actual.getMinutes()/60;//se suman los minutos
+                if(t_min_ingreso>0)
+                            total_horas = hora_fin - tick.getHora_ingreso().getHours()-1;//se resta - 1 porque ahi van los minutos
+                        else 
+                            total_horas = hora_fin - tick.getHora_ingreso().getHours();
+                //total_horas = hora_fin - tick.getHora_ingreso().getHours()-1;
+                if(total_horas<0)
+                            total_horas=0;
+                
+                if (t_min_ingreso > 0) {//minutos de ingreso
+                    if ((60 - t_min_ingreso) <= 30) {
+                        total_horas += .5;//se suman los minutos
+                    } else {
+                        total_horas += 1;
+                    }
+                }
+               // total_horas += (double)(60-tick.getHora_ingreso().getMinutes())/60;//se suman los minutos
+              //  total_horas = roundToHalf(total_horas);
+            } else if (i == lista.size()-1) {//es la ultima tarifa
+                /*total_horas = actual.getHours() - hora_inicio;
+                total_horas += (double)actual.getMinutes()/60;//se suman los minutos*/
+                total_horas=1;
             }else{
                 total_horas=actual.getHours()-tick.getHora_ingreso().getHours();
             }
@@ -338,12 +399,23 @@ public class Cobro {
         double costo =0;
         
         for(tarifa t: lista){
-            costo+= Math.abs(t.getHora_fin_tarifa().getHours()-t.getHora_inicio_tarifa().getHours())*t.getPrecio();
+            if(t==lista.getLast())
+                costo+= t.getPrecio();
+            else
+                costo+= Math.abs(t.getHora_fin_tarifa().getHours()-t.getHora_inicio_tarifa().getHours())*t.getPrecio();
         }
         costo+=100;//por quedarse en el parqueo cuando cerro
-        costo+= par.getHora_fin()*lista.getLast().getPrecio();//las horas de media noche hasta que cierra el parqueo
+        //costo+= par.getHora_fin()*lista.getLast().getPrecio();//las horas de media noche hasta que cierra el parqueo
         
         return costo;
+    }
+
+     private static  String get_fecha() {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        String fecha = new SimpleDateFormat("yyyy/MM/dd").format(timestamp);
+
+        return fecha;
+
     }
     
 }

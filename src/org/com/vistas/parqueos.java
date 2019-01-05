@@ -28,17 +28,25 @@ public class parqueos extends javax.swing.JInternalFrame {
             case INICIO:
                 txt_parqueo.setText(null);
                 txt_direccion.setText(null);
-               
+                txt_encabezado.setText(null);
+                txt_pie.setText(null);
                                 
                 txt_parqueo.setEnabled(false);
                 txt_direccion.setEnabled(false);
-               
+                txt_encabezado.setEditable(false);
+                txt_pie.setEditable(false);
                                 
                 btnNuevo.setEnabled(true);
                 btnEditar.setEnabled(false);
                 btnGuardar.setEnabled(false);
                 btnEliminar.setEnabled(false);
                 btnSalir.setEnabled(true);
+                
+                combo_hora_fin.setEnabled(false);
+                combo_min_fin.setEnabled(false);
+                combo_hora_inicio.setEnabled(false);
+                combo_min_inicio.setEnabled(false);
+                
                 
                 break;
             
@@ -55,15 +63,25 @@ public class parqueos extends javax.swing.JInternalFrame {
                 btnEliminar.setEnabled(true);
                 btnSalir.setEnabled(true);
                 
+                combo_hora_fin.setEnabled(false);
+                combo_min_fin.setEnabled(false);
+                combo_hora_inicio.setEnabled(false);
+                combo_min_inicio.setEnabled(false);
+                
+                txt_encabezado.setEditable(false);
+                txt_pie.setEditable(false);
                 break;
             
             case NUEVO:
                 txt_parqueo.setText(null);
                 txt_direccion.setText(null);
-               
+                txt_encabezado.setText(null);
+                txt_pie.setText(null);
+                
                 txt_parqueo.setEnabled(true);
                 txt_direccion.setEnabled(true);
-               
+                txt_encabezado.setEditable(true);
+                txt_pie.setEditable(true);
                                            
                 btnNuevo.setEnabled(false);
                 btnEditar.setEnabled(false);
@@ -71,12 +89,23 @@ public class parqueos extends javax.swing.JInternalFrame {
                 btnEliminar.setEnabled(false);
                 btnSalir.setEnabled(true);
                 
+                
+                combo_hora_fin.setEnabled(true);
+                combo_min_fin.setEnabled(true);
+                combo_hora_inicio.setEnabled(true);
+                combo_min_inicio.setEnabled(true);
+                
+                combo_hora_fin.setSelectedIndex(0);
+                combo_hora_inicio.setSelectedIndex(6);
+                
                 break;
             
             case GUARDAR:
                 txt_parqueo.setText(null);
                 txt_direccion.setText(null);
-               
+                txt_encabezado.setText(null);
+                txt_pie.setText(null);
+                                
                 
                 txt_parqueo.setEnabled(false);
                 txt_direccion.setEnabled(false);
@@ -88,6 +117,11 @@ public class parqueos extends javax.swing.JInternalFrame {
                 btnEliminar.setEnabled(false);
                 btnSalir.setEnabled(true);
                 nuevo =0;
+                
+                combo_hora_fin.setEnabled(true);
+                combo_min_fin.setEnabled(true);
+                combo_hora_inicio.setEnabled(true);
+                combo_min_inicio.setEnabled(true);
                 break;
             
             case EDITAR:
@@ -102,12 +136,21 @@ public class parqueos extends javax.swing.JInternalFrame {
                 btnEliminar.setEnabled(true);
                 btnSalir.setEnabled(true);
                 
+                txt_encabezado.setEditable(true);
+                txt_pie.setEditable(true);
+                
+                combo_hora_fin.setEnabled(true);
+                combo_min_fin.setEnabled(true);
+                combo_hora_inicio.setEnabled(true);
+                combo_min_inicio.setEnabled(true);
+                
                 break;    
             
             case BORRAR:
                 txt_parqueo.setText(null);
                 txt_direccion.setText(null);
-               
+                txt_encabezado.setText(null);
+                txt_pie.setText(null);
                 
                 txt_parqueo.setEnabled(false);
                 txt_direccion.setEnabled(false);
@@ -118,6 +161,13 @@ public class parqueos extends javax.swing.JInternalFrame {
                 btnGuardar.setEnabled(false);
                 btnEliminar.setEnabled(false);
                 btnSalir.setEnabled(true);
+                
+                
+                
+                combo_hora_fin.setEnabled(false);
+                combo_min_fin.setEnabled(false);
+                combo_hora_inicio.setEnabled(false);
+                combo_min_inicio.setEnabled(false);
                 
                 break;
         }
@@ -149,6 +199,12 @@ public class parqueos extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        label3 = new java.awt.Label();
+        label4 = new java.awt.Label();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txt_pie = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txt_encabezado = new javax.swing.JTextArea();
 
         label1.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         label1.setText("Nombre Parqueo");
@@ -254,6 +310,20 @@ public class parqueos extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
         jLabel3.setText("Hora:");
 
+        label3.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
+        label3.setText("Encabezado:");
+
+        label4.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
+        label4.setText("Pie de Ticket:");
+
+        txt_pie.setColumns(20);
+        txt_pie.setRows(5);
+        jScrollPane2.setViewportView(txt_pie);
+
+        txt_encabezado.setColumns(20);
+        txt_encabezado.setRows(5);
+        jScrollPane3.setViewportView(txt_encabezado);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -261,14 +331,6 @@ public class parqueos extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_parqueo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
-                        .addComponent(txt_direccion))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,28 +341,27 @@ public class parqueos extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24))
                     .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(combo_hora_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(combo_min_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(21, 21, 21)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(combo_hora_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(combo_min_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(77, 77, 77)
-                                .addComponent(jLabel2)
-                                .addGap(67, 67, 67))
+                            .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -308,7 +369,20 @@ public class parqueos extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(combo_min_fin, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(combo_min_fin, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(77, 77, 77)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_direccion)
+                            .addComponent(txt_parqueo))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -322,7 +396,15 @@ public class parqueos extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -340,7 +422,7 @@ public class parqueos extends javax.swing.JInternalFrame {
                             .addComponent(jLabel6)
                             .addComponent(combo_hora_fin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(combo_min_fin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,6 +442,7 @@ public class parqueos extends javax.swing.JInternalFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         nuevo=1;
+       
         estado(Estado.NUEVO);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
@@ -389,13 +472,22 @@ public class parqueos extends javax.swing.JInternalFrame {
          if(!dir.isEmpty()&&!parqueo.isEmpty()){
              if(nuevo==1){
                  parqueo par = new parqueo(0, parqueo, dir);
-                 //horario
+                 par.setHora_fin(get_time_fin());
+                 par.setHora_inicio(get_time_inicio());
+                 par.encabezado=txt_encabezado.getText();
+                 par.pie=txt_pie.getText();
                  modelo.agregar_parqueo(par);
              }else{
                  if(indice>-1){
                     parqueo par =modelo.elementAt(indice);
                     par.setNombre_parqueo(parqueo);
                     par.setDireccion(dir);
+                    
+                    par.setHora_fin(get_time_fin());
+                    par.setHora_inicio(get_time_inicio());
+                    
+                    par.encabezado=txt_encabezado.getText();
+                    par.pie=txt_pie.getText();
                     
                     modelo.modificar_parqueo(par);
                  }
@@ -416,6 +508,10 @@ public class parqueos extends javax.swing.JInternalFrame {
             parqueo par = modelo.elementAt(indice);
             txt_parqueo.setText(par.getNombre_parqueo());
             txt_direccion.setText(par.getDireccion());
+            set_horario_inicio(par.hora_inicio);
+            set_horario_fin(par.hora_fin);
+            txt_encabezado.setText(par.encabezado);
+            txt_pie.setText(par.pie);
             estado(Estado.CLICK);
         }
     }//GEN-LAST:event_tabla_parqueosMouseClicked
@@ -430,6 +526,10 @@ public class parqueos extends javax.swing.JInternalFrame {
                 parqueo par = modelo.elementAt(indice);
                 txt_parqueo.setText(par.getNombre_parqueo());
                 txt_direccion.setText(par.getDireccion());
+                set_horario_inicio(par.hora_inicio);
+                set_horario_fin(par.hora_fin);
+                txt_encabezado.setText(par.encabezado);
+                txt_pie.setText(par.pie);
                 estado(Estado.RELEASE);
             }
         }
@@ -455,6 +555,45 @@ public class parqueos extends javax.swing.JInternalFrame {
         return time;
     }
     
+     private void set_horario_inicio(Time hora_inicio) {
+        Integer hora = hora_inicio.getHours();
+        Integer mins = hora_inicio.getMinutes();
+
+        for (int i = 0; i < combo_hora_inicio.getItemCount(); i++) {
+            Integer aux = Integer.parseInt((String) combo_hora_inicio.getItemAt(i));
+            if (aux == hora) {
+                combo_hora_inicio.setSelectedIndex(i);
+            }
+        }
+
+        for (int i = 0; i < combo_min_inicio.getItemCount(); i++) {
+            Integer aux = Integer.parseInt((String) combo_min_inicio.getItemAt(i));
+            if (aux == mins) {
+                combo_min_inicio.setSelectedIndex(i);
+            }
+        }
+    }
+
+    private void set_horario_fin(Time hora_fin) {
+        Integer hora = hora_fin.getHours();
+        Integer mins = hora_fin.getMinutes();
+
+        for (int i = 0; i < combo_hora_fin.getItemCount(); i++) {
+            Integer aux = Integer.parseInt((String) combo_hora_fin.getItemAt(i));
+            if (aux == hora) {
+                combo_hora_fin.setSelectedIndex(i);
+            }
+        }
+
+        for (int i = 0; i < combo_min_fin.getItemCount(); i++) {
+            Integer aux = Integer.parseInt((String) combo_min_fin.getItemAt(i));
+            if (aux == mins) {
+                combo_min_fin.setSelectedIndex(i);
+            }
+        }
+    }
+
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
@@ -473,10 +612,16 @@ public class parqueos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private java.awt.Label label1;
     private java.awt.Label label2;
+    private java.awt.Label label3;
+    private java.awt.Label label4;
     private javax.swing.JTable tabla_parqueos;
     private javax.swing.JTextField txt_direccion;
+    private javax.swing.JTextArea txt_encabezado;
     private javax.swing.JTextField txt_parqueo;
+    private javax.swing.JTextArea txt_pie;
     // End of variables declaration//GEN-END:variables
 }

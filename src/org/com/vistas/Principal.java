@@ -22,7 +22,7 @@ public class Principal extends javax.swing.JFrame {
         this.setIconImage(img.getImage());
         setLocationRelativeTo(null);
         setExtendedState(MAXIMIZED_BOTH);
-      //  Controlador.iniciar_programa();
+        Controlador.iniciar_programa();
        
         if (Controlador.getUsuarioActual().getfRol()!=1){
             menu_administrador.setVisible(false);
@@ -72,8 +72,6 @@ public class Principal extends javax.swing.JFrame {
         menu_usuario = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         menu_descuentos = new javax.swing.JMenuItem();
-        menu_horario = new javax.swing.JMenuItem();
-        ultimo_saldo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -244,24 +242,6 @@ public class Principal extends javax.swing.JFrame {
         });
         menu_administrador.add(menu_descuentos);
 
-        menu_horario.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
-        menu_horario.setText("Horario Laboral");
-        menu_horario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_horarioActionPerformed(evt);
-            }
-        });
-        menu_administrador.add(menu_horario);
-
-        ultimo_saldo.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
-        ultimo_saldo.setText("Saldo ultimo turno");
-        ultimo_saldo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ultimo_saldoActionPerformed(evt);
-            }
-        });
-        menu_administrador.add(ultimo_saldo);
-
         jMenuBar1.add(menu_administrador);
 
         setJMenuBar(jMenuBar1);
@@ -340,20 +320,6 @@ public class Principal extends javax.swing.JFrame {
         mostrarVentanasInternas(new cobrar_ticket(), "Panel de cobro del Descuento");
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    private void ultimo_saldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ultimo_saldoActionPerformed
-        // TODO add your handling code here:
-        turno_db db = new turno_db();
-        turno turno = db.ultimo_turno(Controlador.getUsuarioActual().getIdUSUARIO());
-        double res = db.saldo_ultimo_turno(turno.getId_turno());
-        JOptionPane.showMessageDialog(jMenu1, "El saldo de su ultimo turno fue de: Q."+res,"SALDO",1);
-    }//GEN-LAST:event_ultimo_saldoActionPerformed
-
-    private void menu_horarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_horarioActionPerformed
-        // TODO add your handling code here:
-        hora_inicio_fin_parqueo hora = new hora_inicio_fin_parqueo();
-        mostrarVentanasInternas(hora, "Gestion de horario laboral");
-    }//GEN-LAST:event_menu_horarioActionPerformed
-
     private void ganancia_turnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ganancia_turnoActionPerformed
         // TODO add your handling code here:
         mostrarVentanasInternas(new reporte_ganancia_por_turno(), "Reporte Ganancia por turno");
@@ -413,7 +379,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu menu_cobro;
     private javax.swing.JMenuItem menu_descuentos;
     private javax.swing.JMenuItem menu_fecha;
-    private javax.swing.JMenuItem menu_horario;
     private javax.swing.JMenuItem menu_parqueo;
     private javax.swing.JMenu menu_reporte;
     private javax.swing.JMenuItem menu_reporte_fecha_hora;
@@ -421,6 +386,5 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu menu_usuairo;
     private javax.swing.JMenuItem menu_usuario;
     private javax.swing.JMenuItem tickets_pendientes;
-    private javax.swing.JMenuItem ultimo_saldo;
     // End of variables declaration//GEN-END:variables
 }

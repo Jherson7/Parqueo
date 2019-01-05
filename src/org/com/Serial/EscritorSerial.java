@@ -37,7 +37,8 @@ public class EscritorSerial extends Thread{
             while (ports.hasMoreElements()) {
                 pID = (CommPortIdentifier) ports.nextElement();
                 if (pID.getPortType() == CommPortIdentifier.PORT_SERIAL) {
-                    if (pID.getName().equals(Controlador.cod_puerto)) {
+                    //if (pID.getName().equals(Controlador.cod_puerto)) {
+                   if (pID.getName().equals("COM8")) {
                         
                         try {
                             //aqui es el puerto que se reconocio
@@ -53,8 +54,46 @@ public class EscritorSerial extends Thread{
             outStream.write(men.getBytes());
             try {
                 serPort.close();
-                sleep(15000);
-                Controlador.iniciar_serial();
+                //sleep(500);
+                //Controlador.iniciar_serial();
+            } catch (Exception e) {
+                System.out.println("Eror al cerrar le puerto: "+e.getMessage());
+            }
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+
+    public static void escribir_en_serial(int men){
+        try {
+            
+            Controlador.detener_puerto_escuchando();
+            
+            ports = CommPortIdentifier.getPortIdentifiers();
+            
+            while (ports.hasMoreElements()) {
+                pID = (CommPortIdentifier) ports.nextElement();
+                if (pID.getPortType() == CommPortIdentifier.PORT_SERIAL) {
+                    //if (pID.getName().equals(Controlador.cod_puerto)) {
+                   if (pID.getName().equals("COM8")) {
+                        
+                        try {
+                            //aqui es el puerto que se reconocio
+                            //if (portId.getName().equals("/dev/term/a")) {
+                            iniciar_escritor();
+                            break;
+                        } catch (Exception ex) {
+                            Logger.getLogger(EscritorSerial.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+            }
+            outStream.write(men);
+            try {
+                serPort.close();
+                //sleep(500);
+                //Controlador.iniciar_serial();
             } catch (Exception e) {
                 System.out.println("Eror al cerrar le puerto: "+e.getMessage());
             }

@@ -2,12 +2,16 @@ package org.com.db;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.JOptionPane;
+import org.com.Serial.impresion_de_ticket;
 import org.com.bens.descuento;
 import org.com.bens.tarifa;
 import org.com.bens.ticket;
+import org.com.logica.Controlador;
 
 /**
  *
@@ -28,11 +32,7 @@ public class cobro_db {
             con.setPreparado(con.getConn().prepareStatement("select * from ticket where codigo= ?"));
             con.getPreparado().setString(1, codigo);
             res=con.getPreparado().executeQuery();
-        } catch (SQLException ex) {
-            System.out.println(ex.getLocalizedMessage());
-        }
-     
-        try {
+      
             if(res.next()){
                 Date date = res.getTimestamp(3);
                 tick= new ticket(res.getInt(1),  res.getString(2),res.getTimestamp(3),res.getTimestamp(4),res.getDouble(5),res.getDouble(6),res.getDouble(7),res.getInt(8),res.getInt(9));
@@ -42,6 +42,8 @@ public class cobro_db {
         }
         return tick;
     }
+    
+    
     
     public Integer actualizar_ticket(ticket ticki){
           try {
@@ -161,5 +163,40 @@ public class cobro_db {
         return -1;
     }
     
+    public int insertar_y_obtener_ticket(int id_parqueo){
+         try {
+            con.setPreparado(con.getConn().prepareStatement("insert into indice_ticket(idparqueo) values (?)",Statement.RETURN_GENERATED_KEYS));
+            con.getPreparado().setInt(1, id_parqueo);
+            
+            con.getPreparado().executeUpdate();
+            res=con.getPreparado().getGeneratedKeys();
+            
+            if(res.next())
+                return res.getInt(1);
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al insertar el ticket y obtener su ID  a DB"+ex.getLocalizedMessage());
+            return -1;
+        }
+        return 0;
+    }
     
+    //dias_de_diferncia
+    public int diferencia_entre_dias(String fecha,String fecha2){
+        
+        String query ="call dias_de_diferncia('"+fecha+"','"+fecha2+"')";
+         try {
+            con.setPreparado(con.getConn().prepareStatement(query));
+
+            res=con.getPreparado().executeQuery();
+            
+            if(res.next())
+                return Math.abs(res.getInt(1));
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener la diferencia en dias"+ex.getLocalizedMessage());
+            return -1;
+        }
+        return 0;
+    }
 }
