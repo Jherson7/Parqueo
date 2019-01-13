@@ -1,4 +1,4 @@
-drop database parqueo;
+drop database if exists parqueo;
 create database parqueo DEFAULT CHARACTER SET utf8 ;
 USE  parqueo;
 
@@ -12,6 +12,35 @@ CREATE TABLE  PARQUEO  (
   PRIMARY KEY ( idPARQUEO ))
 ENGINE = InnoDB;
 
+create TABLE INDICE_TICKET(
+	corelativo int not null primary key auto_increment,
+    idparqueo int not null,
+	 foreign key (idparqueo) references parqueo(idparqueo)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+create table DETALLE_PARQUEO(
+	id_detalle int not null primary key auto_increment,
+    idparqueo int not null,
+    header varchar(300) not null,
+    footer varchar(300) not null,
+	 foreign key (idparqueo) references parqueo(idparqueo)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+
+CREATE TABLE HORARIO_PARQUEO(
+	id_horario int not null auto_increment primary key,
+    hora_inicio time,
+    hora_fin time,
+    idparqueo int not null,
+    foreign key (idparqueo) references parqueo(idparqueo)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+
+);
 
 -- -----------------------------------------------------
 -- Table   ROL 
@@ -21,6 +50,7 @@ CREATE TABLE  ROL  (
    nombre_rol  VARCHAR(100) NOT NULL,
   PRIMARY KEY ( idROL ))
 ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
@@ -171,7 +201,10 @@ ENGINE = InnoDB;
 -- inserciones de rol
 insert into rol (nombre_rol) values('admin'),('usuario');
 
--- procedimientos 
+insert into parqueo(nombre_parqueo,direccion) values('General','Admin');
+
+insert into usuario(dpi,nombre,apellidos,password,fparqueo,frol) values(123456879,'Admin','','capri3042',1,1);
+
 
 -- procedimiento para actualizar el ticket
 delimiter //
@@ -193,6 +226,8 @@ set @maxid = (select max(idturno) from turno);
 select * from turno where idturno = @maxid;
 end//
 
+-- drop procedure aperturar_turno;
+
 
 delimiter //
 create procedure consultar_turno(parqueo int) 
@@ -211,4 +246,24 @@ select sum(total) as total from ticket where fturno = turno;
 
 end//
 
+
+delimiter //
+create procedure get_total_por_turno(inicio date , fin date, parqueo int ) 
+begin
+
+select concat(u.nombres,concat(' ',u.apellidos)) as Empleado , DATE_FORMAT(tu.horario_apertura,"%d-%m-%Y - %H:%m") Apertura, DATE_FORMAT(tu.horario_cierre,"%d-%m-%Y - %H:%m") Cierre, 
+sum(t.total) as Total
+from ticket t inner join turno tu on t.fturno = tu.idturno
+inner join usuario u on u.idusuario = tu.fusuario
+where tu.horario_apertura between inicio and fin and u.fparqueo = parqueo
+group by (t.fturno);
+
+end//
+
+delimiter //
+create procedure dias_de_diferncia(fecha1 date, fecha2 date) 
+begin
+
+SELECT DATEDIFF(fecha1,fecha2)  as dias;
+end//
 

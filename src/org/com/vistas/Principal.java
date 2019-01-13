@@ -3,6 +3,7 @@ package org.com.vistas;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import org.com.Serial.impresion_de_ticket;
 import org.com.bens.turno;
 import org.com.db.Conexion;
 import org.com.db.turno_db;
@@ -179,6 +180,7 @@ public class Principal extends javax.swing.JFrame {
         menu_reporte.add(menu_reporte_tiempo_promedio);
 
         ganancia_turno.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
+        ganancia_turno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/com/pictures/analitica.png"))); // NOI18N
         ganancia_turno.setText("Ganancia por turnos");
         ganancia_turno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,6 +190,7 @@ public class Principal extends javax.swing.JFrame {
         menu_reporte.add(ganancia_turno);
 
         tickets_pendientes.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
+        tickets_pendientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/com/pictures/pendiente.png"))); // NOI18N
         tickets_pendientes.setText("Tickets pendientes de cobro");
         tickets_pendientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -287,9 +290,33 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        
+        /*String mensaje
+                = "TICKET DE CONTROL\n"
+                + "GAPRI S.A.\n"
+                + "4ta. Avenida 16-10 ZONA 10\n"
+                + "" + "11/01/19 8:10" + "\n"
+                + "ACCESO: B    CORRELATIVO: 123456\n";
+        System.out.println(centrar_texto(mensaje));*/
+        //impresion_de_ticket.insertar_y_obtener_codigo();
+       System.exit(0);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private static String centrar_texto(String mensaje) {
+        String arreglo[]=mensaje.split("\n");
+        String res="";
+        for(String r:arreglo){
+            int tam=r.length();
+            int espacios = (48-tam)/2;
+            String no_espacios="";
+            for(;espacios>0;espacios--){
+                no_espacios+=" ";
+            }
+            res+=no_espacios+r+"\n";
+        }
+        
+        return res;
+    }
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
         mostrarVentanasInternas(new tarifas(), "Panel de Administracion de Tarifas");

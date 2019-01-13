@@ -53,7 +53,6 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
         txt_codigo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         lbl_estado = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         combo_descuento.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         combo_descuento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -119,13 +118,6 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
         lbl_estado.setFont(new java.awt.Font("MS Reference Sans Serif", 3, 12)); // NOI18N
         lbl_estado.setText("Estado");
 
-        jButton1.setText("Probar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -146,9 +138,7 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
                         .addComponent(chk_extraviado))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(68, 68, 68)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
-                            .addComponent(jLabel1))
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl_estado)))
                 .addContainerGap(28, Short.MAX_VALUE))
@@ -160,9 +150,7 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lbl_estado))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(chk_descuento)
                 .addGap(7, 7, 7)
                 .addComponent(combo_descuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,7 +182,7 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
             descuento desc = (descuento) combo_descuento.getSelectedItem();
             id_desc = desc.getId_descuento();
         }
-        //temp = Cobro.calcular_costo("0B6DB", id_desc);//cambiar por el codigo escaneado
+        //temp = Cobro.calcular_costo("45", id_desc);//cambiar por el codigo escaneado
         temp = Cobro.calcular_costo(codigo, id_desc);//cambiar por el codigo escaneado
         mostrar_calculo();
 
@@ -246,30 +234,30 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
         if (chk_extraviado.isSelected()) {
             int a = Cobro.realizar_cobro_extraviado(temp.getTicket());
             if (a != 1) {
-                JOptionPane.showMessageDialog(null, "Se inserto correctamente el ticket extraviado:" + codigo, "Panel de Cobro", 1);
+                //JOptionPane.showMessageDialog(null, "Se inserto correctamente el ticket extraviado:" + codigo, "Panel de Cobro", 1);
                 //tendria que escribir abrir
-                Controlador.escribir_en_serial(abrir);
-                this.dispose();
+                //Controlador.escribir_en_serial(abrir);
+                //this.dispose();
+                inicializar();
             } else {
-                JOptionPane.showMessageDialog(null, "ERROR al insertar el ticket extraviado: " + codigo, "Panel de Cobro", 0);
+                JOptionPane.showMessageDialog(null, "ERROR al insertar el ticket extraviado, pongase en contacto con el desarrollador de Software", "Panel de Cobro", 0);
             }
         } else {
             if (temp != null) {
                 int a = Cobro.realizar_cobro(temp.getTicket());
                 if (a != 1) {
-                    JOptionPane.showMessageDialog(null, "Se cobro correctamente el ticket", "Panel de Cobro", 1);
-                    Controlador.escribir_en_serial(abrir);
-                    this.dispose();
+                    /*JOptionPane.showMessageDialog(null, "Se cobro correctamente el ticket", "Panel de Cobro", 1);*/
+                   // Controlador.escribir_en_serial(abrir);
+                    //this.dispose();
+                    inicializar();
                 } else {
-                    JOptionPane.showMessageDialog(null, "ERROR al cobrar el ticket", "Panel de Cobro", 0);
+                    JOptionPane.showMessageDialog(null, "ERROR al cobrar el ticket, pongase en contacto con el desarrollador de Software", "Panel de Cobro", 0);
                     //estado= "Fallido";
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "No se ha detectado ticket!", "ERROR", 0);
             }
         }
-
-
     }//GEN-LAST:event_btn_cobrar1ActionPerformed
 
     private void combo_descuentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo_descuentoItemStateChanged
@@ -300,8 +288,9 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_combo_descuentoItemStateChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       /* temp = Cobro.calcular_costo("0B6DB", 0);//cambiar por el codigo escaneado
+    
+    private void pruebas_de_envio(){
+               /* temp = Cobro.calcular_costo("0B6DB", 0);//cambiar por el codigo escaneado
         mostrar_calculo();
 */
         //cobro_db nuevo = new cobro_db();
@@ -328,9 +317,9 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
             Controlador.escribir_en_serial(230);
         } catch (Exception e) {
         }
+    }
     
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     String InitText() {
         String txt = "";
         for (int i = 0; i <= 14; i++) {
@@ -386,7 +375,6 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox chk_descuento;
     private javax.swing.JCheckBox chk_extraviado;
     private javax.swing.JComboBox combo_descuento;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lbl_estado;
     private javax.swing.JPanel panel_cobro;
@@ -469,5 +457,15 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
 
         chk_descuento.setSelected(false);
 
+    }
+
+    private void inicializar() {
+       temp  = new monto_cobro();
+        JPanel panel_detalles = new JPanel();
+        panel_detalles.setLayout(new GridLayout(temp.detalles.size() + 5, 1));
+        panel_detalles.repaint();
+        scroll_detalles.setViewportView(panel_detalles);
+        scroll_detalles.repaint();
+        iniciar_hilo();
     }
 }

@@ -89,7 +89,7 @@ public class Cobro {
         int a =cobro.insertar_ticket(ticki);
         
         if (a != 1) {
-            JOptionPane.showMessageDialog(null, "Se inserto correctamente el ticket: " + codigo, "Panel de Cobro", 1);
+            //JOptionPane.showMessageDialog(null, "Se inserto correctamente el ticket: " + codigo, "Panel de Cobro", 1);
         } else {
             JOptionPane.showMessageDialog(null, "ERROR al insertar el ticket: " + codigo, "Panel de Cobro", 0);
         }
@@ -211,9 +211,15 @@ public class Cobro {
                             total_horas = t_hora_salida - t_hora_ingreso-1;//se resta - 1 porque ahi van los minutos
                         else 
                             total_horas = t_hora_salida - t_hora_ingreso;
-                                    
-                        if(total_horas<0)
+                               
+                        
+                        boolean menos_de_la_hora=false;
+                        if(total_horas<0){
                             total_horas=0;
+                            menos_de_la_hora=true;
+                            
+                        }
+                            
                         
                         if(t_min_ingreso>0){//minutos de ingreso
                             if((60-t_min_ingreso)<=30)
@@ -221,14 +227,18 @@ public class Cobro {
                             else
                                 total_horas+=1;
                         }
-                        //minutos de salida
-                            if(actual.getMinutes()<=30)
-                                total_horas +=.5;//se suman los minutos
-                            else
-                                total_horas+=1;
-                           // total_horas += (double)actual.getMinutes() / 60;//se suman los minutos
                         
-                            
+                        if (!menos_de_la_hora) {
+                            //minutos de salida
+                            if (actual.getMinutes() <= 30) {
+                                total_horas += .5;//se suman los minutos
+                            } else {
+                                total_horas += 1;
+                            }
+                        }
+                          
+                        // total_horas += (double)actual.getMinutes() / 60;//se suman los minutos
+                                                    
                         //total_horas= roundToHalf(total_horas);
                         //se agrega una nueva condicion si es la ultima tarifa
                         //es decir la ultima solo se cobra el precio, no se multiplica por las horas

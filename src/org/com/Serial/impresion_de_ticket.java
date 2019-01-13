@@ -53,27 +53,28 @@ public class impresion_de_ticket {
     }
     
     private static void imprimir(String codigo){
-        String mensaje = "          TICKET DE CONTROL\n"
-                   + "             "+parqueo_nombre+"\n"
-                   
-                   + "          "+direccion+"\n"
-                   + "      "+get_fecha()+"  "+get_hora()+"\n\n"
-                   + "                Correlativo: "+codigo+"\n"
-                   + "        "+encabezado+"\n"
+        String mensaje = "TICKET DE CONTROL\n"
+                   + ""+parqueo_nombre+"\n"
+                   + ""+direccion+"\n"
+                   + ""+get_fecha()+"  "+get_hora()+"\n\n"
+                   + "Correlativo: "+codigo+"\n"
+                   + ""+encabezado+"\n"
                    + "";
         
         
          try {
+            
             String toSerial = init_text+
-            mensaje+
+            centrar_texto(mensaje)+
             fin_text+
             init_code_bar+
             parsear_codigo(codigo,get_fecha_ticket())+
             fin_code_bar+
             init_text+
-            "       "+footer+"\n"+
+            centrar_texto(footer)+"\n"+
             fin_text+
             printer_cut;
+            
             
             Controlador.escribir_en_serial(inicio_impresion);
             Controlador.escribir_en_serial(toSerial);
@@ -164,5 +165,21 @@ public class impresion_de_ticket {
         String cod = String.valueOf(id);
         Cobro.insertar_ticket(cod);
         imprimir(cod);
+    }
+
+    private static String centrar_texto(String mensaje) {
+        String arreglo[]=mensaje.split("\n");
+        String res="";
+        for(String r:arreglo){
+            int tam=r.length();
+            int espacios = (48-tam)/2;
+            String no_espacios="";
+            for(;espacios>0;espacios--){
+                no_espacios+=" ";
+            }
+            res+=no_espacios+r+"\n";
+        }
+        
+        return res;
     }
 }

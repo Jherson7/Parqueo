@@ -50,7 +50,7 @@ public class reportes_db {
     public List<reporte_hora_fecha_beans> retornar_por_fechas(Date desde,Date hasta){
         List<reporte_hora_fecha_beans> lista = new LinkedList<>();
         
-            
+                    
         String query ="select sum(total) as TOTAL, hora_ingreso as FECHA from ticket WHERE \n" +
                        "hora_ingreso between  ? and ? group by day(hora_ingreso)";
         try {
