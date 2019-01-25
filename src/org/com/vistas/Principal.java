@@ -23,7 +23,7 @@ public class Principal extends javax.swing.JFrame {
         this.setIconImage(img.getImage());
         setLocationRelativeTo(null);
         setExtendedState(MAXIMIZED_BOTH);
-        Controlador.iniciar_programa();
+        //Controlador.iniciar_programa();
        
         if (Controlador.getUsuarioActual().getfRol()!=1){
             menu_administrador.setVisible(false);

@@ -6,11 +6,9 @@ import java.text.SimpleDateFormat;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import org.com.Serial.EscritorSerial;
 import org.com.bens.descuento;
 import org.com.bens.ticket;
 import org.com.controler.descuento_controller;
-import org.com.db.cobro_db;
 import org.com.logica.Cobro;
 import org.com.logica.Controlador;
 import org.com.logica.monto_cobro;
@@ -37,6 +35,7 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
         initComponents();
         combo_descuento.setModel(descuento_controller.getCombo());
         combo_descuento.setEnabled(false);
+        txt_factura.setEnabled(false);
         iniciar_hilo();
     }
 
@@ -53,6 +52,9 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
         txt_codigo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         lbl_estado = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txt_factura = new javax.swing.JTextField();
+        chk_factura = new javax.swing.JCheckBox();
 
         combo_descuento.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         combo_descuento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -118,6 +120,21 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
         lbl_estado.setFont(new java.awt.Font("MS Reference Sans Serif", 3, 12)); // NOI18N
         lbl_estado.setText("Estado");
 
+        jLabel2.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
+        jLabel2.setText("Factura:");
+
+        txt_factura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_facturaActionPerformed(evt);
+            }
+        });
+
+        chk_factura.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                chk_facturaStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,23 +142,28 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chk_descuento)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(combo_descuento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(panel_cobro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addComponent(chk_extraviado))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(68, 68, 68)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_estado)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addComponent(lbl_estado))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(combo_descuento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(chk_descuento)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(panel_cobro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(chk_extraviado)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_factura, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(chk_factura)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,15 +172,20 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lbl_estado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(chk_descuento)
                 .addGap(7, 7, 7)
                 .addComponent(combo_descuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chk_extraviado)
-                .addGap(12, 12, 12)
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txt_factura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chk_factura))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panel_cobro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -244,6 +271,7 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
             }
         } else {
             if (temp != null) {
+                temp.getTicket().setFactura(txt_factura.getText());
                 int a = Cobro.realizar_cobro(temp.getTicket());
                 if (a != 1) {
                     /*JOptionPane.showMessageDialog(null, "Se cobro correctamente el ticket", "Panel de Cobro", 1);*/
@@ -287,6 +315,20 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_combo_descuentoItemStateChanged
+
+    private void txt_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_facturaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_facturaActionPerformed
+
+    private void chk_facturaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chk_facturaStateChanged
+        // TODO add your handling code here:
+        if(chk_factura.isSelected()){
+            txt_factura.setEnabled(true);
+        }else{
+            txt_factura.setText("");
+            txt_factura.setEnabled(false);
+        }
+    }//GEN-LAST:event_chk_facturaStateChanged
 
     
     private void pruebas_de_envio(){
@@ -370,16 +412,20 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
 
     }
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cobrar1;
     private javax.swing.JCheckBox chk_descuento;
     private javax.swing.JCheckBox chk_extraviado;
+    private javax.swing.JCheckBox chk_factura;
     private javax.swing.JComboBox combo_descuento;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lbl_estado;
     private javax.swing.JPanel panel_cobro;
     private javax.swing.JScrollPane scroll_detalles;
     private javax.swing.JTextField txt_codigo;
+    private javax.swing.JTextField txt_factura;
     // End of variables declaration//GEN-END:variables
 
     private void iniciar_hilo() {

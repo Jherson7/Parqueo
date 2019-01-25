@@ -35,7 +35,7 @@ public class cobro_db {
       
             if(res.next()){
                 Date date = res.getTimestamp(3);
-                tick= new ticket(res.getInt(1),  res.getString(2),res.getTimestamp(3),res.getTimestamp(4),res.getDouble(5),res.getDouble(6),res.getDouble(7),res.getInt(8),res.getInt(9));
+                tick= new ticket(res.getInt(1),  res.getString(2),res.getTimestamp(3),res.getTimestamp(4),res.getDouble(5),res.getDouble(6),res.getDouble(7),res.getInt(8),res.getInt(9),res.getString(10));
             }
         } catch (SQLException ex) {
             System.out.println("Error al obtener el ticket: "+ex.getLocalizedMessage());
@@ -47,10 +47,11 @@ public class cobro_db {
     
     public Integer actualizar_ticket(ticket ticki){
           try {
-            con.setPreparado(con.getConn().prepareStatement("call actualizar_ticket(?,?,?)"));
+            con.setPreparado(con.getConn().prepareStatement("call actualizar_ticket(?,?,?,?)"));
             con.getPreparado().setInt(1,ticki.getId_ticket());
             con.getPreparado().setDouble(2,ticki.getSubtotal());
             con.getPreparado().setDouble(3, ticki.getDescuento());
+            con.getPreparado().setString(4, ticki.getFactura());
             
             con.getPreparado().executeUpdate();
             

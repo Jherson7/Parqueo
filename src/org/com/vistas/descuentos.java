@@ -406,6 +406,7 @@ public class descuentos extends javax.swing.JInternalFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         estado(Estado.INICIO);
+        this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void chk_porcentajeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chk_porcentajeMouseClicked

@@ -96,7 +96,7 @@ public class apertura_turno extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         turno_db turno = new turno_db();
         turno aux = turno.consultar_turno(Controlador.getParqueo().getId_parqueo());
-        if(aux.getHora_cierre()==null){
+        if(aux!=null&&aux.getHora_cierre()==null){
             Controlador.setTurno_actual(aux);
              JOptionPane.showMessageDialog(null, "Ya existe el turno aperturado, cierre el turno para poder iniciar otro ", "Panel de Usuarios", 0);
              this.dispose();

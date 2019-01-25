@@ -20,11 +20,12 @@ public class ticket {
     Double  total;
     int     turno;
     int     fdescuento;
+    String  factura;
 
     public ticket() {
     }
 
-    public ticket(int id_ticket, String codigo, Timestamp hora_ingreso, Timestamp hora_salida, Double subtotal, Double descuento, Double total, int turno, int fdescuento) {
+    public ticket(int id_ticket, String codigo, Timestamp hora_ingreso, Timestamp hora_salida, Double subtotal, Double descuento, Double total, int turno, int fdescuento,String fac) {
         this.id_ticket = id_ticket;
         this.codigo = codigo;
         this.hora_ingreso = hora_ingreso;
@@ -34,6 +35,7 @@ public class ticket {
         this.total = total;
         this.turno = turno;
         this.fdescuento = fdescuento;
+        this.factura=fac;
     }
 
     public int getId_ticket() {
@@ -113,8 +115,15 @@ public class ticket {
         this.descuento = (double)descuento;
     }
 
+    public String getFactura() {
+        return factura;
+    }
+
+    public void setFactura(String factura) {
+        this.factura = factura;
+        //C:\Users\Jherson\Documents\Trabajo\ParqueoSQL\script.sql
+    }
+
   
-    
-    
     
 }
