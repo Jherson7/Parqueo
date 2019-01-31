@@ -68,7 +68,7 @@ public class usuario_db {
      
     public Integer modifica_usuario(usuario usu){
           try {
-            con.setPreparado(con.getConn().prepareStatement("update usuario set dpi=?,nombres=?,apellidos=?,password=?,fparqueo=?,frol=? usuario=? where idusuario=?"));
+            con.setPreparado(con.getConn().prepareStatement("update usuario set dpi=?,nombres=?,apellidos=?,password=?,fparqueo=?,frol=? ,usuario=? where idusuario=?"));
             con.getPreparado().setLong(1, usu.getDPI());
             con.getPreparado().setString(2, usu.getNombre());
             con.getPreparado().setString(3, usu.getApellidos());
@@ -184,6 +184,4 @@ public class usuario_db {
         }
         return usu;
     }
-       
-
-}
+ }

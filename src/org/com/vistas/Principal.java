@@ -3,11 +3,6 @@ package org.com.vistas;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-import org.com.Serial.impresion_de_ticket;
-import org.com.bens.turno;
-import org.com.db.Conexion;
-import org.com.db.turno_db;
-import org.com.logica.Cobro;
 import org.com.logica.Controlador;
 
 /**
@@ -23,7 +18,7 @@ public class Principal extends javax.swing.JFrame {
         this.setIconImage(img.getImage());
         setLocationRelativeTo(null);
         setExtendedState(MAXIMIZED_BOTH);
-        //Controlador.iniciar_programa();
+        Controlador.iniciar_programa();
        
         if (Controlador.getUsuarioActual().getfRol()!=1){
             menu_administrador.setVisible(false);
@@ -57,6 +52,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         menu_usuairo = new javax.swing.JMenu();
         menu_apertura = new javax.swing.JMenuItem();
         menu_cierre = new javax.swing.JMenuItem();
@@ -100,6 +96,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Cerrar Sesion");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
 
@@ -290,16 +294,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        
-        /*String mensaje
-                = "TICKET DE CONTROL\n"
-                + "GAPRI S.A.\n"
-                + "4ta. Avenida 16-10 ZONA 10\n"
-                + "" + "11/01/19 8:10" + "\n"
-                + "ACCESO: B    CORRELATIVO: 123456\n";
-        System.out.println(centrar_texto(mensaje));*/
-        //impresion_de_ticket.insertar_y_obtener_codigo();
-       System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private static String centrar_texto(String mensaje) {
@@ -317,6 +312,7 @@ public class Principal extends javax.swing.JFrame {
         
         return res;
     }
+    
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
         mostrarVentanasInternas(new tarifas(), "Panel de Administracion de Tarifas");
@@ -356,6 +352,13 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         mostrarVentanasInternas(new reporte_tickets_pendientes(), "Tickets Pendientes");
     }//GEN-LAST:event_tickets_pendientesActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        Login lg = new Login();
+        lg.setVisible(true);
+        this.dispose();
+                    // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -399,6 +402,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenu menu_administrador;
     private javax.swing.JMenuItem menu_apertura;

@@ -258,6 +258,7 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
 
     private void btn_cobrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cobrar1ActionPerformed
         // TODO add your handling code here:
+        
         if (chk_extraviado.isSelected()) {
             int a = Cobro.realizar_cobro_extraviado(temp.getTicket());
             if (a != 1) {
@@ -270,6 +271,7 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "ERROR al insertar el ticket extraviado, pongase en contacto con el desarrollador de Software", "Panel de Cobro", 0);
             }
         } else {
+            
             if (temp != null) {
                 temp.getTicket().setFactura(txt_factura.getText());
                 int a = Cobro.realizar_cobro(temp.getTicket());
