@@ -15,17 +15,23 @@ public class Principal extends javax.swing.JFrame {
     ImageIcon img= new ImageIcon("src/org/com/pictures/aparcamiento.png");
     
     public Principal() {
+        
+            
+    }
+
+    Principal(Login aThis) {
         initComponents();
         this.setIconImage(img.getImage());
         setLocationRelativeTo(null);
         setExtendedState(MAXIMIZED_BOTH);
-        Controlador.iniciar_programa();
+        //Controlador.iniciar_programa();
+        impresion_de_ticket.obtener_parametros_del_parqueo();
        
         if (Controlador.getUsuarioActual().getfRol()!=1){
             menu_administrador.setVisible(false);
             menu_reporte.setVisible(false);
         }
-            
+        aThis.dispose();
     }
 
       public void mostrarVentanasInternas(JInternalFrame frame,String nombre){

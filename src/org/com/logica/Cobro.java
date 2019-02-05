@@ -255,7 +255,7 @@ public class Cobro {
                         }
 
                         mon.detalles.add(men);
-                        mon.costo = Double.parseDouble(formatter.format(mon.costo));
+                        //mon.costo = Double.parseDouble(formatter.format(mon.costo));
                        
                         return mon;
                     }

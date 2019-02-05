@@ -179,7 +179,7 @@ public class Login extends javax.swing.JFrame {
                 //parqueo parqueo_actual = par.get_parqueo_id(usu.getfPARQUEO());
                 Controlador.setParqueo(par);
                 
-                Principal pr = new Principal();
+                Principal pr = new Principal(this);
                 pr.setVisible(true);
                 setearTurno();
                 this.dispose();

@@ -356,6 +356,7 @@ public class descuentos extends javax.swing.JInternalFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
       nuevo=1;
+      JOptionPane.showMessageDialog(this, "Advertencia el descuento es por tiempo igual, el Maximo es Q.100.00","Informacion",1);
       estado(Estado.NUEVO);
     }//GEN-LAST:event_btnNuevoActionPerformed
 

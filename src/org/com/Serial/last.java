@@ -1,6 +1,5 @@
 package org.com.Serial;
 
-import gnu.io.*;
 import  java.util.*;
 
 /*public class test {
@@ -26,9 +25,7 @@ import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener; 
 import java.io.IOException;
 import java.util.Enumeration;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.com.logica.Cobro;
+import javax.swing.JOptionPane;
 import org.com.logica.Controlador;
 
 
@@ -133,13 +130,16 @@ public class last extends javax.swing.JFrame implements SerialPortEventListener 
 
         
         
-        private void leer_del_puerto(String codigo){
-            if("listo".equals(codigo)){
+        private void leer_del_puerto(String codigo) {
+        if ("listo".equals(codigo)) {
+            if (Controlador.getTurno_actual() != null) {
                 impresion_de_ticket.insertar_y_obtener_codigo();
                 escribir_en_serial(comando);//para que abra la puerta
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha aperturado turno, por favor aperture su turno para abrir paso", "ERROR", 0);
             }
-            
         }
+    }
         
         public void escribir_en_serial(String men){
             try {

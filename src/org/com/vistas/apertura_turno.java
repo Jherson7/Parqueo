@@ -17,7 +17,7 @@ public class apertura_turno extends javax.swing.JInternalFrame {
     public apertura_turno() {
         initComponents();
         lblUsuario.setText(Controlador.getUsuarioActual().getNombre());
-        Controlador.insertar_tickets_pendientes();
+        
     }
 
     /**
@@ -108,6 +108,8 @@ public class apertura_turno extends javax.swing.JInternalFrame {
             if (aux!= null) {
                 JOptionPane.showMessageDialog(null, "Se aperturo exitosamente el turno", "Panel de Usuarios", 1);
                 Controlador.setTurno_actual(aux);
+                //Controlador.insertar_tickets_pendientes(); descomentar esto
+                //si desean guardar los tickets que se generen sin aperturar turno
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Error al aperturar el turno ", "Panel de Usuarios", 0);

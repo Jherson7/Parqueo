@@ -38,7 +38,7 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
         combo_descuento.setModel(descuento_controller.getCombo());
         combo_descuento.setEnabled(false);
         txt_factura.setEnabled(false);
-        iniciar_hilo();
+        //iniciar_hilo();
     }
 
     @SuppressWarnings("unchecked")
@@ -231,11 +231,11 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
         panel_detalles.add(new JLabel("Sub Total:      Q." + temp.getTicket().getSubtotal()));
         panel_detalles.add(new JLabel("Descuento:   Q." + temp.getTicket().getDescuento()));
         JLabel total = new JLabel("Total:              Q." + temp.getTicket().getTotal());
-        total.setFont(new Font("Serif", Font.PLAIN, 14));
+        total.setFont(new Font("Serif", Font.PLAIN, 18));
         total.setForeground(Color.red);
-        panel_detalles.add(total);
         panel_detalles.add(new JLabel("------------------------------"));
-
+        panel_detalles.add(total);
+        
         panel_detalles.repaint();
         scroll_detalles.setViewportView(panel_detalles);
         scroll_detalles.repaint();
@@ -285,7 +285,8 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
                     /*JOptionPane.showMessageDialog(null, "Se cobro correctamente el ticket", "Panel de Cobro", 1);*/
                    // Controlador.escribir_en_serial(abrir);
                     //this.dispose();
-                    inicializar();
+                   
+                    //inicializar(); --esto limpiar la pantalla
                 } else {
                     JOptionPane.showMessageDialog(null, "ERROR al cobrar el ticket, pongase en contacto con el desarrollador de Software", "Panel de Cobro", 0);
                     //estado= "Fallido";
