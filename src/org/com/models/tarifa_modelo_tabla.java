@@ -9,7 +9,7 @@ import org.com.db.tarifa_db;
 public class tarifa_modelo_tabla extends AbstractTableModel{
 
     public List<tarifa>lista;
-    public String [] cabecera = {"ID","PRECIO","HORA INICIO","HORA FIN","PARQUEO"};
+    public String [] cabecera = {"ID","PRECIO","MEDIA HORA","HORA INICIO","HORA FIN","PARQUEO","TARIFA UNICA"};
     private tarifa_db tarifadb;
     private int maxid=0;
     
@@ -38,22 +38,33 @@ public class tarifa_modelo_tabla extends AbstractTableModel{
       tarifa au = lista.get(a);
       String resultado=null;
       
-      switch(b){
-          case 0:
-              resultado = String.valueOf(au.getIdTARIFA());
-              break;
-          case 1:
-              resultado = String.valueOf(au.getPrecio());
-              break;
-          case 2: resultado = String.valueOf(au.getHora_inicio_tarifa());
-              break;
-          case 3:
-              resultado = String.valueOf(au.getHora_fin_tarifa());
-              break;
-          case 4:
-              resultado = au.getParqueo();
-              break;
-      }
+          switch (b) {
+              case 0:
+                  resultado = String.valueOf(au.getIdTARIFA());
+                  break;
+              case 1:
+                  resultado = String.valueOf(au.getPrecio());
+                  break;
+              case 2:
+                  resultado = String.valueOf(au.getMedia_hora());
+                  break;
+              case 3:
+                  resultado = String.valueOf(au.getHora_inicio_tarifa());
+                  break;
+              case 4:
+                  resultado = String.valueOf(au.getHora_fin_tarifa());
+                  break;
+              case 5:
+                  resultado = au.getParqueo();
+                  break;
+              case 6:
+                  if (au.getTarifa_unica() == 1) {
+                      resultado = "SI";
+                  } else {
+                      resultado = "NO";
+                  }
+                  break;
+          }
       return resultado;
     }
     

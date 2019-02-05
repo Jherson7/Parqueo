@@ -12,6 +12,8 @@ CREATE TABLE  PARQUEO  (
   PRIMARY KEY ( idPARQUEO ))
 ENGINE = InnoDB;
 
+
+
 create TABLE INDICE_TICKET(
 	corelativo int not null primary key auto_increment,
     idparqueo int not null,
@@ -31,6 +33,8 @@ create table DETALLE_PARQUEO(
 );
 
 
+
+
 CREATE TABLE HORARIO_PARQUEO(
 	id_horario int not null auto_increment primary key,
     hora_inicio time,
@@ -41,6 +45,7 @@ CREATE TABLE HORARIO_PARQUEO(
     ON UPDATE CASCADE
 
 );
+
 
 -- -----------------------------------------------------
 -- Table   ROL 
@@ -81,6 +86,7 @@ CREATE TABLE  USUARIO  (
 ENGINE = InnoDB;
 
 
+
 -- -----------------------------------------------------
 -- Table   DESCUENTO 
 -- -----------------------------------------------------
@@ -100,6 +106,8 @@ ENGINE = InnoDB;
 CREATE TABLE  TARIFA  (
    idTARIFA  INT NOT NULL AUTO_INCREMENT,
    Precio  DOUBLE NOT NULL,
+   precio_media_hora double not null,
+   tarifa_unica int default 0,
    hora_inicio_tarifa  TIME NOT NULL,
    hora_fin_tarifa  TIME NULL,
    fPARQUEO  INT NOT NULL,
@@ -111,6 +119,7 @@ CREATE TABLE  TARIFA  (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
@@ -134,6 +143,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table   TURNO 
 -- -----------------------------------------------------
+
 CREATE TABLE  TURNO  (
    idTURNO  INT NOT NULL AUTO_INCREMENT,
    horario_apertura  DATETIME NOT NULL,
@@ -159,15 +169,17 @@ ENGINE = InnoDB;
 -- Table   TICKET 
 -- -----------------------------------------------------
 CREATE TABLE  TICKET  (
-   idTICKET  INT NOT NULL AUTO_INCREMENT,
-   Codigo  VARCHAR(6) NOT NULL,
-   hora_ingreso  datetime NOT NULL,
+   idTICKET  	INT NOT NULL AUTO_INCREMENT,
+   Codigo  		VARCHAR(6) NOT NULL,
+   hora_ingreso datetime NOT NULL,
    hora_salida  datetime NULL,
-   subtotal  DOUBLE NULL,
-   descuento  DOUBLE NULL,
-   total  DOUBLE NULL,
-   fTURNO  INT NOT NULL,
-   fDESCUENTO  INT NULL,
+   subtotal  	DOUBLE NULL,
+   descuento  	DOUBLE NULL,
+   total  		DOUBLE NULL,
+   fTURNO  		INT NOT NULL,
+   fDESCUENTO  	INT NULL,
+   factura		varchar(100),
+   -- agregar si el ticket ya fue cobrado no volverlo a cobrar
   PRIMARY KEY ( idTICKET ),
   INDEX  fk_TICKET_TURNO1_idx  ( fTURNO  ASC),
   INDEX  fk_TICKET_DESCUENTO1_idx  ( fDESCUENTO  ASC),
@@ -197,21 +209,13 @@ CREATE TABLE  BITACORA  (
 ENGINE = InnoDB;
 
 
-
--- inserciones de rol
-insert into rol (nombre_rol) values('admin'),('usuario');
-
-insert into parqueo(nombre_parqueo,direccion) values('General','Admin');
-
-insert into usuario(dpi,nombre,apellidos,password,fparqueo,frol) values(123456879,'Admin','','capri3042',1,1);
-
-
 -- procedimiento para actualizar el ticket
+
 delimiter //
 create procedure actualizar_ticket(
-id_ticket int, sub double, descu double) 
+id_ticket int, sub double, descu double,v_factura varchar(100)) 
 begin 
-update ticket set hora_salida =  NOW(), subtotal = sub,descuento=descu,total=(sub  - descu) where idTICKET = id_ticket;
+update ticket set factura=v_factura, hora_salida =  NOW(), subtotal = sub,descuento=descu,total=(sub  - descu) where idTICKET = id_ticket;
 end//
 
 
@@ -267,3 +271,26 @@ begin
 SELECT DATEDIFF(fecha1,fecha2)  as dias;
 end//
 
+
+/*
+idTARIFA  INT NOT NULL AUTO_INCREMENT,
+   Precio  DOUBLE NOT NULL,
+   precio_media_hora double not null,
+   tarifa_unica int default 0,
+   hora_inicio_tarifa  TIME NOT NULL,
+   hora_fin_tarifa  TIME NULL,
+   fPARQUEO  INT NOT NULL,*/
+
+insert into PARQUEO (Nombre_parqueo,direccion) values('Master','Parking');
+insert into detalle_parqueo (idparqueo,header,footer) values (1,'header','fooder');
+insert into horario_parqueo (hora_inicio,hora_fin,idparqueo) values('7:00','2:00',1);
+insert into rol (nombre_rol) values('admin'),('usuario');
+insert into usuario(dpi,usuario,nombres,apellidos,password,fparqueo,frol) values(123456789,'Admin','Admin','Admin','capri3042',1,1);
+insert into usuario(dpi,usuario,nombres,apellidos,password,fparqueo,frol) values(987654321,'Usuario','User','User','usuario',1,2);
+insert into horario (hora_inicio,hora_fin,fusuario) values ('7:00','17:00',1);
+insert into tarifa(precio,precio_media_hora,tarifa_unica,hora_inicio_tarifa,hora_fin_tarifa,fparqueo)
+values(10,6,0,'7:00','17:00',1);
+insert into tarifa(precio,precio_media_hora,tarifa_unica,hora_inicio_tarifa,hora_fin_tarifa,fparqueo)
+values(30,0,1,'18:00','23:00',1);
+
+select * from ticket;

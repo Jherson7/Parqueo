@@ -9,6 +9,8 @@ import java.sql.Time;
 public class tarifa {
    Integer idTARIFA  ;
    Double Precio  ;
+   Double media_hora;
+   int tarifa_unica;
    Time hora_inicio_tarifa;
    Time hora_fin_tarifa ;
    Integer fPARQUEO;
@@ -17,15 +19,18 @@ public class tarifa {
     public tarifa() {
     }
 
-    public tarifa(Integer idTARIFA, Double Precio, Time hora_inicio_tarifa, Time hora_fin_tarifa, Integer fPARQUEO,String parqueo) {
+    public tarifa(Integer idTARIFA, Double Precio, Double media_hora, int tarifa_unica, Time hora_inicio_tarifa, Time hora_fin_tarifa, Integer fPARQUEO, String parqueo) {
         this.idTARIFA = idTARIFA;
         this.Precio = Precio;
+        this.media_hora = media_hora;
+        this.tarifa_unica = tarifa_unica;
         this.hora_inicio_tarifa = hora_inicio_tarifa;
         this.hora_fin_tarifa = hora_fin_tarifa;
         this.fPARQUEO = fPARQUEO;
-        this.parqueo= parqueo;
+        this.parqueo = parqueo;
     }
 
+    
     public Integer getIdTARIFA() {
         return idTARIFA;
     }
@@ -73,4 +78,22 @@ public class tarifa {
     public void setParqueo(String parqueo) {
         this.parqueo = parqueo;
     }
+
+    public Double getMedia_hora() {
+        return media_hora;
+    }
+
+    public void setMedia_hora(Double media_hora) {
+        this.media_hora = media_hora;
+    }
+
+    public int getTarifa_unica() {
+        return tarifa_unica;
+    }
+
+    public void setTarifa_unica(int tarifa_unica) {
+        this.tarifa_unica = tarifa_unica;
+    }
+    
+    
 }

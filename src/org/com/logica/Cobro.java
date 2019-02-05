@@ -207,6 +207,8 @@ public class Cobro {
                     if (t_hora_ingreso   >= hora_inicio && t_hora_salida <= hora_fin) {//tarifa noctura
                         men = new SimpleDateFormat("HH:mm").format(f.getHora_inicio_tarifa()) + " - " + new SimpleDateFormat("HH:mm").format(f.getHora_fin_tarifa());
                         
+                        //aqui preguntar si es tarifa unica....
+                        
                         if(t_min_ingreso>0)
                             total_horas = t_hora_salida - t_hora_ingreso-1;//se resta - 1 porque ahi van los minutos
                         else 

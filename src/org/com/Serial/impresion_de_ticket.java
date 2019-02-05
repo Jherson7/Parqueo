@@ -164,7 +164,7 @@ public class impresion_de_ticket {
         int id = cobro.insertar_y_obtener_ticket(id_parqueo);
         String cod = String.valueOf(id);
         Cobro.insertar_ticket(cod);
-        imprimir(cod);
+       // imprimir(cod);
     }
 
     private static String centrar_texto(String mensaje) {

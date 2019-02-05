@@ -106,6 +106,8 @@ ENGINE = InnoDB;
 CREATE TABLE  TARIFA  (
    idTARIFA  INT NOT NULL AUTO_INCREMENT,
    Precio  DOUBLE NOT NULL,
+   precio_media_hora double not null,
+   tarifa_unica int default 0,
    hora_inicio_tarifa  TIME NOT NULL,
    hora_fin_tarifa  TIME NULL,
    fPARQUEO  INT NOT NULL,
@@ -177,6 +179,7 @@ CREATE TABLE  TICKET  (
    fTURNO  		INT NOT NULL,
    fDESCUENTO  	INT NULL,
    factura		varchar(100),
+   -- agregar si el ticket ya fue cobrado no volverlo a cobrar
   PRIMARY KEY ( idTICKET ),
   INDEX  fk_TICKET_TURNO1_idx  ( fTURNO  ASC),
   INDEX  fk_TICKET_DESCUENTO1_idx  ( fDESCUENTO  ASC),
@@ -269,7 +272,14 @@ SELECT DATEDIFF(fecha1,fecha2)  as dias;
 end//
 
 
-
+/*
+idTARIFA  INT NOT NULL AUTO_INCREMENT,
+   Precio  DOUBLE NOT NULL,
+   precio_media_hora double not null,
+   tarifa_unica int default 0,
+   hora_inicio_tarifa  TIME NOT NULL,
+   hora_fin_tarifa  TIME NULL,
+   fPARQUEO  INT NOT NULL,*/
 
 insert into PARQUEO (Nombre_parqueo,direccion) values('Master','Parking');
 insert into detalle_parqueo (idparqueo,header,footer) values (1,'header','fooder');
@@ -278,7 +288,9 @@ insert into rol (nombre_rol) values('admin'),('usuario');
 insert into usuario(dpi,usuario,nombres,apellidos,password,fparqueo,frol) values(123456789,'Admin','Admin','Admin','capri3042',1,1);
 insert into usuario(dpi,usuario,nombres,apellidos,password,fparqueo,frol) values(987654321,'Usuario','User','User','usuario',1,2);
 insert into horario (hora_inicio,hora_fin,fusuario) values ('7:00','17:00',1);
-insert into tarifa(precio,hora_inicio_tarifa,hora_fin_tarifa,fparqueo)
-values(5,'7:00','17:00',1);
-insert into tarifa(precio,hora_inicio_tarifa,hora_fin_tarifa,fparqueo)
-values(30,'18:00','23:00',1);
+insert into tarifa(precio,precio_media_hora,tarifa_unica,hora_inicio_tarifa,hora_fin_tarifa,fparqueo)
+values(10,6,0,'7:00','17:00',1);
+insert into tarifa(precio,precio_media_hora,tarifa_unica,hora_inicio_tarifa,hora_fin_tarifa,fparqueo)
+values(30,0,1,'18:00','23:00',1);
+
+select * from ticket;

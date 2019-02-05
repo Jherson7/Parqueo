@@ -34,7 +34,8 @@ public class tarifas extends javax.swing.JInternalFrame {
             case INICIO:
                 txt_precio.setText(null);
                 txt_precio.setEnabled(false);
-                
+                txt_media.setEnabled(false);
+                chk_unica.setSelected(false);
                                 
                 btnNuevo.setEnabled(true);
                 btnEditar.setEnabled(false);
@@ -55,7 +56,7 @@ public class tarifas extends javax.swing.JInternalFrame {
             case CLICK:
                                 
                 txt_precio.setEnabled(false);
-                
+                txt_media.setEnabled(false);
                                 
                 btnNuevo.setEnabled(true);
                 btnEditar.setEnabled(true);
@@ -75,6 +76,8 @@ public class tarifas extends javax.swing.JInternalFrame {
             case NUEVO:
                 txt_precio.setText(null);
                 txt_precio.setEnabled(true);
+                txt_media.setText(null);
+                txt_media.setEnabled(true);
                 
                                            
                 btnNuevo.setEnabled(false);
@@ -96,7 +99,8 @@ public class tarifas extends javax.swing.JInternalFrame {
                 txt_precio.setText(null);
                
                 txt_precio.setEnabled(false);
-               
+                txt_media.setText(null);
+                txt_media.setEnabled(false);
                 
                 btnNuevo.setEnabled(true);
                 btnEditar.setEnabled(false);
@@ -116,6 +120,7 @@ public class tarifas extends javax.swing.JInternalFrame {
             case EDITAR:
                 nuevo =0;               
                 txt_precio.setEnabled(true);
+                txt_media.setEnabled(true);
                 
                 btnNuevo.setEnabled(false);
                 btnEditar.setEnabled(false);
@@ -136,6 +141,8 @@ public class tarifas extends javax.swing.JInternalFrame {
             case BORRAR:
                 txt_precio.setText(null);
                 txt_precio.setEnabled(false);
+                txt_media.setText(null);
+                txt_media.setEnabled(false);
                 
                 btnNuevo.setEnabled(true);
                 btnEditar.setEnabled(false);
@@ -178,6 +185,9 @@ public class tarifas extends javax.swing.JInternalFrame {
         combo_min_fin = new javax.swing.JComboBox<>();
         combo_parqueo = new javax.swing.JComboBox();
         jLabel13 = new javax.swing.JLabel();
+        txt_media = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        chk_unica = new javax.swing.JCheckBox();
 
         jLabel1.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         jLabel1.setText("Precio:");
@@ -281,60 +291,83 @@ public class tarifas extends javax.swing.JInternalFrame {
         jLabel13.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         jLabel13.setText("Parqueo:");
 
+        jLabel4.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
+        jLabel4.setText("Precio 1/2 hora:");
+
+        chk_unica.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 12)); // NOI18N
+        chk_unica.setText("Tarifa Unica");
+        chk_unica.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                chk_unicaStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane1)
+                .addGap(41, 41, 41))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 3, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chk_unica, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_media, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(combo_parqueo, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel10)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(combo_hora_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(combo_min_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))
-                                .addGap(49, 49, 49))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addGap(27, 27, 27)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(combo_parqueo, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(jLabel11)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(combo_min_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(110, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(combo_hora_fin, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(combo_min_fin, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel12)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(combo_min_fin, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41))))
         );
         layout.setVerticalGroup(
@@ -342,13 +375,17 @@ public class tarifas extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(combo_parqueo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
+                .addComponent(chk_unica)
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(txt_media, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
@@ -364,9 +401,9 @@ public class tarifas extends javax.swing.JInternalFrame {
                         .addComponent(jLabel11)
                         .addComponent(combo_hora_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(combo_min_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -400,6 +437,7 @@ public class tarifas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        
         tarifa_modelo_tabla modelo = (tarifa_modelo_tabla)tabla_tarifa.getModel();
         
         int fparqueo = ((parqueo)combo_parqueo.getSelectedItem()).getId_parqueo();
@@ -407,9 +445,14 @@ public class tarifas extends javax.swing.JInternalFrame {
                 
         try {
             Double precio = Double.parseDouble(txt_precio.getText());
+            Double precio_media = Double.parseDouble(txt_media.getText());
+            int tarifa_unica =0;
+            if(chk_unica.isSelected())
+                tarifa_unica=1;
+            
             if (precio > 0) {
                 if (nuevo == 1) {
-                    tarifa nueva = new tarifa(0, precio, get_time_inicio(), get_time_fin(), fparqueo, parqueo);
+                    tarifa nueva = new tarifa(0, precio,precio_media,tarifa_unica, get_time_inicio(), get_time_fin(), fparqueo, parqueo);
                     modelo.agregar_tarifa(nueva);
                 } else {
                     indice = tabla_tarifa.getSelectedRow();
@@ -420,7 +463,8 @@ public class tarifas extends javax.swing.JInternalFrame {
                         nueva.setHora_fin_tarifa(get_time_fin());
                         nueva.setfPARQUEO(fparqueo);
                         nueva.setParqueo(parqueo);
-
+                        nueva.setMedia_hora(precio_media);
+                        
                         modelo.modificar_tarifa(nueva);
                     }
                 }
@@ -448,10 +492,26 @@ public class tarifas extends javax.swing.JInternalFrame {
             set_horario_fin(tar.getHora_fin_tarifa());
             
             txt_precio.setText(String.valueOf(tar.getPrecio()));
+            txt_media.setText(String.valueOf(tar.getMedia_hora()));
+            
+            if(tar.getTarifa_unica()==1){
+                chk_unica.setSelected(true);
+            }else
+                chk_unica.setSelected(false);
+            
             estado(Estado.CLICK);
         }
 
     }//GEN-LAST:event_tabla_tarifaMouseClicked
+
+    private void chk_unicaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chk_unicaStateChanged
+        // TODO add your handling code here:
+        if(chk_unica.isSelected())
+            txt_media.setEnabled(false);
+        else
+            txt_media.setEnabled(true);
+                    
+    }//GEN-LAST:event_chk_unicaStateChanged
 
     
      private Time get_time_inicio(){
@@ -530,6 +590,7 @@ public class tarifas extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JCheckBox chk_unica;
     private javax.swing.JComboBox<String> combo_hora_fin;
     private javax.swing.JComboBox<String> combo_hora_inicio;
     private javax.swing.JComboBox<String> combo_min_fin;
@@ -542,9 +603,11 @@ public class tarifas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla_tarifa;
+    private javax.swing.JTextField txt_media;
     private javax.swing.JTextField txt_precio;
     // End of variables declaration//GEN-END:variables
 }

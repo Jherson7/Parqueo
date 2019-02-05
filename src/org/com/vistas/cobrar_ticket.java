@@ -1,5 +1,7 @@
 package org.com.vistas;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -228,7 +230,10 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
         panel_detalles.add(new JLabel("------------------------------"));
         panel_detalles.add(new JLabel("Sub Total:      Q." + temp.getTicket().getSubtotal()));
         panel_detalles.add(new JLabel("Descuento:   Q." + temp.getTicket().getDescuento()));
-        panel_detalles.add(new JLabel("Total:              Q." + temp.getTicket().getTotal()));
+        JLabel total = new JLabel("Total:              Q." + temp.getTicket().getTotal());
+        total.setFont(new Font("Serif", Font.PLAIN, 14));
+        total.setForeground(Color.red);
+        panel_detalles.add(total);
         panel_detalles.add(new JLabel("------------------------------"));
 
         panel_detalles.repaint();
@@ -258,7 +263,8 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
 
     private void btn_cobrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cobrar1ActionPerformed
         // TODO add your handling code here:
-        
+        temp = Cobro.calcular_costo("2", 0);//cambiar por el codigo escanead
+        mostrar_calculo();
         if (chk_extraviado.isSelected()) {
             int a = Cobro.realizar_cobro_extraviado(temp.getTicket());
             if (a != 1) {

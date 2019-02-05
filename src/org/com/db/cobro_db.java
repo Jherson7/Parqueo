@@ -87,7 +87,8 @@ public class cobro_db {
             res=con.getPreparado().executeQuery();
         
             while(res.next()){
-                tarifa par= new tarifa(res.getInt(1),res.getDouble(2), res.getTime(3),res.getTime(4), id_parqueo, "");
+                //(Integer idTARIFA, Double Precio, Double media_hora, int tarifa_unica, Time hora_inicio_tarifa, Time hora_fin_tarifa, Integer fPARQUEO, String parqueo) 
+                tarifa par= new tarifa(res.getInt(1),res.getDouble(2), res.getDouble(3),res.getInt(4),res.getTime(5),res.getTime(6), id_parqueo, "");
                 lista.add(par);
             }
         } catch (SQLException ex) {

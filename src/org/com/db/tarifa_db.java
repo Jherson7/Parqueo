@@ -23,7 +23,9 @@ public class tarifa_db {
     public List<tarifa> retornarLista(){
         List<tarifa> lista = new LinkedList<>();
         try {
-            con.setPreparado(con.getConn().prepareStatement("select t.idTARIFA,  t.Precio,t.hora_inicio_tarifa, t.hora_fin_tarifa,t.fPARQUEO, p.nombre_parqueo " +
+            con.setPreparado(con.getConn().prepareStatement("select t.idTARIFA,  "
+                    + "t.Precio,t.precio_media_hora,t.tarifa_unica,t.hora_inicio_tarifa,"
+                    + " t.hora_fin_tarifa,t.fPARQUEO, p.nombre_parqueo " +
             "from tarifa t inner join parqueo p on t.fPARQUEO = p.idparqueo;"));
             res=con.getPreparado().executeQuery();
         } catch (SQLException ex) {
@@ -32,7 +34,7 @@ public class tarifa_db {
      
         try {
             while(res.next()){
-                tarifa au= new tarifa(res.getInt(1), res.getDouble(2), res.getTime(3), res.getTime(4), res.getInt(5), res.getString(6));
+                tarifa au= new tarifa(res.getInt(1), res.getDouble(2),res.getDouble(3),res.getInt(4), res.getTime(5), res.getTime(6), res.getInt(7), res.getString(8));
                 lista.add(au);
             }
         } catch (SQLException ex) {
@@ -43,14 +45,16 @@ public class tarifa_db {
     
     public Integer agregar_tarifa(tarifa tar){
          try {
-            con.setPreparado(con.getConn().prepareStatement("insert into tarifa(precio,hora_inicio_tarifa,hora_fin_tarifa,fparqueo) values(?,?,?,?)"));
+            con.setPreparado(con.getConn().prepareStatement("insert into tarifa(precio,"
+                    + "hora_inicio_tarifa,hora_fin_tarifa,fparqueo,precio_media_hora,tarifa_unica) values(?,?,?,?,?,?)"));
             con.getPreparado().setDouble(1, tar.getPrecio());
             con.getPreparado().setTime(2, tar.getHora_inicio_tarifa());
             con.getPreparado().setTime(3, tar.getHora_fin_tarifa());
             con.getPreparado().setInt(4,tar.getfPARQUEO());
+            con.getPreparado().setDouble(5,tar.getMedia_hora());
+            con.getPreparado().setInt(6,tar.getTarifa_unica());
             
             con.getPreparado().executeUpdate();
-            
             
         } catch (SQLException ex) {
             System.out.println("Error al insertar tarifa a DB"+ex.getLocalizedMessage());
@@ -61,15 +65,18 @@ public class tarifa_db {
     
     public int modificar_tarifa(tarifa tar){
          try {
-            con.setPreparado(con.getConn().prepareStatement("update tarifa set precio=?,hora_inicio_tarifa=?,hora_fin_tarifa=?,fparqueo=? where idtarifa= ?"));
+            con.setPreparado(con.getConn().prepareStatement("update tarifa set precio=?,"
+                    + "hora_inicio_tarifa=?,hora_fin_tarifa=?,"
+                    + "fparqueo=?, precio_media_hora=?,tarifa_unica=? where idtarifa= ?"));
             con.getPreparado().setDouble(1, tar.getPrecio());
             con.getPreparado().setTime(2, tar.getHora_inicio_tarifa());
             con.getPreparado().setTime(3, tar.getHora_fin_tarifa());
             con.getPreparado().setInt(4,tar.getfPARQUEO());
-            con.getPreparado().setInt(5, tar.getIdTARIFA());
+            con.getPreparado().setDouble(5,tar.getMedia_hora());
+            con.getPreparado().setInt(6,tar.getTarifa_unica());
+            con.getPreparado().setInt(7, tar.getIdTARIFA());
             
             con.getPreparado().executeUpdate();
-            
             
         } catch (SQLException ex) {
             System.out.println("Error al modificar tarifa a DB"+ex.getLocalizedMessage());
@@ -109,6 +116,4 @@ public class tarifa_db {
         }
         return -1;
     }
-    
-    
 }
