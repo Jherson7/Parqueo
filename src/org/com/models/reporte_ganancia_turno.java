@@ -13,7 +13,7 @@ import org.com.db.reportes_db;
  */
 public class reporte_ganancia_turno  extends AbstractTableModel{
     public List<reporte_turno>lista;
-    public String [] cabecera = {"Empelado","Apertura","Cierre","Total"};
+    public String [] cabecera = {"Empleado","Apertura","Cierre","Total"};
     private reportes_db reportedb;
 
     public reporte_ganancia_turno(Date fecha,Date fin, int parqueo) {

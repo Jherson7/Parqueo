@@ -265,6 +265,15 @@ group by (t.fturno);
 end//
 
 delimiter //
+create procedure get_total_por_turno_detallado(inicio date , fin date, parqueo int ) 
+begin
+Select u.usuario, date(tu.horario_apertura),tu.horario_apertura,tu.horario_cierre,ti.hora_ingreso,ti.hora_salida,ti.total from usuario u inner join turno tu on u.idusuario = tu.fusuario
+Inner join ticket ti on ti.fturno = tu.idturno
+where date(tu.horario_apertura) between date(inicio) and date(fin) and tu.fparqueo = parqueo;
+
+end//
+
+delimiter //
 create procedure dias_de_diferncia(fecha1 date, fecha2 date) 
 begin
 

@@ -71,6 +71,7 @@ public class Principal extends javax.swing.JFrame {
         menu_reporte_tiempo_promedio = new javax.swing.JMenuItem();
         ganancia_turno = new javax.swing.JMenuItem();
         tickets_pendientes = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         menu_administrador = new javax.swing.JMenu();
         menu_parqueo = new javax.swing.JMenuItem();
         menu_usuario = new javax.swing.JMenuItem();
@@ -209,6 +210,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         menu_reporte.add(tickets_pendientes);
+
+        jMenuItem3.setText("Ganancia por turnos Detallado");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        menu_reporte.add(jMenuItem3);
 
         jMenuBar1.add(menu_reporte);
 
@@ -368,6 +377,11 @@ public class Principal extends javax.swing.JFrame {
                     // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        mostrarVentanasInternas(new reporte_ganancia_por_turno_detallado(), "Detalle de Tickets Generados por Turno");
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -411,6 +425,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenu menu_administrador;
     private javax.swing.JMenuItem menu_apertura;
