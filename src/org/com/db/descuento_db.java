@@ -31,7 +31,7 @@ public class descuento_db {
      
         try {
             while(res.next()){
-                descuento des= new descuento(res.getInt(1),  res.getString(2),res.getInt(3),res.getDate(4),res.getInt(5));
+                descuento des= new descuento(res.getInt(1),  res.getString(2),res.getInt(3),res.getDouble(4),res.getDate(5));
                 lista.add(des);
             }
         } catch (SQLException ex) {
@@ -42,13 +42,18 @@ public class descuento_db {
     
     
     public int agregar_descuento(descuento des){
-        
+        /*
+         idDESCUENTO  INT NOT NULL AUTO_INCREMENT,
+   nombre_descuento varchar(200) not null,
+   tipo_descuento  INT NULL,-- 1 porcentaje 2 minutos 3 dinero
+   valor  double  not null NULL,
+   fecha  DATE NULL,*/
         try {
-            con.setPreparado(con.getConn().prepareStatement("insert into descuento(nombre_descuento,porcentaje,fecha,minutos_de_descuento)values(?,?,?,?)"));
+            con.setPreparado(con.getConn().prepareStatement("insert into descuento(nombre_descuento,tipo_descuento,valor,fecha)values(?,?,?,?)"));
             con.getPreparado().setString(1, des.getNombre_descuento());
-            con.getPreparado().setInt(2, des.getPorcetaje());
-            con.getPreparado().setDate(3, new java.sql.Date(des.getFecha().getTime()));
-            con.getPreparado().setInt(4, des.getMinutos_descuento());
+            con.getPreparado().setInt(2, des.getTipo());
+            con.getPreparado().setDouble(3, des.getValor());
+            con.getPreparado().setDate(4, new java.sql.Date(des.getFecha().getTime()));
             con.getPreparado().executeUpdate();
         } catch (SQLException ex) {
             System.out.println("Error al insertar el DESCUENTO a DB"+ex.getLocalizedMessage());
@@ -60,11 +65,12 @@ public class descuento_db {
     
     public int editar_descuento(descuento par){
          try {
-            con.setPreparado(con.getConn().prepareStatement("update descuento set nombre_descuento=?,porcentaje=?,fecha=?,minutos_de_descuento=? where iddescuento = ?"));
+            con.setPreparado(con.getConn().prepareStatement("update descuento set nombre_descuento=?,tipo_descuento=?,valor=?,fecha=? where iddescuento = ?"));
             con.getPreparado().setString(1, par.getNombre_descuento());
-            con.getPreparado().setInt(2, par.getPorcetaje());
-            con.getPreparado().setDate(3, new java.sql.Date(par.getFecha().getTime()));
-            con.getPreparado().setInt(4, par.getMinutos_descuento());
+            con.getPreparado().setInt(2, par.getTipo());
+            con.getPreparado().setDouble(3, par.getValor());
+            con.getPreparado().setDate(4, new java.sql.Date(par.getFecha().getTime()));
+            
             con.getPreparado().setInt(5, par.getId_descuento());
             
             con.getPreparado().executeUpdate();

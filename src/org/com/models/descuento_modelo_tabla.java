@@ -13,7 +13,7 @@ import org.com.db.descuento_db;
  */
 public class descuento_modelo_tabla  extends AbstractTableModel{
     public List<descuento>lista;
-    public String [] cabecera = {"ID","NOMBRE DESCUENTO","FECHA CREACION","MINUTOS","PORCENTAJE"};
+    public String [] cabecera = {"ID","NOMBRE DESCUENTO","FECHA CREACION","VALOR","TIPO"};
     private descuento_db descdb;
     private int maxid;
 
@@ -53,10 +53,20 @@ public class descuento_modelo_tabla  extends AbstractTableModel{
                 resultado = dateString;
               break;
           case 3:
-              resultado = String.valueOf(au.getMinutos_descuento());
+              resultado = String.valueOf(au.getValor());
               break;
           case 4:
-              resultado = String.valueOf(au.getPorcetaje());
+              switch(au.getTipo()){
+                  case 1:
+                      resultado= "Porcentaje";
+                      break;
+                  case 2:
+                      resultado= "Minutos";
+                      break;
+                  default:
+                      resultado= "Dinero";
+                      break;
+              }
               break;
       }
       return resultado;

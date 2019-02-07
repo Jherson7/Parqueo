@@ -105,7 +105,7 @@ public class cobro_db {
             res=con.getPreparado().executeQuery();
             
             if(res.next()){
-                des= new descuento(res.getInt(1), res.getString(2),res.getInt(3), res.getDate(4), res.getInt(5));
+                des= new descuento(res.getInt(1), res.getString(2),res.getInt(3), res.getDouble(4), res.getDate(5));
                 //Integer idTARIFA, Double Precio, Time hora_inicio_tarifa, Time hora_fin_tarifa, Integer fPARQUEO,String parqueo) {
             }
         } catch (SQLException ex) {

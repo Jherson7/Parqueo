@@ -27,8 +27,12 @@ public class reportes_db {
     public List<reporte_hora_fecha_beans> retornar_reporte_hora_fecha(Date date){
         List<reporte_hora_fecha_beans> lista = new LinkedList<>();
         
-        String query ="select  hour(hora_salida) as 'Hora  Salida', sum(total) as total,hora_ingreso  \n" +
+       /* String query ="select  hour(hora_salida) as 'Hora  Salida', sum(total) as total,hora_ingreso  \n" +
                         "as fecha from ticket where CAST(hora_ingreso as date) = ? \n" +
+                        "group by hour(hora_salida), day(hora_salida)";*/
+        
+        String query ="select  hour(hora_salida) as 'Hora  Salida', sum(total) as total,hora_ingreso  \n" +
+                        "as fecha from ticket where date(hora_ingreso) = date(?) \n" +
                         "group by hour(hora_salida), day(hora_salida)";
         
         try {
@@ -47,13 +51,12 @@ public class reportes_db {
         return lista;
     }
     
-    
     public List<reporte_hora_fecha_beans> retornar_por_fechas(Date desde,Date hasta){
         List<reporte_hora_fecha_beans> lista = new LinkedList<>();
         
                     
         String query ="select sum(total) as TOTAL, hora_ingreso as FECHA from ticket WHERE \n" +
-                       "hora_ingreso between  ? and ? group by day(hora_ingreso)";
+                       "date(hora_ingreso) between  date(?) and date(?) group by day(hora_ingreso)";
         try {
             con.setPreparado(con.getConn().prepareStatement(query));
             con.getPreparado().setDate(1, new java.sql.Date(desde.getTime()));
@@ -71,12 +74,11 @@ public class reportes_db {
         return lista;
     }
     
-    
     public List<reporte_estadistica> retornar_reporte_estadistica_vehiculos(Date date,Date hasta){
         List<reporte_estadistica> lista = new LinkedList<>();
         
         String query="select hora_salida  as fecha, count(1) as 'Total de Vehiculos', count(1)/24 as 'Promedio por Hora'   from ticket\n" +
-        "  WHERE  hora_salida between  ? and ? group by   day(hora_salida) ";
+        "  WHERE  date(hora_salida) between  date(?) and date(?) group by   day(hora_salida) ";
         
         try {
             
@@ -119,7 +121,6 @@ public class reportes_db {
      
         return lista;
     }
-    
     
     public List<reporte_turno_detallado> retornar_reporte_por_turno_detallado(Date date,Date fin, int parqueo){
         List<reporte_turno_detallado> lista = new LinkedList<>();

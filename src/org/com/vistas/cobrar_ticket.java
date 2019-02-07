@@ -305,15 +305,16 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "No se ha detectado ticket, por favor escanee ticket", "ERROR", 0);;
             } else {
                 descuento desc = (descuento) combo_descuento.getSelectedItem();
-                if (desc.getPorcetaje() > 0) {
-                    float res = desc.getPorcetaje();
+                if (desc.getTipo()== 1) {
+                    float res = (float) desc.getValor();
                     res = res / 100;
                     descuento = (float) (res * temp.getTicket().getSubtotal());//descuento por porcentaje
-
-                } else {
-                    float calculo = desc.getMinutos_descuento();
+                } else if (desc.getTipo()== 2) { 
+                    float calculo =(float) desc.getValor();
                     calculo = calculo / 60;
                     descuento = (float) (calculo * temp.getTarifa());//descuento por minutos
+                } else {
+                    descuento =(float) desc.getValor();
                 }
 
                 temp.getTicket().setDescuento(descuento);

@@ -93,9 +93,9 @@ ENGINE = InnoDB;
 CREATE TABLE  DESCUENTO  (
    idDESCUENTO  INT NOT NULL AUTO_INCREMENT,
    nombre_descuento varchar(200) not null,
-   porcentaje  INT NULL,
+   tipo_descuento  INT NULL,-- 1 porcentaje 2 minutos 3 dinero
+   valor  double  not null NULL,
    fecha  DATE NULL,
-   minutos_de_descuento  INT NULL,
   PRIMARY KEY ( idDESCUENTO ))
 ENGINE = InnoDB;
 
@@ -259,7 +259,7 @@ select concat(u.nombres,concat(' ',u.apellidos)) as Empleado , DATE_FORMAT(tu.ho
 sum(t.total) as Total
 from ticket t inner join turno tu on t.fturno = tu.idturno
 inner join usuario u on u.idusuario = tu.fusuario
-where tu.horario_apertura between inicio and fin and u.fparqueo = parqueo
+where date(tu.horario_apertura) between date(inicio) and date(fin) and u.fparqueo = parqueo
 group by (t.fturno);
 
 end//
@@ -297,6 +297,7 @@ insert into rol (nombre_rol) values('admin'),('usuario');
 insert into usuario(dpi,usuario,nombres,apellidos,password,fparqueo,frol) values(123456789,'Admin','Admin','Admin','capri3042',1,1);
 insert into usuario(dpi,usuario,nombres,apellidos,password,fparqueo,frol) values(987654321,'Usuario','User','User','usuario',1,2);
 insert into horario (hora_inicio,hora_fin,fusuario) values ('7:00','17:00',1);
+insert into horario (hora_inicio,hora_fin,fusuario) values ('7:00','18:00',2);
 insert into tarifa(precio,precio_media_hora,tarifa_unica,hora_inicio_tarifa,hora_fin_tarifa,fparqueo)
 values(10,6,0,'7:00','17:00',1);
 insert into tarifa(precio,precio_media_hora,tarifa_unica,hora_inicio_tarifa,hora_fin_tarifa,fparqueo)
