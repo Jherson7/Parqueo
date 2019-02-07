@@ -18,7 +18,7 @@ public class reporte_ganancia_por_turno_detallado extends javax.swing.JInternalF
     public reporte_ganancia_por_turno_detallado() {
         initComponents();
         combo_parqueo.setModel(parqueo_controller.getCombo());
-        tabla_fechas.setModel(reportes_controller.get_reporte_ganancia_turno_detallado(date_inicio.getDate(), date_inicio.getDate(), 0));
+        //tabla_fechas.setModel(reportes_controller.get_reporte_ganancia_turno_detallado(date_inicio.getDate(), date_inicio.getDate(), 0));
     }
 
     /**
@@ -178,7 +178,7 @@ public class reporte_ganancia_por_turno_detallado extends javax.swing.JInternalF
         parqueo par =(parqueo)combo_parqueo.getSelectedItem();
         Date inicio = date_inicio.getDate();
         Date fin  = date_fin.getDate();
-        tabla_fechas.setModel(reportes_controller.get_reporte_ganancia_turno_detallado(inicio, fin, par.getId_parqueo()));
+        //tabla_fechas.setModel(reportes_controller.get_reporte_ganancia_turno_detallado(inicio, fin, par.getId_parqueo()));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

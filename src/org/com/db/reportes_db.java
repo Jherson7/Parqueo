@@ -164,4 +164,9 @@ public class reportes_db {
         }
         return lista;
     }
+
+    public List<reporte_turno_detallado> retornar_reporte_por_turno_detallado(int parqueo, int turno) {
+        String query ="";
+        return null;
+    }
 }

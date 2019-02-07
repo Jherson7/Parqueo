@@ -17,10 +17,15 @@ public class reporte_ganancia_turno_detallado  extends AbstractTableModel{
     public String [] cabecera = {"Empleado","Apertura","Cierre","Entrada Ticket","Salida Ticket","Total"};
     private reportes_db reportedb;
 
-    public reporte_ganancia_turno_detallado(Date fecha,Date fin, int parqueo) {
+    /*public reporte_ganancia_turno_detallado(Date fecha,Date fin, int parqueo) {
         reportedb =new reportes_db();
         lista=reportedb.retornar_reporte_por_turno_detallado(fecha,fin,parqueo);
         
+    }*/
+
+    public reporte_ganancia_turno_detallado(int parqueo, int turno) {
+        reportedb =new reportes_db();
+        lista=reportedb.retornar_reporte_por_turno_detallado(parqueo,turno);
     }
     
     public reporte_turno_detallado elementAt(int indice){

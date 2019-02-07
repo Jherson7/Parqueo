@@ -208,7 +208,6 @@ CREATE TABLE  BITACORA  (
   PRIMARY KEY ( idBITACORA ))
 ENGINE = InnoDB;
 
-
 -- procedimiento para actualizar el ticket
 
 delimiter //
@@ -290,6 +289,8 @@ idTARIFA  INT NOT NULL AUTO_INCREMENT,
    hora_fin_tarifa  TIME NULL,
    fPARQUEO  INT NOT NULL,*/
 
+
+
 insert into PARQUEO (Nombre_parqueo,direccion) values('Master','Parking');
 insert into detalle_parqueo (idparqueo,header,footer) values (1,'header','fooder');
 insert into horario_parqueo (hora_inicio,hora_fin,idparqueo) values('7:00','2:00',1);
@@ -304,3 +305,30 @@ insert into tarifa(precio,precio_media_hora,tarifa_unica,hora_inicio_tarifa,hora
 values(30,0,1,'18:00','23:00',1);
 
 select * from ticket;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -- 3 consultas
+-- get_tickets_que_no_son_extraviados_y_no_tienen_descuento
+-- get_tickets_extraviados_y_no_tienen_desc
+-- get_tickets_con_descuento
+-- por turno y que hayan sido  cobrados
+-- despues los recorro para ver cuantos fueron de noche y de dia
