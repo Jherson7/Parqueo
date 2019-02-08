@@ -168,6 +168,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table   TICKET 
 -- -----------------------------------------------------
+
 CREATE TABLE  TICKET  (
    idTICKET  	INT NOT NULL AUTO_INCREMENT,
    Codigo  		VARCHAR(6) NOT NULL,
@@ -179,6 +180,7 @@ CREATE TABLE  TICKET  (
    fTURNO  		INT NOT NULL,
    fDESCUENTO  	INT NULL,
    factura		varchar(100),
+   fturno_cierre int null,
    -- agregar si el ticket ya fue cobrado no volverlo a cobrar
   PRIMARY KEY ( idTICKET ),
   INDEX  fk_TICKET_TURNO1_idx  ( fTURNO  ASC),
@@ -212,9 +214,9 @@ ENGINE = InnoDB;
 
 delimiter //
 create procedure actualizar_ticket(
-id_ticket int, sub double, descu double,v_factura varchar(100)) 
+id_ticket int, sub double, descu double,v_factura varchar(100),turno_cierre int) 
 begin 
-update ticket set factura=v_factura, hora_salida =  NOW(), subtotal = sub,descuento=descu,total=(sub  - descu) where idTICKET = id_ticket;
+update ticket set fturno_cierre = turno_cierre,factura=v_factura, hora_salida =  NOW(), subtotal = sub,descuento=descu,total=(sub  - descu) where idTICKET = id_ticket;
 end//
 
 
@@ -305,6 +307,9 @@ insert into tarifa(precio,precio_media_hora,tarifa_unica,hora_inicio_tarifa,hora
 values(30,0,1,'18:00','23:00',1);
 
 select * from ticket;
+
+
+
 
 
 

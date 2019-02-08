@@ -379,7 +379,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        mostrarVentanasInternas(new reporte_ganancia_por_turno_detallado(), "Detalle de Tickets Generados por Turno");
+        mostrarVentanasInternas(new reporte_detallado(), "Detalle de Tickets Generados por Turno");
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**

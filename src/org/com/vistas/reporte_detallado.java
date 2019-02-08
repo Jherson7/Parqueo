@@ -5,6 +5,11 @@
  */
 package org.com.vistas;
 
+import org.com.bens.turno;
+import org.com.controler.reportes_controller;
+import org.com.logica.Controlador;
+import org.com.models.reporte_ganancia_turno_detallado;
+
 /**
  *
  * @author jortiz
@@ -16,6 +21,8 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
      */
     public reporte_detallado() {
         initComponents();
+        table_detalle.setModel(reportes_controller.get_reporte_ganancia_turno_detallado( Controlador.getTurno_actual().getId_turno()));
+        setear_datos();
     }
 
     /**
@@ -46,21 +53,19 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        lbl_cantidad_t_dia = new javax.swing.JLabel();
-        ganancia_t_dia = new javax.swing.JLabel();
+        lbl_cantidad_total = new javax.swing.JLabel();
+        ganancia_total = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         lbl_cantidad_t_dia3 = new javax.swing.JLabel();
         lbl_cantidad_t_dia4 = new javax.swing.JLabel();
-        lbl_cantidad_t_dia5 = new javax.swing.JLabel();
         lbl_cantidad_t_dia6 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        lbl_cantidad_t_dia2 = new javax.swing.JLabel();
-        ganancia_t_dia2 = new javax.swing.JLabel();
+        lbl_cantidad_t_dia = new javax.swing.JLabel();
+        ganancia_t_dia = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         table_detalle = new javax.swing.JTable();
@@ -177,7 +182,7 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resumen General", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(51, 255, 51))); // NOI18N
 
         jLabel2.setBackground(new java.awt.Color(0, 255, 204));
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 204, 204));
         jLabel2.setText("Ganancia:");
 
@@ -186,35 +191,30 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
         jLabel12.setForeground(new java.awt.Color(0, 204, 204));
         jLabel12.setText("Cantidad Tickets:");
 
-        lbl_cantidad_t_dia.setBackground(new java.awt.Color(0, 255, 204));
-        lbl_cantidad_t_dia.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
-        lbl_cantidad_t_dia.setForeground(new java.awt.Color(0, 255, 0));
-        lbl_cantidad_t_dia.setText("jLabel13");
+        lbl_cantidad_total.setBackground(new java.awt.Color(0, 255, 204));
+        lbl_cantidad_total.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
+        lbl_cantidad_total.setForeground(new java.awt.Color(0, 255, 0));
+        lbl_cantidad_total.setText("jLabel13");
 
-        ganancia_t_dia.setBackground(new java.awt.Color(0, 255, 204));
-        ganancia_t_dia.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
-        ganancia_t_dia.setForeground(new java.awt.Color(0, 255, 0));
-        ganancia_t_dia.setText("jLabel13");
+        ganancia_total.setBackground(new java.awt.Color(0, 255, 204));
+        ganancia_total.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
+        ganancia_total.setForeground(new java.awt.Color(0, 255, 0));
+        ganancia_total.setText("jLabel13");
 
         jLabel7.setBackground(new java.awt.Color(0, 255, 204));
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 204, 204));
-        jLabel7.setText("Tickets Extraviados:");
-
-        jLabel6.setBackground(new java.awt.Color(0, 255, 204));
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 204, 204));
-        jLabel6.setText("Tickets Cobrados:");
+        jLabel7.setText("Tickets Cobrados:");
 
         jLabel5.setBackground(new java.awt.Color(0, 255, 204));
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 204, 204));
-        jLabel5.setText("Ticket Generados:");
+        jLabel5.setText("Cantidad de Vehiculos");
 
         jLabel19.setBackground(new java.awt.Color(0, 255, 204));
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(0, 204, 204));
-        jLabel19.setText("Cantidad Tickets:");
+        jLabel19.setText("Tickets Extraviados:");
 
         lbl_cantidad_t_dia3.setBackground(new java.awt.Color(0, 255, 204));
         lbl_cantidad_t_dia3.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
@@ -225,11 +225,6 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
         lbl_cantidad_t_dia4.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
         lbl_cantidad_t_dia4.setForeground(new java.awt.Color(0, 255, 0));
         lbl_cantidad_t_dia4.setText("jLabel13");
-
-        lbl_cantidad_t_dia5.setBackground(new java.awt.Color(0, 255, 204));
-        lbl_cantidad_t_dia5.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
-        lbl_cantidad_t_dia5.setForeground(new java.awt.Color(0, 255, 0));
-        lbl_cantidad_t_dia5.setText("jLabel13");
 
         lbl_cantidad_t_dia6.setBackground(new java.awt.Color(0, 255, 204));
         lbl_cantidad_t_dia6.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
@@ -244,29 +239,26 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ganancia_t_dia))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_cantidad_t_dia))
+                        .addComponent(ganancia_total))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                         .addComponent(lbl_cantidad_t_dia6))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_cantidad_t_dia3))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbl_cantidad_t_dia4))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
+                        .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_cantidad_t_dia5)))
+                        .addComponent(lbl_cantidad_t_dia3))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbl_cantidad_total)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -277,25 +269,21 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lbl_cantidad_t_dia6, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
-                    .addComponent(lbl_cantidad_t_dia5))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(lbl_cantidad_t_dia4))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
                     .addComponent(lbl_cantidad_t_dia3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_cantidad_t_dia, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(lbl_cantidad_total))
+                .addGap(35, 35, 35)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(ganancia_t_dia))
+                    .addComponent(ganancia_total))
                 .addGap(19, 19, 19))
         );
 
@@ -310,13 +298,13 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
         jLabel18.setForeground(new java.awt.Color(0, 204, 204));
         jLabel18.setText("Cantidad Tickets:");
 
-        lbl_cantidad_t_dia2.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
-        lbl_cantidad_t_dia2.setForeground(new java.awt.Color(0, 255, 0));
-        lbl_cantidad_t_dia2.setText("jLabel13");
+        lbl_cantidad_t_dia.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
+        lbl_cantidad_t_dia.setForeground(new java.awt.Color(0, 255, 0));
+        lbl_cantidad_t_dia.setText("jLabel13");
 
-        ganancia_t_dia2.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
-        ganancia_t_dia2.setForeground(new java.awt.Color(0, 255, 0));
-        ganancia_t_dia2.setText("jLabel13");
+        ganancia_t_dia.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
+        ganancia_t_dia.setForeground(new java.awt.Color(0, 255, 0));
+        ganancia_t_dia.setText("jLabel13");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -328,11 +316,11 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ganancia_t_dia2))
+                        .addComponent(ganancia_t_dia))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_cantidad_t_dia2)))
+                        .addComponent(lbl_cantidad_t_dia)))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -341,11 +329,11 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
                 .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(lbl_cantidad_t_dia2))
+                    .addComponent(lbl_cantidad_t_dia))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(ganancia_t_dia2))
+                    .addComponent(ganancia_t_dia))
                 .addGap(19, 19, 19))
         );
 
@@ -392,7 +380,7 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,37 +426,34 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(14, 14, 14))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(330, 330, 330)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(66, 66, 66)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbl_usuario))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(284, 284, 284)
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbl_usuario))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(218, 218, 218)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_apertura)
-                                .addGap(124, 124, 124)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_cierre)))
-                        .addGap(0, 243, Short.MAX_VALUE)))
-                .addGap(14, 14, 14))
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_apertura)
+                        .addGap(124, 124, 124)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_cierre)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lbl_usuario))
@@ -478,13 +463,13 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4)
                     .addComponent(lbl_apertura)
                     .addComponent(lbl_cierre))
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 4, Short.MAX_VALUE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -495,15 +480,12 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ganancia_t_dia;
-    private javax.swing.JLabel ganancia_t_dia1;
-    private javax.swing.JLabel ganancia_t_dia2;
     private javax.swing.JLabel ganancia_t_noche;
+    private javax.swing.JLabel ganancia_total;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -511,15 +493,12 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -532,15 +511,31 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable4;
     private javax.swing.JLabel lbl_apertura;
     private javax.swing.JLabel lbl_cantidad_t_dia;
-    private javax.swing.JLabel lbl_cantidad_t_dia1;
-    private javax.swing.JLabel lbl_cantidad_t_dia2;
     private javax.swing.JLabel lbl_cantidad_t_dia3;
     private javax.swing.JLabel lbl_cantidad_t_dia4;
-    private javax.swing.JLabel lbl_cantidad_t_dia5;
     private javax.swing.JLabel lbl_cantidad_t_dia6;
     private javax.swing.JLabel lbl_cantidad_t_noche;
+    private javax.swing.JLabel lbl_cantidad_total;
     private javax.swing.JLabel lbl_cierre;
     private javax.swing.JLabel lbl_usuario;
     private javax.swing.JTable table_detalle;
     // End of variables declaration//GEN-END:variables
+
+    private void setear_datos() {
+        lbl_usuario.setText(Controlador.getUsuarioActual().toString());
+        turno actual = Controlador.getTurno_actual();
+        lbl_apertura.setText(actual.getHora_apertura().toString());
+        if(actual.getHora_cierre()!=null)
+            lbl_cierre.setText(actual.getHora_cierre().toString());
+        else 
+            lbl_cierre.setText("Aun en turno");
+        
+        reporte_ganancia_turno_detallado tr = (reporte_ganancia_turno_detallado)table_detalle.getModel();
+        ganancia_t_dia.setText("Q. "+tr.ganancia_dia);
+        lbl_cantidad_t_dia.setText(String.valueOf(tr.tickets_dia));
+        
+        ganancia_t_noche.setText("Q. "+tr.gananacia_noche);
+        lbl_cantidad_t_noche.setText(String.valueOf(tr.tickets_noche));
+        
+    }
 }
