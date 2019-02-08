@@ -19,6 +19,7 @@ import org.com.bens.ticket;
 import org.com.bens.turno;
 import org.com.bens.usuario;
 import org.com.db.cobro_db;
+import org.com.vistas.Principal;
 
 public class Controlador {
     
@@ -34,6 +35,9 @@ public class Controlador {
     private static String servidor_cliente;
     //public static  SerialPort serialPort;
     static LinkedList<ticket> pendientes = new LinkedList<>();
+    
+    public static Principal actual;
+    
     
     public static void iniciar_serial() {
         serial = new last();
@@ -226,6 +230,10 @@ public class Controlador {
     
     public static String retornar_cod_puerto(){
         return cod_puerto;
+    }
+
+    public static void setPrincipal(Principal aThis) {
+        actual=aThis;
     }
     
 }

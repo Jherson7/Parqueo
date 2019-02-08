@@ -5,9 +5,8 @@
  */
 package org.com.vistas;
 
-import org.com.bens.turno;
 import org.com.controler.reportes_controller;
-import org.com.logica.Controlador;
+import org.com.models.reporte_ganancia_descuento;
 import org.com.models.reporte_ganancia_turno_detallado;
 
 /**
@@ -19,10 +18,10 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
     /**
      * Creates new form reporte_detallado
      */
-    public reporte_detallado() {
+    public reporte_detallado(int turno,String empleado,String apertura,String cierre) {
         initComponents();
-        table_detalle.setModel(reportes_controller.get_reporte_ganancia_turno_detallado( Controlador.getTurno_actual().getId_turno()));
-        setear_datos();
+        table_detalle.setModel(reportes_controller.get_reporte_ganancia_turno_detallado(turno));
+        setear_datos(empleado,apertura,cierre);
     }
 
     /**
@@ -54,7 +53,7 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         lbl_cantidad_total = new javax.swing.JLabel();
-        ganancia_total = new javax.swing.JLabel();
+        l_ganancia_total = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -73,7 +72,7 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
         lbl_cierre = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        tabla_descuentos = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -196,10 +195,10 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
         lbl_cantidad_total.setForeground(new java.awt.Color(0, 255, 0));
         lbl_cantidad_total.setText("jLabel13");
 
-        ganancia_total.setBackground(new java.awt.Color(0, 255, 204));
-        ganancia_total.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
-        ganancia_total.setForeground(new java.awt.Color(0, 255, 0));
-        ganancia_total.setText("jLabel13");
+        l_ganancia_total.setBackground(new java.awt.Color(0, 255, 204));
+        l_ganancia_total.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
+        l_ganancia_total.setForeground(new java.awt.Color(0, 255, 0));
+        l_ganancia_total.setText("jLabel13");
 
         jLabel7.setBackground(new java.awt.Color(0, 255, 204));
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -242,7 +241,7 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
                         .addGap(51, 51, 51)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ganancia_total))
+                        .addComponent(l_ganancia_total))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
@@ -283,7 +282,7 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
                 .addGap(35, 35, 35)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(ganancia_total))
+                    .addComponent(l_ganancia_total))
                 .addGap(19, 19, 19))
         );
 
@@ -395,7 +394,7 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Tickets con Descuento"));
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_descuentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -406,7 +405,7 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane5.setViewportView(jTable4);
+        jScrollPane5.setViewportView(tabla_descuentos);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -481,7 +480,6 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ganancia_t_dia;
     private javax.swing.JLabel ganancia_t_noche;
-    private javax.swing.JLabel ganancia_total;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -508,7 +506,7 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
+    private javax.swing.JLabel l_ganancia_total;
     private javax.swing.JLabel lbl_apertura;
     private javax.swing.JLabel lbl_cantidad_t_dia;
     private javax.swing.JLabel lbl_cantidad_t_dia3;
@@ -518,24 +516,35 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbl_cantidad_total;
     private javax.swing.JLabel lbl_cierre;
     private javax.swing.JLabel lbl_usuario;
+    private javax.swing.JTable tabla_descuentos;
     private javax.swing.JTable table_detalle;
     // End of variables declaration//GEN-END:variables
 
-    private void setear_datos() {
-        lbl_usuario.setText(Controlador.getUsuarioActual().toString());
-        turno actual = Controlador.getTurno_actual();
-        lbl_apertura.setText(actual.getHora_apertura().toString());
-        if(actual.getHora_cierre()!=null)
-            lbl_cierre.setText(actual.getHora_cierre().toString());
-        else 
-            lbl_cierre.setText("Aun en turno");
+    private void setear_datos(String empleado,String apertura,String cierre) {
+        lbl_usuario.setText(empleado);
+        lbl_apertura.setText(apertura);
+        lbl_cierre.setText(cierre);
         
         reporte_ganancia_turno_detallado tr = (reporte_ganancia_turno_detallado)table_detalle.getModel();
-        ganancia_t_dia.setText("Q. "+tr.ganancia_dia);
-        lbl_cantidad_t_dia.setText(String.valueOf(tr.tickets_dia));
         
-        ganancia_t_noche.setText("Q. "+tr.gananacia_noche);
-        lbl_cantidad_t_noche.setText(String.valueOf(tr.tickets_noche));
+        // configurando la tabla descuentos
+        reporte_ganancia_descuento tabla = tr.tabla_descuento;
+        tabla_descuentos.setModel(tabla);
+        
+        int total_tickets_dia=tr.tickets_dia+tabla.tickets_dia;
+        int total_tickets_noche=tr.tickets_noche+tabla.tickets_noche;
+        Double ganancia_total = tr.gananacia_noche+tabla.gananacia_noche+tr.ganancia_dia+tabla.ganancia_dia;
+        
+        ganancia_t_dia.setText("Q. "+(tr.ganancia_dia+tabla.ganancia_dia));
+        lbl_cantidad_t_dia.setText(String.valueOf(total_tickets_dia));
+        
+        ganancia_t_noche.setText("Q. "+(tr.gananacia_noche+tabla.gananacia_noche));
+        lbl_cantidad_t_noche.setText(String.valueOf(total_tickets_noche));
+        
+        lbl_cantidad_total.setText(String.valueOf(total_tickets_dia+total_tickets_noche));
+        l_ganancia_total.setText(""+ganancia_total);
         
     }
+
+    
 }

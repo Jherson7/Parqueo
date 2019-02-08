@@ -9,15 +9,17 @@ public class reporte_turno {
     String apertura;
     String cierre;
     double total;
+    int turno;
 
     public reporte_turno() {
     }
 
-    public reporte_turno(String usuario, String apertura, String cierre, double total) {
+    public reporte_turno(String usuario, String apertura, String cierre, double total,int turno) {
         this.usuario = usuario;
         this.apertura = apertura;
         this.cierre = cierre;
         this.total = total;
+        this.turno = turno;
     }
 
     public String getUsuario() {
@@ -50,6 +52,14 @@ public class reporte_turno {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public int getTurno() {
+        return turno;
+    }
+
+    public void setTurno(int turno) {
+        this.turno = turno;
     }
     
     

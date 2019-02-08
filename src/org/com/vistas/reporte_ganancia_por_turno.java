@@ -5,10 +5,14 @@
  */
 package org.com.vistas;
 
+import java.awt.event.KeyEvent;
 import java.util.Date;
 import org.com.bens.parqueo;
+import org.com.bens.reporte_turno;
 import org.com.controler.parqueo_controller;
 import org.com.controler.reportes_controller;
+import org.com.logica.Controlador;
+import org.com.models.reporte_ganancia_turno;
 import org.com.reportes.manejador_de_reportes;
 
 /**
@@ -94,6 +98,11 @@ public class reporte_ganancia_por_turno extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabla_fechas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tabla_fechasKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla_fechas);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -200,6 +209,15 @@ public class reporte_ganancia_por_turno extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btnSalir1ActionPerformed
 
+    private void tabla_fechasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabla_fechasKeyReleased
+        // TODO add your handling code here:
+        int indice = tabla_fechas.getSelectedRow();
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            if(indice>-1)
+                mostrar_sub_reporte(indice);
+        }
+    }//GEN-LAST:event_tabla_fechasKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalir1;
@@ -215,4 +233,11 @@ public class reporte_ganancia_por_turno extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla_fechas;
     // End of variables declaration//GEN-END:variables
+
+    private void mostrar_sub_reporte(int indice) {
+        reporte_ganancia_turno aux = (reporte_ganancia_turno)tabla_fechas.getModel();
+        reporte_turno empleado = aux.elementAt(indice);
+        reporte_detallado rp = new reporte_detallado(empleado.getTurno(),empleado.getUsuario(),empleado.getApertura(),empleado.getCierre());
+        Controlador.actual.mostrarVentanasInternas(rp, "Detalle del turno");
+    }
 }

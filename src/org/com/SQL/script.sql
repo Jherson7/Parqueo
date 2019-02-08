@@ -257,7 +257,7 @@ create procedure get_total_por_turno(inicio date , fin date, parqueo int )
 begin
 
 select concat(u.nombres,concat(' ',u.apellidos)) as Empleado , DATE_FORMAT(tu.horario_apertura,"%d-%m-%Y - %H:%m") Apertura, DATE_FORMAT(tu.horario_cierre,"%d-%m-%Y - %H:%m") Cierre, 
-sum(t.total) as Total
+sum(t.total) as Total,tu.idturno
 from ticket t inner join turno tu on t.fturno = tu.idturno
 inner join usuario u on u.idusuario = tu.fusuario
 where date(tu.horario_apertura) between date(inicio) and date(fin) and u.fparqueo = parqueo

@@ -112,35 +112,13 @@ public class reportes_db {
             
             res=con.getPreparado().executeQuery();
             while(res.next()){
-                reporte_turno rep= new reporte_turno(res.getString(1),  res.getString(2),res.getString(3),res.getDouble(4));
+                reporte_turno rep= new reporte_turno(res.getString(1),  res.getString(2),res.getString(3),res.getDouble(4),res.getInt(5));
                 lista.add(rep);
             }
         } catch (SQLException ex) {
             System.out.println("ERROR en el reporte de ganancia turno "+ex.getLocalizedMessage());
         }
      
-        return lista;
-    }
-    
-    public List<reporte_turno_detallado> retornar_reporte_por_turno_detallado(Date date,Date fin, int parqueo){
-        List<reporte_turno_detallado> lista = new LinkedList<>();
-        String fecha_incio =new SimpleDateFormat("yyyy-MM-dd").format(date);
-        String fecha_fin =new SimpleDateFormat("yyyy-MM-dd").format(fin);
-        
-        String query ="call get_total_por_turno_detallado('"+fecha_incio+"','"+fecha_fin+"',?)";
-        
-        try {
-            con.setPreparado(con.getConn().prepareStatement(query));
-            con.getPreparado().setInt(1, parqueo);
-            
-            res=con.getPreparado().executeQuery();
-            while(res.next()){
-                reporte_turno_detallado rep= new reporte_turno_detallado(res.getString(1),  res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6),res.getDouble(7));
-                lista.add(rep);
-            }
-        } catch (SQLException ex) {
-            System.out.println("ERROR en el reporte de ganancia turno detallado "+ex.getLocalizedMessage());
-        }
         return lista;
     }
     

@@ -12,6 +12,7 @@ public class monto_cobro {
     ticket ticket;
     double costo;
     double tarifa;
+    double costo_media_hora;
 
     public monto_cobro() {
         detalles = new  LinkedList<>();
@@ -54,6 +55,14 @@ public class monto_cobro {
 
     public void setTarifa(double tarifa) {
         this.tarifa = tarifa;
+    }
+
+    public double getCosto_media_hora() {
+        return costo_media_hora;
+    }
+
+    public void setCosto_media_hora(double costo_media_hora) {
+        this.costo_media_hora = costo_media_hora;
     }
     
     

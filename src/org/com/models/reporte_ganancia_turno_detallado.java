@@ -25,6 +25,8 @@ public class reporte_ganancia_turno_detallado  extends AbstractTableModel{
 
     public Double ganancia_dia=0.0;
     public Double gananacia_noche=0.0;
+    
+    public reporte_ganancia_descuento tabla_descuento;
     /*public reporte_ganancia_turno_detallado(Date fecha,Date fin, int parqueo) {
         reportedb =new reportes_db();
         lista=reportedb.retornar_reporte_por_turno_detallado(fecha,fin,parqueo);
@@ -35,6 +37,10 @@ public class reporte_ganancia_turno_detallado  extends AbstractTableModel{
         lista = new LinkedList<>();
         reportedb =new cobro_db();
         reportedb.get_tickets_por_turno_dia(lista, ""+turno);
+        
+        tabla_descuento = new reporte_ganancia_descuento(turno);
+        
+        
         tickets_dia = lista.size();
         setear_ganancia_dia();
         reportedb.get_ticket_por_turno_noche(lista, ""+turno);

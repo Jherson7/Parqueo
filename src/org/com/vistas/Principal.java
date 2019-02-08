@@ -42,7 +42,8 @@ public class Principal extends javax.swing.JFrame {
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
         frame.pack();
-
+        
+        Controlador.setPrincipal(this);
         jDesktopPane1.add(frame);
         frame.moveToFront();
     }
@@ -379,7 +380,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        mostrarVentanasInternas(new reporte_detallado(), "Detalle de Tickets Generados por Turno");
+        //mostrarVentanasInternas(new reporte_detallado(), "Detalle de Tickets Generados por Turno");
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**

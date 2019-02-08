@@ -57,6 +57,8 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         txt_factura = new javax.swing.JTextField();
         chk_factura = new javax.swing.JCheckBox();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         combo_descuento.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         combo_descuento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -137,10 +139,45 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
             }
         });
 
+        jTextField1.setText("jTextField1");
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(panel_cobro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(combo_descuento, 0, 309, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chk_descuento)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txt_factura, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(chk_factura)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(18, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -149,23 +186,9 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl_estado))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(combo_descuento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(chk_descuento)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(panel_cobro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(chk_extraviado)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_factura, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(chk_factura)))))
-                .addContainerGap())
+                        .addGap(98, 98, 98)
+                        .addComponent(chk_extraviado)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,18 +198,26 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(lbl_estado))
                 .addGap(18, 18, 18)
-                .addComponent(chk_descuento)
-                .addGap(7, 7, 7)
-                .addComponent(combo_descuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chk_extraviado)
-                .addGap(11, 11, 11)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                        .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(chk_descuento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(combo_descuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txt_factura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chk_factura))
+                    .addComponent(chk_factura)
+                    .addComponent(txt_factura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panel_cobro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -230,8 +261,8 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
         panel_detalles.add(new JLabel("------------------------------"));
         panel_detalles.add(new JLabel("Sub Total:      Q." + temp.getTicket().getSubtotal()));
         panel_detalles.add(new JLabel("Descuento:   Q." + temp.getTicket().getDescuento()));
-        JLabel total = new JLabel("Total:              Q." + temp.getTicket().getTotal());
-        total.setFont(new Font("Serif", Font.PLAIN, 18));
+        JLabel total = new JLabel("Total:      Q." + temp.getTicket().getTotal());
+        total.setFont(new Font("Serif", Font.PLAIN, 20));
         total.setForeground(Color.red);
         panel_detalles.add(new JLabel("------------------------------"));
         panel_detalles.add(total);
@@ -263,8 +294,6 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
 
     private void btn_cobrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cobrar1ActionPerformed
         // TODO add your handling code here:
-        temp = Cobro.calcular_costo("2", 0);//cambiar por el codigo escanead
-        mostrar_calculo();
         if (chk_extraviado.isSelected()) {
             int a = Cobro.realizar_cobro_extraviado(temp.getTicket());
             if (a != 1) {
@@ -286,7 +315,7 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
                    // Controlador.escribir_en_serial(abrir);
                     //this.dispose();
                    
-                    //inicializar(); --esto limpiar la pantalla
+                    inicializar(); //--esto limpiar la pantalla
                 } else {
                     JOptionPane.showMessageDialog(null, "ERROR al cobrar el ticket, pongase en contacto con el desarrollador de Software", "Panel de Cobro", 0);
                     //estado= "Fallido";
@@ -339,6 +368,12 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
             txt_factura.setEnabled(false);
         }
     }//GEN-LAST:event_chk_facturaStateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        temp = Cobro.calcular_costo(jTextField1.getText(), 0);//cambiar por el codigo escanead
+        mostrar_calculo();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     
     private void pruebas_de_envio(){
@@ -429,8 +464,10 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox chk_extraviado;
     private javax.swing.JCheckBox chk_factura;
     private javax.swing.JComboBox combo_descuento;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbl_estado;
     private javax.swing.JPanel panel_cobro;
     private javax.swing.JScrollPane scroll_detalles;
@@ -516,12 +553,12 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
     }
 
     private void inicializar() {
-       temp  = new monto_cobro();
+        temp  = new monto_cobro();
         JPanel panel_detalles = new JPanel();
         panel_detalles.setLayout(new GridLayout(temp.detalles.size() + 5, 1));
         panel_detalles.repaint();
         scroll_detalles.setViewportView(panel_detalles);
         scroll_detalles.repaint();
-        iniciar_hilo();
+       // iniciar_hilo();
     }
 }
