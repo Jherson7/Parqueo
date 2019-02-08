@@ -57,7 +57,8 @@ public class tarifas extends javax.swing.JInternalFrame {
                                 
                 txt_precio.setEnabled(false);
                 txt_media.setEnabled(false);
-                                
+                chk_unica.setEnabled(false);
+                
                 btnNuevo.setEnabled(true);
                 btnEditar.setEnabled(true);
                 btnGuardar.setEnabled(false);
@@ -78,7 +79,7 @@ public class tarifas extends javax.swing.JInternalFrame {
                 txt_precio.setEnabled(true);
                 txt_media.setText(null);
                 txt_media.setEnabled(true);
-                
+                chk_unica.setEnabled(true);
                                            
                 btnNuevo.setEnabled(false);
                 btnEditar.setEnabled(false);
@@ -101,6 +102,8 @@ public class tarifas extends javax.swing.JInternalFrame {
                 txt_precio.setEnabled(false);
                 txt_media.setText(null);
                 txt_media.setEnabled(false);
+                chk_unica.setEnabled(false);
+                chk_unica.setSelected(false);
                 
                 btnNuevo.setEnabled(true);
                 btnEditar.setEnabled(false);
@@ -121,6 +124,8 @@ public class tarifas extends javax.swing.JInternalFrame {
                 nuevo =0;               
                 txt_precio.setEnabled(true);
                 txt_media.setEnabled(true);
+                 chk_unica.setEnabled(true);
+                
                 
                 btnNuevo.setEnabled(false);
                 btnEditar.setEnabled(false);
@@ -143,6 +148,8 @@ public class tarifas extends javax.swing.JInternalFrame {
                 txt_precio.setEnabled(false);
                 txt_media.setText(null);
                 txt_media.setEnabled(false);
+                chk_unica.setEnabled(false);
+                chk_unica.setSelected(false);
                 
                 btnNuevo.setEnabled(true);
                 btnEditar.setEnabled(false);
