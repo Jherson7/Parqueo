@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 
 //import java.util.Date;
 
-
 /**
  *
  * @author Jherson
@@ -58,7 +57,6 @@ public class ticket {
         return hora_ingreso;
     }
 
- 
     public Timestamp getHora_salida() {
         return hora_salida;
     }

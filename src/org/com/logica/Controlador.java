@@ -19,6 +19,7 @@ import org.com.bens.ticket;
 import org.com.bens.turno;
 import org.com.bens.usuario;
 import org.com.db.cobro_db;
+import org.com.vistas.Principal;
 
 public class Controlador {
     
@@ -31,8 +32,12 @@ public class Controlador {
     private static Thread scanner;
     public static boolean puerto;
     private static String cod_puerto;
+    private static String servidor_cliente;
     //public static  SerialPort serialPort;
     static LinkedList<ticket> pendientes = new LinkedList<>();
+    
+    public static Principal actual;
+    
     
     public static void iniciar_serial() {
         serial = new last();
@@ -65,34 +70,40 @@ public class Controlador {
     }
     
     public static  void iniciar_programa(){
+        
         get_codigo_com();//metodo que obtiene el puerto com establecido
-        iniciar_serial();
-        iniciar_hilo_hora_fecha();   
+                        // y si es servidor o no
         
-        impresion_de_ticket.obtener_parametros_del_parqueo();
-        
-        scanner = new Thread(){/// hilo que esta verificando que este bien el puerto serial
-            public void run(){
-                while(true){
-                    try {
-                        Thread.sleep(10000);
-                        if(!hora_fecha.isAlive()){
-                            iniciar_hilo_hora_fecha();
+        if (servidor_cliente.equalsIgnoreCase("si")) {
+            //es servidor no utiliza el puerto serial
+        } else {
+            
+            iniciar_serial();
+            
+            iniciar_hilo_hora_fecha();
+
+            impresion_de_ticket.obtener_parametros_del_parqueo();
+
+            scanner = new Thread() {/// hilo que esta verificando que este bien el puerto serial
+                public void run() {
+                    while (true) {
+                        try {
+                            Thread.sleep(10000);
+                            if (!hora_fecha.isAlive()) {
+                                iniciar_hilo_hora_fecha();
+                            }
+                            if (!puerto) {
+                                System.out.println("No se ha detectado señal de puerto");
+                                iniciar_serial();
+                            }
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        if(!puerto){
-                          System.out.println("No se ha detectado se;al de puerto");
-                          iniciar_serial();
-                        }
-                          
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
                 }
-            }
-        };
-        
-        scanner.start();
+            };
+            scanner.start();
+        }
     }
     
     private static void iniciar_hilo_hora_fecha(){
@@ -167,6 +178,8 @@ public class Controlador {
             prop.load(input);
             
             cod_puerto = prop.getProperty("com").trim();
+            servidor_cliente = prop.getProperty("server").trim();
+            
             System.out.println("Codigo Recibido:>"+cod_puerto+"<");
             
         } catch (FileNotFoundException ex) {
@@ -181,7 +194,6 @@ public class Controlador {
             }
         }
     }
-    
     
     public static void agregarTicketPendiente(String codigo){
         Timestamp actual = new Timestamp(System.currentTimeMillis());
@@ -199,7 +211,6 @@ public class Controlador {
         }
         pendientes.clear();//se limpian todos los tickets pendientes
     }
-    
     
     public static void escribir_en_serial(String men){
         if(puerto)
@@ -219,6 +230,10 @@ public class Controlador {
     
     public static String retornar_cod_puerto(){
         return cod_puerto;
+    }
+
+    public static void setPrincipal(Principal aThis) {
+        actual=aThis;
     }
     
 }

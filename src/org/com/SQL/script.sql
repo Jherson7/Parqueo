@@ -93,9 +93,9 @@ ENGINE = InnoDB;
 CREATE TABLE  DESCUENTO  (
    idDESCUENTO  INT NOT NULL AUTO_INCREMENT,
    nombre_descuento varchar(200) not null,
-   porcentaje  INT NULL,
+   tipo_descuento  INT NULL,-- 1 porcentaje 2 minutos 3 dinero
+   valor  double  not null NULL,
    fecha  DATE NULL,
-   minutos_de_descuento  INT NULL,
   PRIMARY KEY ( idDESCUENTO ))
 ENGINE = InnoDB;
 
@@ -168,6 +168,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table   TICKET 
 -- -----------------------------------------------------
+
 CREATE TABLE  TICKET  (
    idTICKET  	INT NOT NULL AUTO_INCREMENT,
    Codigo  		VARCHAR(6) NOT NULL,
@@ -179,6 +180,7 @@ CREATE TABLE  TICKET  (
    fTURNO  		INT NOT NULL,
    fDESCUENTO  	INT NULL,
    factura		varchar(100),
+   fturno_cierre int null,
    -- agregar si el ticket ya fue cobrado no volverlo a cobrar
   PRIMARY KEY ( idTICKET ),
   INDEX  fk_TICKET_TURNO1_idx  ( fTURNO  ASC),
@@ -208,14 +210,13 @@ CREATE TABLE  BITACORA  (
   PRIMARY KEY ( idBITACORA ))
 ENGINE = InnoDB;
 
-
 -- procedimiento para actualizar el ticket
 
 delimiter //
 create procedure actualizar_ticket(
-id_ticket int, sub double, descu double,v_factura varchar(100)) 
+id_ticket int, sub double, descu double,v_factura varchar(100),turno_cierre int) 
 begin 
-update ticket set factura=v_factura, hora_salida =  NOW(), subtotal = sub,descuento=descu,total=(sub  - descu) where idTICKET = id_ticket;
+update ticket set fturno_cierre = turno_cierre,factura=v_factura, hora_salida =  NOW(), subtotal = sub,descuento=descu,total=(sub  - descu) where idTICKET = id_ticket;
 end//
 
 
@@ -256,10 +257,10 @@ create procedure get_total_por_turno(inicio date , fin date, parqueo int )
 begin
 
 select concat(u.nombres,concat(' ',u.apellidos)) as Empleado , DATE_FORMAT(tu.horario_apertura,"%d-%m-%Y - %H:%m") Apertura, DATE_FORMAT(tu.horario_cierre,"%d-%m-%Y - %H:%m") Cierre, 
-sum(t.total) as Total
+sum(t.total) as Total,tu.idturno
 from ticket t inner join turno tu on t.fturno = tu.idturno
 inner join usuario u on u.idusuario = tu.fusuario
-where tu.horario_apertura between inicio and fin and u.fparqueo = parqueo
+where date(tu.horario_apertura) between date(inicio) and date(fin) and u.fparqueo = parqueo
 group by (t.fturno);
 
 end//
@@ -290,6 +291,8 @@ idTARIFA  INT NOT NULL AUTO_INCREMENT,
    hora_fin_tarifa  TIME NULL,
    fPARQUEO  INT NOT NULL,*/
 
+
+
 insert into PARQUEO (Nombre_parqueo,direccion) values('Master','Parking');
 insert into detalle_parqueo (idparqueo,header,footer) values (1,'header','fooder');
 insert into horario_parqueo (hora_inicio,hora_fin,idparqueo) values('7:00','2:00',1);
@@ -297,9 +300,40 @@ insert into rol (nombre_rol) values('admin'),('usuario');
 insert into usuario(dpi,usuario,nombres,apellidos,password,fparqueo,frol) values(123456789,'Admin','Admin','Admin','capri3042',1,1);
 insert into usuario(dpi,usuario,nombres,apellidos,password,fparqueo,frol) values(987654321,'Usuario','User','User','usuario',1,2);
 insert into horario (hora_inicio,hora_fin,fusuario) values ('7:00','17:00',1);
+insert into horario (hora_inicio,hora_fin,fusuario) values ('7:00','18:00',2);
 insert into tarifa(precio,precio_media_hora,tarifa_unica,hora_inicio_tarifa,hora_fin_tarifa,fparqueo)
 values(10,6,0,'7:00','17:00',1);
 insert into tarifa(precio,precio_media_hora,tarifa_unica,hora_inicio_tarifa,hora_fin_tarifa,fparqueo)
 values(30,0,1,'18:00','23:00',1);
 
 select * from ticket;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -- 3 consultas
+-- get_tickets_que_no_son_extraviados_y_no_tienen_descuento
+-- get_tickets_extraviados_y_no_tienen_desc
+-- get_tickets_con_descuento
+-- por turno y que hayan sido  cobrados
+-- despues los recorro para ver cuantos fueron de noche y de dia

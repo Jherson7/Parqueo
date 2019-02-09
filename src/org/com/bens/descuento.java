@@ -9,22 +9,20 @@ import java.util.Date;
 public class descuento {
     int id_descuento;
     String nombre_descuento;
-    int porcetaje;
+    int tipo;
+    double valor;
     Date fecha;
-    int minutos_descuento;
 
     public descuento() {
     }
 
-    public descuento(int id_descuento, String nombre_descuento, int porcetaje, Date fecha, int minutos_descuento) {
+    public descuento(int id_descuento, String nombre_descuento, int tipo, double valor, Date fecha) {
         this.id_descuento = id_descuento;
         this.nombre_descuento = nombre_descuento;
-        this.porcetaje = porcetaje;
+        this.tipo = tipo;
+        this.valor = valor;
         this.fecha = fecha;
-        this.minutos_descuento = minutos_descuento;
     }
-
-    
 
     public int getId_descuento() {
         return id_descuento;
@@ -34,12 +32,20 @@ public class descuento {
         this.id_descuento = id_descuento;
     }
 
-    public int getPorcetaje() {
-        return porcetaje;
+    public int getTipo() {
+        return tipo;
     }
 
-    public void setPorcetaje(int porcetaje) {
-        this.porcetaje = porcetaje;
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
     public Date getFecha() {
@@ -48,14 +54,6 @@ public class descuento {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
-    }
-
-    public int getMinutos_descuento() {
-        return minutos_descuento;
-    }
-
-    public void setMinutos_descuento(int minutos_descuento) {
-        this.minutos_descuento = minutos_descuento;
     }
 
     @Override
@@ -70,10 +68,5 @@ public class descuento {
     public void setNombre_descuento(String nombre_descuento) {
         this.nombre_descuento = nombre_descuento;
     }
-    
-    
-    
-    
-    
     
 }

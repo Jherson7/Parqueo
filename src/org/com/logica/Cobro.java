@@ -221,8 +221,6 @@ public class Cobro {
                             menos_de_la_hora=true;
                             
                         }
-                            
-                        
                         if(t_min_ingreso>0){//minutos de ingreso
                             if((60-t_min_ingreso)<=30)
                                 total_horas +=.5;//se suman los minutos
@@ -249,9 +247,12 @@ public class Cobro {
                             mon.costo+=f.getPrecio();
                             men += ": Q." + formatter.format(f.getPrecio());
                         } else {
-                            mon.costo += total_horas * f.getPrecio();
+                            double aux = ((total_horas - (int)total_horas)>0)?1:0;//se cobra lo que se haya generado de media hora
+                            mon.costo+= aux*f.getMedia_hora();
+                            mon.costo += ((int)total_horas) * f.getPrecio();
                             mon.setTarifa(f.getPrecio());//seteo el precio de la tarifa para descuentos
-                            men += ": Q." + formatter.format(total_horas * f.getPrecio());
+                            mon.setCosto_media_hora(f.getMedia_hora());
+                            men += ": Q." + formatter.format(mon.costo);
                         }
 
                         mon.detalles.add(men);
@@ -321,8 +322,16 @@ public class Cobro {
                 total_horas=actual.getHours()-tick.getHora_ingreso().getHours();
             }
             
-            men += ": Q." +formatter.format(total_horas * f.getPrecio()) ;
-            costo += total_horas * f.getPrecio();
+            
+            /*----------------------*/
+            double aux = ((total_horas - (int)total_horas)>0)?1:0;//se cobra lo que se haya generado de media hora
+            costo+= aux*f.getMedia_hora();
+            costo += ((int)total_horas) * f.getPrecio();
+            mon.setTarifa(f.getPrecio());//seteo el precio de la tarifa para descuentos
+            mon.setCosto_media_hora(f.getMedia_hora());
+            /*----------------------*/
+            men += ": Q." +formatter.format(costo) ;
+            //costo += total_horas * f.getPrecio();
             mon.detalles.add(men);
         }
         mon.costo+=(costo);
@@ -404,8 +413,6 @@ public class Cobro {
             }return nuevo;
         }
     }
-    
-    
     
     private static double retornar_dia_completo(LinkedList<tarifa> lista,parqueo par){
         double costo =0;

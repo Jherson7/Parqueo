@@ -39,14 +39,22 @@ public class reportes_controller {
     }
     
     
-     public static reporte_ganancia_turno_detallado get_reporte_ganancia_turno_detallado(Date desde,Date hasta,int parqueo){
-        return new reporte_ganancia_turno_detallado(desde, hasta, parqueo);
-    }
+    
     
     
     public static reporte_ticket_pendient_table get_table_tickets(int parqueo){
         return new reporte_ticket_pendient_table(parqueo);
     }
     
+
+    //metodos para generar el reporte general detallado
+    //public static reporte
+    public static reporte_ganancia_turno_detallado get_reporte_ganancia_turno_detallado(int turno){
+        return new reporte_ganancia_turno_detallado(turno);
+    }
+    
+    /*public static reporte_ganancia_turno_detallado_noche get_reporte_ganancia_turno_detallado(int parqueo,int turno){
+        return new reporte_ganancia_turno_detallado(parqueo,turno);
+    }*/
     
 }
