@@ -120,7 +120,20 @@ CREATE TABLE  TARIFA  (
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
-
+-- -----------------------------------------------------
+-- Table   dias_tarifa 
+-- -----------------------------------------------------
+create table dias_tarifa (
+    id_dias int not null auto_increment,
+    dia_cod  int not null,
+    dia_nombre varchar(10),
+    fk_tarifa int not null,
+    primary key (id_dias,fk_tarifa),
+    constraint fk_dia_tarifa foreign key (fk_tarifa)
+    references TARIFA(id_tarifa)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
 
 -- -----------------------------------------------------
 -- Table   HORARIO 

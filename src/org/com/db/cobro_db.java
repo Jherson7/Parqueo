@@ -3,6 +3,7 @@ package org.com.db;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -82,9 +83,16 @@ public class cobro_db {
     }
     
     public LinkedList<tarifa>get_tarifas_de_parqueo(int id_parqueo){
+        
+        Calendar now = Calendar.getInstance();
+        int dia = (now.get(Calendar.DAY_OF_WEEK)-1);
+        
         LinkedList<tarifa> lista = new LinkedList<>();
         try {
-            con.setPreparado(con.getConn().prepareStatement("select * from tarifa where fparqueo= "+id_parqueo));
+            String query ="select * from tarifa t inner join dias_tarifa dt "
+                    + "on dt.fk_tarifa = t.idtarifa where t.fparqueo= "+id_parqueo+" and dt.dia_cod = "+dia;
+            
+            con.setPreparado(con.getConn().prepareStatement(query));
             res=con.getPreparado().executeQuery();
         
             while(res.next()){

@@ -243,7 +243,7 @@ public class Cobro {
                         //se agrega una nueva condicion si es la ultima tarifa
                         //es decir la ultima solo se cobra el precio, no se multiplica por las horas
                         
-                        if (f == lista.getLast()) {
+                        if (f == lista.getLast() || f.getTarifa_unica()==1) {
                             mon.costo+=f.getPrecio();
                             men += ": Q." + formatter.format(f.getPrecio());
                         } else {
@@ -257,7 +257,6 @@ public class Cobro {
 
                         mon.detalles.add(men);
                         //mon.costo = Double.parseDouble(formatter.format(mon.costo));
-                       
                         return mon;
                     }
                 }
