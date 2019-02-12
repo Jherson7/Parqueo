@@ -57,7 +57,9 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         txt_factura = new javax.swing.JTextField();
         chk_factura = new javax.swing.JCheckBox();
+
         jTextField1 = new javax.swing.JTextField();
+
         jButton1 = new javax.swing.JButton();
 
         combo_descuento.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
@@ -174,6 +176,12 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txt_factura, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(chk_factura)))))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addComponent(jButton1)
                                 .addGap(18, 18, 18)
                                 .addComponent(chk_factura)))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -198,6 +206,14 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(lbl_estado))
                 .addGap(18, 18, 18)
+                .addComponent(chk_descuento)
+                .addGap(7, 7, 7)
+                .addComponent(combo_descuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(20, 20, 20)
+                .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chk_extraviado)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -371,8 +387,12 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+ 
+          inicializar();
+ 
         temp = Cobro.calcular_costo(jTextField1.getText(), 0);//cambiar por el codigo escanead
         mostrar_calculo();
+ 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
