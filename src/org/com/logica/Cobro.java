@@ -334,7 +334,7 @@ public class Cobro {
             mon.detalles.add(men);
         }
         mon.costo+=(costo);
-        mon.costo = Double.parseDouble(formatter.format(mon.costo));
+       //mon.costo = Double.parseDouble(formatter.format(mon.costo));
         return mon;
     }
    
@@ -417,14 +417,13 @@ public class Cobro {
         double costo =0;
         
         for(tarifa t: lista){
-            if(t==lista.getLast())
+            if(t.getTarifa_unica()==1||t==lista.getLast())
                 costo+= t.getPrecio();
             else
                 costo+= Math.abs(t.getHora_fin_tarifa().getHours()-t.getHora_inicio_tarifa().getHours())*t.getPrecio();
         }
         costo+=100;//por quedarse en el parqueo cuando cerro
         //costo+= par.getHora_fin()*lista.getLast().getPrecio();//las horas de media noche hasta que cierra el parqueo
-        
         return costo;
     }
 
