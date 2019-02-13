@@ -20,7 +20,19 @@ public class tarifas extends javax.swing.JInternalFrame {
         initComponents();
         estado(Estado.INICIO);
         combo_parqueo.setModel(parqueo_controller.getCombo());
-        tabla_tarifa.setModel(tarifa_controller.getTabla());
+        set_modelo_tabla();
+        chk_unica.setEnabled(false);
+    }
+
+    private void set_modelo_tabla() {
+        int id =0;
+        try {
+            parqueo aux = (parqueo)combo_parqueo.getSelectedItem();
+            id= aux.getId_parqueo();
+        } catch (Exception e) {
+        
+        }
+        tabla_tarifa.setModel(tarifa_controller.getTabla(id));
     }
 
     private enum Estado {
@@ -67,7 +79,7 @@ public class tarifas extends javax.swing.JInternalFrame {
                 combo_min_fin.setEnabled(false);
                 combo_hora_fin.setEnabled(false);
                 combo_hora_inicio.setEnabled(false);
-                combo_parqueo.setEnabled(false);
+                //combo_parqueo.setEnabled(false);
                 
                 
                 break;
@@ -89,7 +101,7 @@ public class tarifas extends javax.swing.JInternalFrame {
                 combo_min_fin.setEnabled(false);
                 combo_hora_fin.setEnabled(false);
                 combo_hora_inicio.setEnabled(false);
-                combo_parqueo.setEnabled(false);
+                //combo_parqueo.setEnabled(false);
               
                  chk_1.setEnabled(false);
                 chk_2.setEnabled(false);
@@ -137,7 +149,7 @@ public class tarifas extends javax.swing.JInternalFrame {
                 combo_min_fin.setEnabled(true);
                 combo_hora_fin.setEnabled(true);
                 combo_hora_inicio.setEnabled(true);
-                combo_parqueo.setEnabled(true);
+                //combo_parqueo.setEnabled(true);
               
                 break;
             
@@ -161,7 +173,7 @@ public class tarifas extends javax.swing.JInternalFrame {
                 combo_min_fin.setEnabled(false);
                 combo_hora_fin.setEnabled(false);
                 combo_hora_inicio.setEnabled(false);
-                combo_parqueo.setEnabled(false);
+               // combo_parqueo.setEnabled(false);
                 
                 
                 chk_1.setEnabled(false);
@@ -202,7 +214,7 @@ public class tarifas extends javax.swing.JInternalFrame {
                 combo_min_fin.setEnabled(true);
                 combo_hora_fin.setEnabled(true);
                 combo_hora_inicio.setEnabled(true);
-                combo_parqueo.setEnabled(true);
+                //combo_parqueo.setEnabled(true);
                
                 
                  chk_1.setEnabled(true);
@@ -232,7 +244,7 @@ public class tarifas extends javax.swing.JInternalFrame {
                 combo_min_fin.setEnabled(false);
                 combo_hora_fin.setEnabled(false);
                 combo_hora_inicio.setEnabled(false);
-                combo_parqueo.setEnabled(false);
+                //combo_parqueo.setEnabled(false);
                 
                 
                  chk_1.setEnabled(false);
@@ -384,6 +396,11 @@ public class tarifas extends javax.swing.JInternalFrame {
 
         combo_parqueo.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         combo_parqueo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combo_parqueo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                combo_parqueoItemStateChanged(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
         jLabel13.setText("Parqueo:");
@@ -750,6 +767,11 @@ public class tarifas extends javax.swing.JInternalFrame {
         
                     
     }//GEN-LAST:event_chk_unicaStateChanged
+
+    private void combo_parqueoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo_parqueoItemStateChanged
+        // TODO add your handling code here:
+        set_modelo_tabla();
+    }//GEN-LAST:event_combo_parqueoItemStateChanged
 
     
      private Time get_time_inicio(){

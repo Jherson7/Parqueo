@@ -20,13 +20,13 @@ public class tarifa_db {
     }
     
     
-    public List<tarifa> retornarLista(){
+    public List<tarifa> retornarLista(int id){
         List<tarifa> lista = new LinkedList<>();
         try {
             String query ="select t.idTARIFA,  "
                     + "t.Precio,t.precio_media_hora,t.tarifa_unica,t.hora_inicio_tarifa,"
                     + " t.hora_fin_tarifa,t.fPARQUEO, p.nombre_parqueo " +
-            "from tarifa t inner join parqueo p on t.fPARQUEO = p.idparqueo";
+            "from tarifa t inner join parqueo p on t.fPARQUEO = p.idparqueo where p.idparqueo = "+id;
             con.setPreparado(con.getConn().prepareStatement(query));
             res=con.getPreparado().executeQuery();
         } catch (SQLException ex) {

@@ -13,9 +13,9 @@ public class tarifa_modelo_tabla extends AbstractTableModel{
     private tarifa_db tarifadb;
     private int maxid=0;
     
-    public tarifa_modelo_tabla() {
+    public tarifa_modelo_tabla(int id) {
         tarifadb =new tarifa_db();
-        lista=tarifadb.retornarLista();
+        lista=tarifadb.retornarLista(id);
         maxid=tarifadb.get_max_id()+1;
     }
     
