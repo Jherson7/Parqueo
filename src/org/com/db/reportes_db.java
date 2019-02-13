@@ -54,13 +54,26 @@ public class reportes_db {
     public List<reporte_hora_fecha_beans> retornar_por_fechas(Date desde,Date hasta){
         List<reporte_hora_fecha_beans> lista = new LinkedList<>();
         
-                    
-        String query ="select sum(total) as TOTAL, hora_ingreso as FECHA from ticket WHERE \n" +
+        desde.setHours(00);
+        desde.setMinutes(00);
+        desde.setSeconds(01);
+        
+        hasta.setHours(23);
+        hasta.setMinutes(59);
+        hasta.setSeconds(59);
+        
+        String fecha_inicio = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(desde);
+        String fecha_fin = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(hasta);
+        /*String query ="select sum(total) as TOTAL, hora_ingreso as FECHA from ticket WHERE \n" +
                        "date(hora_ingreso) between  date(?) and date(?) group by day(hora_ingreso)";
+        */
+        String query ="select sum(total) as TOTAL, date(hora_salida) as FECHA from ticket WHERE \n" +
+                       "hora_salida between '"+fecha_inicio+"'and '"+fecha_fin+"'group by day(hora_salida)";
+        
         try {
             con.setPreparado(con.getConn().prepareStatement(query));
-            con.getPreparado().setDate(1, new java.sql.Date(desde.getTime()));
-            con.getPreparado().setDate(2, new java.sql.Date(hasta.getTime()));
+            /*con.getPreparado().setDate(1, new java.sql.Date(desde.getTime()));
+            con.getPreparado().setDate(2, new java.sql.Date(hasta.getTime()));*/
             
             res=con.getPreparado().executeQuery();
             while(res.next()){
@@ -77,14 +90,31 @@ public class reportes_db {
     public List<reporte_estadistica> retornar_reporte_estadistica_vehiculos(Date date,Date hasta){
         List<reporte_estadistica> lista = new LinkedList<>();
         
-        String query="select hora_salida  as fecha, count(1) as 'Total de Vehiculos', count(1)/24 as 'Promedio por Hora'   from ticket\n" +
+        date.setHours(00);
+        date.setMinutes(00);
+        date.setSeconds(01);
+        
+        hasta.setHours(23);
+        hasta.setMinutes(59);
+        hasta.setSeconds(59);
+        
+        String fecha_inicio = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+        String fecha_fin = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(hasta);
+        
+        
+        
+        /*String query="select hora_salida  as fecha, count(1) as 'Total de Vehiculos', count(1)/24 as 'Promedio por Hora'   from ticket\n" +
         "  WHERE  date(hora_salida) between  date(?) and date(?) group by   day(hora_salida) ";
+        */
+        
+        String query="select date(hora_salida)  as fecha, count(1) as 'Total de Vehiculos', count(1)/24 as 'Promedio por Hora'   from ticket\n" +
+        "  WHERE  hora_salida between '"+fecha_inicio+"' and '"+fecha_fin+"' group by   day(hora_salida) ";
         
         try {
             
             con.setPreparado(con.getConn().prepareStatement(query));
-            con.getPreparado().setDate(1, new java.sql.Date(date.getTime()));
-            con.getPreparado().setDate(2, new java.sql.Date(hasta.getTime()));
+           // con.getPreparado().setDate(1, new java.sql.Date(date.getTime()));
+           // con.getPreparado().setDate(2, new java.sql.Date(hasta.getTime()));
             
             res=con.getPreparado().executeQuery();
             int cont =1;
@@ -101,6 +131,16 @@ public class reportes_db {
     
     public List<reporte_turno> retornar_reporte_por_turno(Date date,Date fin, int parqueo){
         List<reporte_turno> lista = new LinkedList<>();
+        
+        
+        date.setHours(00);
+        date.setMinutes(00);
+        date.setSeconds(01);
+        
+        fin.setHours(23);
+        fin.setMinutes(59);
+        fin.setSeconds(59);
+        
         String fecha_incio =new SimpleDateFormat("yyyy-MM-dd").format(date);
         String fecha_fin =new SimpleDateFormat("yyyy-MM-dd").format(fin);
         

@@ -183,6 +183,7 @@ public class Cobro {
                     mon.costo += total_horas * lista.getLast().getPrecio();//se multiplica por el costo de la ultima tarifa
                     */
                     //mon.costo+=lista.getLast().getPrecio();
+                    
                     String men = new SimpleDateFormat("HH:mm").format(tick.getHora_ingreso())+" - " +parqueo_actual.getHora_fin()+":00";
                     men+=" Q.0.00";//+ Double.parseDouble(formatter.format(lista.getLast().getPrecio()));
                     mon.detalles.add(men);
@@ -243,16 +244,23 @@ public class Cobro {
                         //se agrega una nueva condicion si es la ultima tarifa
                         //es decir la ultima solo se cobra el precio, no se multiplica por las horas
                         
+                        double costo = 0.0;//para desplegar el detalle de gastos
                         if (f == lista.getLast() || f.getTarifa_unica()==1) {
+                            
                             mon.costo+=f.getPrecio();
                             men += ": Q." + formatter.format(f.getPrecio());
                         } else {
                             double aux = ((total_horas - (int)total_horas)>0)?1:0;//se cobra lo que se haya generado de media hora
-                            mon.costo+= aux*f.getMedia_hora();
+                            
+                            costo =  aux*f.getMedia_hora();//para desplegar el detalle de gastos
+                            costo += ((int)total_horas) * f.getPrecio();//para desplegar el detalle de gastos
+                            
+                            mon.costo += aux*f.getMedia_hora();
                             mon.costo += ((int)total_horas) * f.getPrecio();
+                            
                             mon.setTarifa(f.getPrecio());//seteo el precio de la tarifa para descuentos
                             mon.setCosto_media_hora(f.getMedia_hora());
-                            men += ": Q." + formatter.format(mon.costo);
+                            men += ": Q." +costo;
                         }
 
                         mon.detalles.add(men);
@@ -272,7 +280,7 @@ public class Cobro {
     
     private static monto_cobro calculo_varias_tarifas(LinkedList<tarifa> lista_actual, ticket tick,Timestamp actual,monto_cobro mon){
         
-        double costo=0;
+       // double costo=0;
         NumberFormat formatter = new DecimalFormat("#0.00");    
         LinkedList<tarifa> lista = new LinkedList<>();
         
@@ -286,6 +294,7 @@ public class Cobro {
         }
         
         for (int i = 0; i < lista.size(); i++) {
+            double costo=0;
             tarifa f = lista.get(i);
             int hora_inicio = f.getHora_inicio_tarifa().getHours();
             int hora_fin = f.getHora_fin_tarifa().getHours();
@@ -332,8 +341,9 @@ public class Cobro {
             men += ": Q." +formatter.format(costo) ;
             //costo += total_horas * f.getPrecio();
             mon.detalles.add(men);
+            mon.costo+=costo;
         }
-        mon.costo+=(costo);
+        //mon.costo+=(costo);
        //mon.costo = Double.parseDouble(formatter.format(mon.costo));
         return mon;
     }
