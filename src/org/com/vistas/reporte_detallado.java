@@ -387,7 +387,7 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
         );
 
         lbl_apertura.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        lbl_apertura.setText("jLabel2");
+        lbl_apertura.setText("hora_apertura");
 
         lbl_cierre.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
         lbl_cierre.setText("jLabel2");
@@ -442,9 +442,9 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
                         .addComponent(lbl_usuario))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(lbl_apertura)
-                        .addGap(124, 124, 124)
+                        .addGap(112, 112, 112)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl_cierre)))
@@ -468,7 +468,7 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 4, Short.MAX_VALUE))
+                        .addGap(0, 8, Short.MAX_VALUE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );

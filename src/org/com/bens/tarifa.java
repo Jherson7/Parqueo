@@ -1,6 +1,7 @@
 package org.com.bens;
 
 import java.sql.Time;
+import java.util.LinkedList;
 
 /**
  *
@@ -15,6 +16,7 @@ public class tarifa {
    Time hora_fin_tarifa ;
    Integer fPARQUEO;
    String parqueo;
+   LinkedList<Integer> dias ;
 
     public tarifa() {
     }
@@ -28,6 +30,14 @@ public class tarifa {
         this.hora_fin_tarifa = hora_fin_tarifa;
         this.fPARQUEO = fPARQUEO;
         this.parqueo = parqueo;
+    }
+
+    public LinkedList<Integer> getDias() {
+        return dias;
+    }
+
+    public void setDias(LinkedList<Integer> dias) {
+        this.dias = dias;
     }
 
     

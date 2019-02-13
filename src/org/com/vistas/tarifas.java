@@ -1,6 +1,8 @@
 package org.com.vistas;
 
 import java.sql.Time;
+import java.util.LinkedList;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import org.com.bens.parqueo;
 import org.com.bens.tarifa;
@@ -24,7 +26,7 @@ public class tarifas extends javax.swing.JInternalFrame {
     private enum Estado {
         INICIO, CLICK, RELEASE, NUEVO, EDITAR, GUARDAR, BORRAR
     };
-    private int nuevo = 0;
+    private int nuevo = -1;
     private int indice = -1;
   
 
@@ -33,10 +35,28 @@ public class tarifas extends javax.swing.JInternalFrame {
             
             case INICIO:
                 txt_precio.setText(null);
+                txt_media.setText(null);
                 txt_precio.setEnabled(false);
                 txt_media.setEnabled(false);
                 chk_unica.setSelected(false);
-                                
+
+                chk_1.setEnabled(false);
+                chk_2.setEnabled(false);
+                chk_3.setEnabled(false);
+                chk_4.setEnabled(false);
+                chk_5.setEnabled(false);
+                chk_6.setEnabled(false);
+                chk_7.setEnabled(false);
+                
+                chk_1.setSelected(false);
+                chk_2.setSelected(false);
+                chk_3.setSelected(false);
+                chk_4.setSelected(false);
+                chk_5.setSelected(false);
+                chk_6.setSelected(false);
+                chk_7.setSelected(false);
+                
+                
                 btnNuevo.setEnabled(true);
                 btnEditar.setEnabled(false);
                 btnGuardar.setEnabled(false);
@@ -71,6 +91,14 @@ public class tarifas extends javax.swing.JInternalFrame {
                 combo_hora_inicio.setEnabled(false);
                 combo_parqueo.setEnabled(false);
               
+                 chk_1.setEnabled(false);
+                chk_2.setEnabled(false);
+                chk_3.setEnabled(false);
+                chk_4.setEnabled(false);
+                chk_5.setEnabled(false);
+                chk_6.setEnabled(false);
+                chk_7.setEnabled(false);
+                
                 
                 break;
             
@@ -88,6 +116,23 @@ public class tarifas extends javax.swing.JInternalFrame {
                 btnSalir.setEnabled(true);
                 
                 
+                chk_1.setEnabled(true);
+                chk_2.setEnabled(true);
+                chk_3.setEnabled(true);
+                chk_4.setEnabled(true);
+                chk_5.setEnabled(true);
+                chk_6.setEnabled(true);
+                chk_7.setEnabled(true);
+                
+                chk_1.setSelected(false);
+                chk_2.setSelected(false);
+                chk_3.setSelected(false);
+                chk_4.setSelected(false);
+                chk_5.setSelected(false);
+                chk_6.setSelected(false);
+                chk_7.setSelected(false);
+                
+                
                 combo_min_inicio.setEnabled(true);
                 combo_min_fin.setEnabled(true);
                 combo_hora_fin.setEnabled(true);
@@ -98,7 +143,7 @@ public class tarifas extends javax.swing.JInternalFrame {
             
             case GUARDAR:
                 txt_precio.setText(null);
-               
+                
                 txt_precio.setEnabled(false);
                 txt_media.setText(null);
                 txt_media.setEnabled(false);
@@ -110,13 +155,32 @@ public class tarifas extends javax.swing.JInternalFrame {
                 btnGuardar.setEnabled(false);
                 btnEliminar.setEnabled(false);
                 btnSalir.setEnabled(true);
-                nuevo =0;
+                nuevo =-1;
                 
                 combo_min_inicio.setEnabled(false);
                 combo_min_fin.setEnabled(false);
                 combo_hora_fin.setEnabled(false);
                 combo_hora_inicio.setEnabled(false);
                 combo_parqueo.setEnabled(false);
+                
+                
+                chk_1.setEnabled(false);
+                chk_2.setEnabled(false);
+                chk_3.setEnabled(false);
+                chk_4.setEnabled(false);
+                chk_5.setEnabled(false);
+                chk_6.setEnabled(false);
+                chk_7.setEnabled(false);
+                
+                
+                chk_1.setSelected(false);
+                chk_2.setSelected(false);
+                chk_3.setSelected(false);
+                chk_4.setSelected(false);
+                chk_5.setSelected(false);
+                chk_6.setSelected(false);
+                chk_7.setSelected(false);
+                
                 
                 break;
             
@@ -141,6 +205,13 @@ public class tarifas extends javax.swing.JInternalFrame {
                 combo_parqueo.setEnabled(true);
                
                 
+                 chk_1.setEnabled(true);
+                chk_2.setEnabled(true);
+                chk_3.setEnabled(true);
+                chk_4.setEnabled(true);
+                chk_5.setEnabled(true);
+                chk_6.setEnabled(true);
+                chk_7.setEnabled(true);
                 break;    
             
             case BORRAR:
@@ -162,7 +233,17 @@ public class tarifas extends javax.swing.JInternalFrame {
                 combo_hora_fin.setEnabled(false);
                 combo_hora_inicio.setEnabled(false);
                 combo_parqueo.setEnabled(false);
+                
+                
+                 chk_1.setEnabled(false);
+                chk_2.setEnabled(false);
+                chk_3.setEnabled(false);
+                chk_4.setEnabled(false);
+                chk_5.setEnabled(false);
+                chk_6.setEnabled(false);
+                chk_7.setEnabled(false);
                 break;
+                
         }
     }
 
@@ -195,8 +276,17 @@ public class tarifas extends javax.swing.JInternalFrame {
         txt_media = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         chk_unica = new javax.swing.JCheckBox();
+        jPanel1 = new javax.swing.JPanel();
+        chk_7 = new javax.swing.JCheckBox();
+        chk_6 = new javax.swing.JCheckBox();
+        chk_5 = new javax.swing.JCheckBox();
+        chk_4 = new javax.swing.JCheckBox();
+        chk_3 = new javax.swing.JCheckBox();
+        chk_2 = new javax.swing.JCheckBox();
+        chk_1 = new javax.swing.JCheckBox();
+        jLabel5 = new javax.swing.JLabel();
 
-        jLabel1.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
         jLabel1.setText("Precio único/Precio hora:");
 
         jLabel2.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
@@ -295,19 +385,85 @@ public class tarifas extends javax.swing.JInternalFrame {
         combo_parqueo.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         combo_parqueo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel13.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
         jLabel13.setText("Parqueo:");
 
-        jLabel4.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
         jLabel4.setText("Precio 1/2 hora:");
 
-        chk_unica.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 12)); // NOI18N
+        chk_unica.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 16)); // NOI18N
         chk_unica.setText("Tarifa Unica");
         chk_unica.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 chk_unicaStateChanged(evt);
             }
         });
+
+        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        chk_7.setBackground(new java.awt.Color(0, 204, 204));
+        chk_7.setText("Domingo");
+
+        chk_6.setBackground(new java.awt.Color(0, 204, 204));
+        chk_6.setText("Sabado");
+
+        chk_5.setBackground(new java.awt.Color(0, 204, 204));
+        chk_5.setText("Viernes");
+
+        chk_4.setBackground(new java.awt.Color(0, 204, 204));
+        chk_4.setText("Jueves");
+
+        chk_3.setBackground(new java.awt.Color(0, 204, 204));
+        chk_3.setText("Miercoles");
+
+        chk_2.setBackground(new java.awt.Color(0, 204, 204));
+        chk_2.setText("Martes");
+
+        chk_1.setBackground(new java.awt.Color(0, 204, 204));
+        chk_1.setText("Lunes");
+
+        jLabel5.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
+        jLabel5.setText("Dias que aplica:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chk_1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chk_2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chk_3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chk_4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chk_5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chk_6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chk_7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(chk_1)
+                    .addComponent(chk_2)
+                    .addComponent(chk_3)
+                    .addComponent(chk_4)
+                    .addComponent(chk_5)
+                    .addComponent(chk_6)
+                    .addComponent(chk_7))
+                .addGap(18, 18, 18))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -316,40 +472,7 @@ public class tarifas extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane1)
-                .addGap(41, 41, 41))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chk_unica, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(56, 56, 56)
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(txt_media, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(combo_parqueo, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(combo_hora_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(12, 12, 12)
-                                        .addComponent(jLabel11)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(combo_min_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -358,11 +481,11 @@ public class tarifas extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -376,23 +499,67 @@ public class tarifas extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(combo_min_fin, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(combo_hora_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(jLabel11)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(combo_min_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel13)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(combo_parqueo, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(449, 449, 449)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_media, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(chk_unica, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(269, 269, 269))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(combo_parqueo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(combo_parqueo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
                 .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(chk_unica)
-                .addGap(9, 9, 9)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(txt_media, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
@@ -411,13 +578,12 @@ public class tarifas extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
 
@@ -430,6 +596,7 @@ public class tarifas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        nuevo=0;
         estado(Estado.EDITAR);
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -457,9 +624,38 @@ public class tarifas extends javax.swing.JInternalFrame {
             if(chk_unica.isSelected())
                 tarifa_unica=1;
             
+            LinkedList<Integer> lista = new LinkedList<>();
+          
+            if (chk_1.isSelected())
+                lista.add(1);
+            if (chk_2.isSelected()) {
+                lista.add(2);
+            }
+            if (chk_3.isSelected()) {
+                lista.add(3);
+            }
+            if (chk_4.isSelected()) {
+                lista.add(4);
+            }
+            if (chk_5.isSelected()) {
+                lista.add(5);
+            }
+            if (chk_6.isSelected()) {
+                lista.add(6);
+            }
+            if (chk_7.isSelected()) {
+                lista.add(7);
+            }
+                        
+            if(lista.isEmpty()){
+                JOptionPane.showMessageDialog(this, "Debe seleccionar los dias de vigencia de la tarifa","ERROR",0);
+                return;
+            }
+
             if (precio > 0) {
                 if (nuevo == 1) {
                     tarifa nueva = new tarifa(0, precio,precio_media,tarifa_unica, get_time_inicio(), get_time_fin(), fparqueo, parqueo);
+                    nueva.setDias(lista);
                     modelo.agregar_tarifa(nueva);
                 } else {
                     indice = tabla_tarifa.getSelectedRow();
@@ -472,11 +668,14 @@ public class tarifas extends javax.swing.JInternalFrame {
                         nueva.setParqueo(parqueo);
                         nueva.setMedia_hora(precio_media);
                         
+                        nueva.setDias(lista);
+                        
                         modelo.modificar_tarifa(nueva);
                     }
                 }
-                estado(Estado.GUARDAR);
+                
             }
+            estado(Estado.GUARDAR);
         } catch (Exception e) {
              JOptionPane.showMessageDialog(null, "El precio debe ser numerico y mayor a 0 ", "Panel de Usuarios", 0);
         }
@@ -506,6 +705,32 @@ public class tarifas extends javax.swing.JInternalFrame {
             }else
                 chk_unica.setSelected(false);
             
+            for (int x : tar.getDias()) {
+                switch (x) {
+                    case 1:
+                        chk_1.setSelected(true);
+                        break;
+                    case 2:
+                        chk_2.setSelected(true);
+                        break;
+                    case 3:
+                        chk_3.setSelected(true);
+                        break;
+                    case 4:
+                        chk_4.setSelected(true);
+                        break;
+                    case 5:
+                        chk_5.setSelected(true);
+                        break;
+                    case 6:
+                        chk_6.setSelected(true);
+                        break;
+                    case 7:
+                        chk_7.setSelected(true);
+                        break;
+                }
+            }
+            
             estado(Estado.CLICK);
         }
 
@@ -513,10 +738,14 @@ public class tarifas extends javax.swing.JInternalFrame {
 
     private void chk_unicaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chk_unicaStateChanged
         // TODO add your handling code here:
-        if(chk_unica.isSelected())
-            txt_media.setEnabled(false);
-        else
-            txt_media.setEnabled(true);
+        if (nuevo == 0 || nuevo == 1) {
+            if (chk_unica.isSelected()) {
+                txt_media.setEnabled(false);
+            } else {
+                txt_media.setEnabled(true);
+            }
+        }
+        
                     
     }//GEN-LAST:event_chk_unicaStateChanged
 
@@ -597,6 +826,13 @@ public class tarifas extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JCheckBox chk_1;
+    private javax.swing.JCheckBox chk_2;
+    private javax.swing.JCheckBox chk_3;
+    private javax.swing.JCheckBox chk_4;
+    private javax.swing.JCheckBox chk_5;
+    private javax.swing.JCheckBox chk_6;
+    private javax.swing.JCheckBox chk_7;
     private javax.swing.JCheckBox chk_unica;
     private javax.swing.JComboBox<String> combo_hora_fin;
     private javax.swing.JComboBox<String> combo_hora_inicio;
@@ -611,7 +847,9 @@ public class tarifas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla_tarifa;
     private javax.swing.JTextField txt_media;

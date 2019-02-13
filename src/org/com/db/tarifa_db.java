@@ -35,6 +35,7 @@ public class tarifa_db {
         try {
             while(res.next()){
                 tarifa au= new tarifa(res.getInt(1), res.getDouble(2),res.getDouble(3),res.getInt(4), res.getTime(5), res.getTime(6), res.getInt(7), res.getString(8));
+                au.setDias(get_dias_tarifa(au.getIdTARIFA()));
                 lista.add(au);
             }
         } catch (SQLException ex) {
@@ -55,6 +56,9 @@ public class tarifa_db {
             con.getPreparado().setInt(6,tar.getTarifa_unica());
             
             con.getPreparado().executeUpdate();
+            
+            insertar_dias_tarifa(tar);
+            
             
         } catch (SQLException ex) {
             System.out.println("Error al insertar tarifa a DB"+ex.getLocalizedMessage());
@@ -77,6 +81,9 @@ public class tarifa_db {
             con.getPreparado().setInt(7, tar.getIdTARIFA());
             
             con.getPreparado().executeUpdate();
+            
+             eliminar_dias_tarifa(tar.getIdTARIFA());
+             insertar_dias_tarifa(tar);
             
         } catch (SQLException ex) {
             System.out.println("Error al modificar tarifa a DB"+ex.getLocalizedMessage());
@@ -116,4 +123,75 @@ public class tarifa_db {
         }
         return -1;
     }
+
+    LinkedList<Integer> get_dias_tarifa(int id){
+        LinkedList<Integer> aux = new LinkedList<>();
+        try {
+            con.setPreparado(con.getConn().prepareStatement("select * from dias_tarifa where fk_tarifa = "+id));
+            res=con.getPreparado().executeQuery();
+        } catch (SQLException ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+     
+        try {
+            while(res.next()){
+               aux.add(res.getInt(2));
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener los dias de Tarifas: "+ex.getLocalizedMessage());
+        }
+        return aux;
+    }
+    
+    
+    private void insertar_dias_tarifa(tarifa tar) {
+        for (int x : tar.getDias()) {
+            String dia = "";
+            switch (x) {
+                case 1:
+                    dia = "Lunes";
+                    break;
+                case 2:
+                    dia = "Martes";
+                    break;
+                case 3:
+                    dia = "Miercoles";
+                    break;
+                case 4:
+                    dia = "Jueves";
+                    break;
+                case 5:
+                    dia = "Viernes";
+                    break;
+                case 6:
+                    dia = "Sabado";
+                    break;
+                default:
+                    dia = "Domingo";
+                    break;
+            }
+            try {
+                
+                con.setPreparado(con.getConn().prepareStatement("insert into dias_tarifa(dia_cod,dia_nombre,fk_tarifa) values(?,?,?)"));
+                con.getPreparado().setInt(1, x);
+                con.getPreparado().setString(2, dia);
+                con.getPreparado().setInt(3, tar.getIdTARIFA());
+
+                con.getPreparado().executeUpdate();
+
+            } catch (SQLException ex) {
+                System.out.println("Error al insertar dias de tarifa a DB" + ex.getLocalizedMessage());
+            }
+        }
+    }
+    
+    void eliminar_dias_tarifa(int id){
+        try {
+                con.setPreparado(con.getConn().prepareStatement("delete from dias_tarifa where fk_tarifa = "+id));
+                con.getPreparado().executeUpdate();
+            } catch (SQLException ex) {
+                System.out.println("Error al eliminar dias de tarifa a DB" + ex.getLocalizedMessage());
+            }
+    }
+    
 }
