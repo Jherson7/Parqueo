@@ -130,7 +130,7 @@ create table dias_tarifa (
     fk_tarifa int not null,
     primary key (id_dias,fk_tarifa),
     constraint fk_dia_tarifa foreign key (fk_tarifa)
-    references TARIFA(id_tarifa)
+    references TARIFA(idtarifa)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );

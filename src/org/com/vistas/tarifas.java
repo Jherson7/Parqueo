@@ -619,7 +619,9 @@ public class tarifas extends javax.swing.JInternalFrame {
                 
         try {
             Double precio = Double.parseDouble(txt_precio.getText());
-            Double precio_media = Double.parseDouble(txt_media.getText());
+            Double precio_media = 0.0;
+            if (!txt_media.getText().isEmpty())
+                precio_media=Double.parseDouble(txt_media.getText());
             int tarifa_unica =0;
             if(chk_unica.isSelected())
                 tarifa_unica=1;
