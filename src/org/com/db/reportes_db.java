@@ -32,12 +32,12 @@ public class reportes_db {
                         "group by hour(hora_salida), day(hora_salida)";*/
         
         String query ="select  hour(hora_salida) as 'Hora  Salida', sum(total) as total,hora_ingreso  \n" +
-                        "as fecha from ticket where date(hora_ingreso) = date(?) \n" +
+                        "as fecha from ticket where concat(date(hora_salida),'') = '"+new java.sql.Date(date.getTime())+"' \n" +
                         "group by hour(hora_salida), day(hora_salida)";
         
         try {
             con.setPreparado(con.getConn().prepareStatement(query));
-            con.getPreparado().setDate(1, new java.sql.Date(date.getTime()));
+            //con.getPreparado().setDate(1, new java.sql.Date(date.getTime()));
             
             res=con.getPreparado().executeQuery();
             while(res.next()){
