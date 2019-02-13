@@ -127,23 +127,18 @@ public class tarifa_db {
 
     LinkedList<Integer> get_dias_tarifa(int id){
         LinkedList<Integer> aux = new LinkedList<>();
+
         try {
             con.setPreparado(con.getConn().prepareStatement("select * from dias_tarifa where fk_tarifa = "+id));
-            res=con.getPreparado().executeQuery();
-        } catch (SQLException ex) {
-            System.out.println(ex.getLocalizedMessage());
-        }
-     
-        try {
-            while(res.next()){
-               aux.add(res.getInt(2));
+            ResultSet resx=con.getPreparado().executeQuery();
+            while(resx.next()){
+               aux.add(resx.getInt(2));
             }
         } catch (SQLException ex) {
             System.out.println("Error al obtener los dias de Tarifas: "+ex.getLocalizedMessage());
         }
         return aux;
     }
-    
     
     private void insertar_dias_tarifa(tarifa tar) {
         for (int x : tar.getDias()) {
