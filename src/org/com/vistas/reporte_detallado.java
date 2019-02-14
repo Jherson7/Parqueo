@@ -57,9 +57,9 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        lbl_cantidad_t_dia3 = new javax.swing.JLabel();
-        lbl_cantidad_t_dia4 = new javax.swing.JLabel();
-        lbl_cantidad_t_dia6 = new javax.swing.JLabel();
+        lbl_extraviados = new javax.swing.JLabel();
+        lbl_cobrados = new javax.swing.JLabel();
+        lbl_cantidad_vehiculos = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -215,20 +215,20 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
         jLabel19.setForeground(new java.awt.Color(0, 204, 204));
         jLabel19.setText("Tickets Extraviados:");
 
-        lbl_cantidad_t_dia3.setBackground(new java.awt.Color(0, 255, 204));
-        lbl_cantidad_t_dia3.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
-        lbl_cantidad_t_dia3.setForeground(new java.awt.Color(0, 255, 0));
-        lbl_cantidad_t_dia3.setText("jLabel13");
+        lbl_extraviados.setBackground(new java.awt.Color(0, 255, 204));
+        lbl_extraviados.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
+        lbl_extraviados.setForeground(new java.awt.Color(0, 255, 0));
+        lbl_extraviados.setText("jLabel13");
 
-        lbl_cantidad_t_dia4.setBackground(new java.awt.Color(0, 255, 204));
-        lbl_cantidad_t_dia4.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
-        lbl_cantidad_t_dia4.setForeground(new java.awt.Color(0, 255, 0));
-        lbl_cantidad_t_dia4.setText("jLabel13");
+        lbl_cobrados.setBackground(new java.awt.Color(0, 255, 204));
+        lbl_cobrados.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
+        lbl_cobrados.setForeground(new java.awt.Color(0, 255, 0));
+        lbl_cobrados.setText("jLabel13");
 
-        lbl_cantidad_t_dia6.setBackground(new java.awt.Color(0, 255, 204));
-        lbl_cantidad_t_dia6.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
-        lbl_cantidad_t_dia6.setForeground(new java.awt.Color(0, 255, 0));
-        lbl_cantidad_t_dia6.setText("jLabel13");
+        lbl_cantidad_vehiculos.setBackground(new java.awt.Color(0, 255, 204));
+        lbl_cantidad_vehiculos.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
+        lbl_cantidad_vehiculos.setForeground(new java.awt.Color(0, 255, 0));
+        lbl_cantidad_vehiculos.setText("jLabel13");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -245,15 +245,15 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
-                        .addComponent(lbl_cantidad_t_dia6))
+                        .addComponent(lbl_cantidad_vehiculos))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_cantidad_t_dia4))
+                        .addComponent(lbl_cobrados))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_cantidad_t_dia3))
+                        .addComponent(lbl_extraviados))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -266,15 +266,15 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
                 .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbl_cantidad_t_dia6, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(lbl_cantidad_vehiculos, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(lbl_cantidad_t_dia4))
+                    .addComponent(lbl_cobrados))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
-                    .addComponent(lbl_cantidad_t_dia3))
+                    .addComponent(lbl_extraviados))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
@@ -509,12 +509,12 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
     private javax.swing.JLabel l_ganancia_total;
     private javax.swing.JLabel lbl_apertura;
     private javax.swing.JLabel lbl_cantidad_t_dia;
-    private javax.swing.JLabel lbl_cantidad_t_dia3;
-    private javax.swing.JLabel lbl_cantidad_t_dia4;
-    private javax.swing.JLabel lbl_cantidad_t_dia6;
     private javax.swing.JLabel lbl_cantidad_t_noche;
     private javax.swing.JLabel lbl_cantidad_total;
+    private javax.swing.JLabel lbl_cantidad_vehiculos;
     private javax.swing.JLabel lbl_cierre;
+    private javax.swing.JLabel lbl_cobrados;
+    private javax.swing.JLabel lbl_extraviados;
     private javax.swing.JLabel lbl_usuario;
     private javax.swing.JTable tabla_descuentos;
     private javax.swing.JTable table_detalle;
@@ -543,6 +543,12 @@ public class reporte_detallado extends javax.swing.JInternalFrame {
         
         lbl_cantidad_total.setText(String.valueOf(total_tickets_dia+total_tickets_noche));
         l_ganancia_total.setText(""+ganancia_total);
+        
+        
+        lbl_cantidad_vehiculos.setText(""+tr.cantidad_vehiculos);
+        lbl_extraviados.setText(""+ tr.no_tickets_ext);
+        lbl_cobrados.setText(""+total_tickets_dia+total_tickets_noche);
+        
         
     }
 

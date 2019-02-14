@@ -227,9 +227,9 @@ ENGINE = InnoDB;
 
 delimiter //
 create procedure actualizar_ticket(
-id_ticket int, sub double, descu double,v_factura varchar(100),turno_cierre int) 
+id_ticket int, sub double, descu double,v_factura varchar(100),turno_cierre int,fk_descuento int ) 
 begin 
-update ticket set fturno_cierre = turno_cierre,factura=v_factura, hora_salida =  NOW(), subtotal = sub,descuento=descu,total=(sub  - descu) where idTICKET = id_ticket;
+update ticket set fturno_cierre = turno_cierre,factura=v_factura, hora_salida =  NOW(), subtotal = sub,descuento=descu,total=(sub  - descu), fdescuento = fk_descuento where idTICKET = id_ticket;
 end//
 
 

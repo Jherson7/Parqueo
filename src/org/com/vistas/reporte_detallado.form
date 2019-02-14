@@ -346,17 +346,17 @@
                           <Group type="102" attributes="0">
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="85" max="32767" attributes="0"/>
-                              <Component id="lbl_cantidad_t_dia6" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_cantidad_vehiculos" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="lbl_cantidad_t_dia4" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_cobrados" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="lbl_cantidad_t_dia3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_extraviados" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
@@ -374,17 +374,17 @@
                       <EmptySpace pref="17" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_cantidad_t_dia6" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_cantidad_vehiculos" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_cantidad_t_dia4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_cobrados" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_cantidad_t_dia3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_extraviados" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -500,7 +500,7 @@
                 <Property name="text" type="java.lang.String" value="Tickets Extraviados:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lbl_cantidad_t_dia3">
+            <Component class="javax.swing.JLabel" name="lbl_extraviados">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="ff" red="0" type="rgb"/>
@@ -514,7 +514,7 @@
                 <Property name="text" type="java.lang.String" value="jLabel13"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lbl_cantidad_t_dia4">
+            <Component class="javax.swing.JLabel" name="lbl_cobrados">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="ff" red="0" type="rgb"/>
@@ -528,7 +528,7 @@
                 <Property name="text" type="java.lang.String" value="jLabel13"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lbl_cantidad_t_dia6">
+            <Component class="javax.swing.JLabel" name="lbl_cantidad_vehiculos">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="ff" red="0" type="rgb"/>
