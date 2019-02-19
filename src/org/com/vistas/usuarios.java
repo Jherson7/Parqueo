@@ -1,6 +1,7 @@
 package org.com.vistas;
 
 import java.sql.Time;
+import javax.swing.JOptionPane;
 import org.com.bens.horario;
 import org.com.bens.parqueo;
 import org.com.bens.rol;
@@ -632,8 +633,14 @@ public class usuarios extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         usuario_modelo_tabla modelo = (usuario_modelo_tabla) tabla_usuarios.getModel();
-
-        long dpi            = Long.parseLong(txt_dpi.getText());
+        long dpi=0;
+        try{
+                   dpi= Long.parseLong(txt_dpi.getText());
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Ingrese un numero valido de DPI","ERROR",0);
+            return;
+        }
+        
         String usuario      = txt_usuario.getText();
         String nombre       = txt_nombre.getText();
         String apellidos    = txt_apellidos.getText();
