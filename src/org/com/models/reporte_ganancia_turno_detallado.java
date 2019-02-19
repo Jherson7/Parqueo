@@ -1,15 +1,11 @@
 
 package org.com.models;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import org.com.bens.reporte_turno;
-import org.com.bens.reporte_turno_detallado;
 import org.com.bens.ticket;
 import org.com.db.cobro_db;
-import org.com.db.reportes_db;
 
 /**
  *
@@ -25,6 +21,9 @@ public class reporte_ganancia_turno_detallado  extends AbstractTableModel{
 
     public Double ganancia_dia=0.0;
     public Double gananacia_noche=0.0;
+    
+    public int cantidad_vehiculos=0;
+    public int no_tickets_ext=0;
     
     public reporte_ganancia_descuento tabla_descuento;
     /*public reporte_ganancia_turno_detallado(Date fecha,Date fin, int parqueo) {
@@ -46,6 +45,10 @@ public class reporte_ganancia_turno_detallado  extends AbstractTableModel{
         reportedb.get_ticket_por_turno_noche(lista, ""+turno);
         tickets_noche= lista.size()-tickets_dia;
         setear_ganancia_noche();
+        
+        
+        cantidad_vehiculos = reportedb.get_numero_vehiculos(turno);
+        no_tickets_ext = reportedb.get_numero_tickets_ext(turno);
     }
     
     public ticket elementAt(int indice){
@@ -78,7 +81,11 @@ public class reporte_ganancia_turno_detallado  extends AbstractTableModel{
                   resultado = String .valueOf(au.getHora_salida());
                   break;
               case 3:
-                  resultado = (au.getFactura().equals(""))?"Vacio": au.getFactura();
+                  try {
+                      resultado = (au.getFactura().equals(""))?"Vacio": au.getFactura();
+                  } catch (Exception e) {
+                      resultado = "Vacio";
+                  }
                   break;
               case 4:
                   resultado = String.valueOf(au.getTotal());

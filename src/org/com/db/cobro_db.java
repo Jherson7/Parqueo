@@ -49,12 +49,13 @@ public class cobro_db {
     
     public Integer actualizar_ticket(ticket ticki){
           try {
-            con.setPreparado(con.getConn().prepareStatement("call actualizar_ticket(?,?,?,?,?)"));
+            con.setPreparado(con.getConn().prepareStatement("call actualizar_ticket(?,?,?,?,?,?)"));
             con.getPreparado().setInt(1,ticki.getId_ticket());
             con.getPreparado().setDouble(2,ticki.getSubtotal());
             con.getPreparado().setDouble(3, ticki.getDescuento());
             con.getPreparado().setString(4, ticki.getFactura());
             con.getPreparado().setInt(5, Controlador.getTurno_actual().getId_turno());
+            con.getPreparado().setInt(6, ticki.getFdescuento());
             
             con.getPreparado().executeUpdate();
             
@@ -142,7 +143,7 @@ public class cobro_db {
     
     public int insertar_ticket_extraviado(ticket ticki){
          try {
-            con.setPreparado(con.getConn().prepareStatement("insert into ticket(codigo,hora_ingreso,hora_salida,subtotal,descuento,total,fturno)values(?,?,?,?,?,?,?)"));
+            con.setPreparado(con.getConn().prepareStatement("insert into ticket(codigo,hora_ingreso,hora_salida,subtotal,descuento,total,fturno,fturno_cierre)values(?,?,?,?,?,?,?,?)"));
             con.getPreparado().setString(1,"EXT_"+ticki.getCodigo());
             con.getPreparado().setTimestamp(2,ticki.getHora_ingreso());
             con.getPreparado().setTimestamp(3,ticki.getHora_salida());
@@ -150,6 +151,7 @@ public class cobro_db {
             con.getPreparado().setDouble(5, ticki.getDescuento());
             con.getPreparado().setDouble(6, ticki.getTotal());
             con.getPreparado().setInt(7, ticki.getTurno());
+            con.getPreparado().setInt(8, Controlador.getTurno_actual().getId_turno()); 
             
             con.getPreparado().executeUpdate();
             
@@ -288,9 +290,9 @@ public class cobro_db {
 
     public void get_ticket_por_turno_dia_descuento(List<reporte_turno_detallado>lista,String codigo){
         reporte_turno_detallado tick=null;
-        String query ="select d.nombre_descuento, t.codigo,t.hora_ingreso,t.hora_salida,t.descuento,t.total,t.factura\n" +
+         String query ="select d.nombre_descuento, t.codigo,t.hora_ingreso,t.hora_salida,t.descuento,t.factura,t.total\n" +
                         "from ticket t inner join descuento d on t.fdescuento = d.iddescuento\n" +
-                        "where fturno_cierre is not null AND hour(hora_salida) <= 18 and fturno_cierre = "+codigo;
+                        "where fturno_cierre is not null AND hour(hora_salida) <= 18 and fturno_cierre = "+codigo;;
         try {
             con.setPreparado(con.getConn().prepareStatement(query));
            // con.getPreparado().setString(1, codigo);
@@ -309,7 +311,7 @@ public class cobro_db {
    
     public void get_ticket_por_turno_noche_descuento(List<reporte_turno_detallado>lista,String codigo){
         reporte_turno_detallado tick=null;
-        String query ="select d.nombre_descuento, t.codigo,t.hora_ingreso,t.hora_salida,t.descuento,t.total,t.factura\n" +
+        String query ="select d.nombre_descuento, t.codigo,t.hora_ingreso,t.hora_salida,t.descuento,t.factura,t.total\n" +
                         "from ticket t inner join descuento d on t.fdescuento = d.iddescuento\n" +
                         "where fturno_cierre is not null AND hour(hora_salida) > 18 and fturno_cierre = "+codigo;
         try {
@@ -326,6 +328,40 @@ public class cobro_db {
         } catch (SQLException ex) {
             System.out.println("Error al obtener la lista de tickets descuento dia: "+ex.getLocalizedMessage());
         }
+    }
+
+    public int get_numero_vehiculos(int turno) {
+        try {
+            String query ="select count(*) from ticket where fturno = "+turno;
+            con.setPreparado(con.getConn().prepareStatement(query));
+           // con.getPreparado().setString(1, codigo);
+            res=con.getPreparado().executeQuery();
+      
+            if(res.next()){
+                //Date date = res.getTimestamp(3);
+                 return res.getInt(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println("error al obtener numero de vehiculos: "+ex.getLocalizedMessage());
+            return -1;
+        }
+         return -1;
+    }
+
+    public int get_numero_tickets_ext(int turno) {
+        try {
+            con.setPreparado(con.getConn().prepareStatement(" select count(*) from ticket where codigo like '%EXT%' and fturno_cierre = "+turno));
+           // con.getPreparado().setString(1, codigo);
+            res=con.getPreparado().executeQuery();
+      
+            if(res.next()){
+                //Date date = res.getTimestamp(3);
+                return res.getInt(1);
+            }
+        } catch (SQLException ex) {
+           return -1;
+        }
+         return -1;
     }
 
 }

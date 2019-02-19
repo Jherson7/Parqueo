@@ -343,6 +343,7 @@ public class cobrar_ticket extends javax.swing.JInternalFrame {
 
                 temp.getTicket().setDescuento(descuento);
                 temp.getTicket().setTotal(temp.getTicket().getSubtotal() - descuento);
+                temp.getTicket().setFdescuento(desc.getId_descuento());
                 mostrar_calculo();
             }
         }
