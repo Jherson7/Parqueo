@@ -2,6 +2,7 @@ package org.com.db;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import org.com.bens.turno;
 
@@ -72,7 +73,13 @@ public class turno_db {
             res=con.getPreparado().executeQuery();
 
             if(res.next()){
-                turno tr = new turno(res.getInt(1),res.getTimestamp(2),res.getTimestamp(3),res.getInt(4),res.getInt(5));
+                Timestamp fecha_cierre = null;
+                try{
+                    fecha_cierre = res.getTimestamp(3);
+                }catch(Exception e){
+                    
+                }
+                turno tr = new turno(res.getInt(1),res.getTimestamp(2),fecha_cierre,res.getInt(4),res.getInt(5));
                 return tr ;
             }
             

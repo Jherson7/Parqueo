@@ -48,14 +48,20 @@ public class cobro_db {
     
     
     public Integer actualizar_ticket(ticket ticki){
+        
           try {
-            con.setPreparado(con.getConn().prepareStatement("call actualizar_ticket(?,?,?,?,?,?)"));
+            if(ticki.getFdescuento()>0){
+                    con.setPreparado(con.getConn().prepareStatement("call actualizar_ticket(?,?,?,?,?,?)"));
+                    con.getPreparado().setInt(6, ticki.getFdescuento());
+            }  
+            else
+                con.setPreparado(con.getConn().prepareStatement("call actualizar_ticket_sin_desc(?,?,?,?,?)"));
             con.getPreparado().setInt(1,ticki.getId_ticket());
             con.getPreparado().setDouble(2,ticki.getSubtotal());
             con.getPreparado().setDouble(3, ticki.getDescuento());
             con.getPreparado().setString(4, ticki.getFactura());
             con.getPreparado().setInt(5, Controlador.getTurno_actual().getId_turno());
-            con.getPreparado().setInt(6, ticki.getFdescuento());
+            
             
             con.getPreparado().executeUpdate();
             
@@ -143,7 +149,12 @@ public class cobro_db {
     
     public int insertar_ticket_extraviado(ticket ticki){
          try {
-            con.setPreparado(con.getConn().prepareStatement("insert into ticket(codigo,hora_ingreso,hora_salida,subtotal,descuento,total,fturno,fturno_cierre)values(?,?,?,?,?,?,?,?)"));
+            if(ticki.getFdescuento()>0) {
+                con.setPreparado(con.getConn().prepareStatement("insert into ticket(codigo,hora_ingreso,hora_salida,subtotal,descuento,total,fturno,fturno_cierre,fdescuento)values(?,?,?,?,?,?,?,?,?)"));
+                con.getPreparado().setInt(9, ticki.getFdescuento());
+            }else
+                con.setPreparado(con.getConn().prepareStatement("insert into ticket(codigo,hora_ingreso,hora_salida,subtotal,descuento,total,fturno,fturno_cierre)values(?,?,?,?,?,?,?,?)"));
+             
             con.getPreparado().setString(1,"EXT_"+ticki.getCodigo());
             con.getPreparado().setTimestamp(2,ticki.getHora_ingreso());
             con.getPreparado().setTimestamp(3,ticki.getHora_salida());

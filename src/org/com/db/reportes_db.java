@@ -165,7 +165,7 @@ public class reportes_db {
     public List<reporte_tickets> reporte_tickets_pendientes(int parqueo){
         List<reporte_tickets> lista = new LinkedList<>();
 
-        String query ="select DATE_FORMAT(t.hora_ingreso,\"%d-%m-%Y\") as 'Fecha Ingreso', t.codigo from ticket t \n" +
+        String query ="select DATE_FORMAT(t.hora_ingreso,\"%d-%m-%Y  %H:%i\") as 'Fecha Ingreso', t.codigo from ticket t \n" +
                       "inner join turno tu on tu.idturno = t.fturno where t.total is NULL and tu.fparqueo =?";
         try {
             con.setPreparado(con.getConn().prepareStatement(query));

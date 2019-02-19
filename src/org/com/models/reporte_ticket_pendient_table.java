@@ -11,7 +11,7 @@ import org.com.db.reportes_db;
  */
 public class reporte_ticket_pendient_table extends AbstractTableModel{
     public List<reporte_tickets>lista;
-    public String [] cabecera = {"No.","Codigo","Fecha"};
+    public String [] cabecera = {"No.","Codigo","Fecha Hora"};
     private reportes_db reportedb;
     
     public reporte_ticket_pendient_table(int parqueo) {

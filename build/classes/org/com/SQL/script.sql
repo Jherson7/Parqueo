@@ -227,11 +227,20 @@ ENGINE = InnoDB;
 
 delimiter //
 create procedure actualizar_ticket(
+
 id_ticket int, sub double, descu double,v_factura varchar(100),turno_cierre int,fk_descuento int ) 
 begin 
 update ticket set fturno_cierre = turno_cierre,factura=v_factura, hora_salida =  NOW(), subtotal = sub,descuento=descu,total=(sub  - descu), fdescuento = fk_descuento where idTICKET = id_ticket;
 end//
 
+
+delimiter //
+create procedure actualizar_ticket_sin_desc(
+
+id_ticket int, sub double, descu double,v_factura varchar(100),turno_cierre int ) 
+begin 
+update ticket set fturno_cierre = turno_cierre,factura=v_factura, hora_salida =  NOW(), subtotal = sub,descuento=descu,total=(sub  - descu) where idTICKET = id_ticket;
+end//
 
 -- procedimiento para hacer la apertura del curso
 delimiter //
@@ -259,7 +268,7 @@ delimiter //
 create procedure cerrar_turno(parqueo int, turno int) 
 begin
 
-update turno set horario_cierre=CURRENT_TIME() where idturno = turno and fparqueo = parqueo;
+update turno set horario_cierre=NOW() where idturno = turno and fparqueo = parqueo;
 select sum(total) as total from ticket where fturno = turno;
 
 end//

@@ -1,5 +1,8 @@
 package org.com.vistas;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -72,12 +75,12 @@ public class Principal extends javax.swing.JFrame {
         menu_reporte_tiempo_promedio = new javax.swing.JMenuItem();
         ganancia_turno = new javax.swing.JMenuItem();
         tickets_pendientes = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         menu_administrador = new javax.swing.JMenu();
         menu_parqueo = new javax.swing.JMenuItem();
         menu_usuario = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         menu_descuentos = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,6 +109,8 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem2.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/com/pictures/bloquear.png"))); // NOI18N
         jMenuItem2.setText("Cerrar Sesion");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +125,7 @@ public class Principal extends javax.swing.JFrame {
         menu_usuairo.setText("Usuario");
         menu_usuairo.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
 
+        menu_apertura.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         menu_apertura.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
         menu_apertura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/com/pictures/abrir_turno.png"))); // NOI18N
         menu_apertura.setText("Aperturar Turno");
@@ -130,6 +136,7 @@ public class Principal extends javax.swing.JFrame {
         });
         menu_usuairo.add(menu_apertura);
 
+        menu_cierre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         menu_cierre.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
         menu_cierre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/com/pictures/cerrar_turno.png"))); // NOI18N
         menu_cierre.setText("Cerrar Turno");
@@ -146,6 +153,7 @@ public class Principal extends javax.swing.JFrame {
         menu_cobro.setText("Cobro");
         menu_cobro.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
 
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ENTER, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem5.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/com/pictures/descuento.png"))); // NOI18N
         jMenuItem5.setText("Cobrar Ticket");
@@ -212,14 +220,6 @@ public class Principal extends javax.swing.JFrame {
         });
         menu_reporte.add(tickets_pendientes);
 
-        jMenuItem3.setText("Ganancia por turnos Detallado");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        menu_reporte.add(jMenuItem3);
-
         jMenuBar1.add(menu_reporte);
 
         menu_administrador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/com/pictures/bloqueado.png"))); // NOI18N
@@ -267,6 +267,16 @@ public class Principal extends javax.swing.JFrame {
         menu_administrador.add(menu_descuentos);
 
         jMenuBar1.add(menu_administrador);
+
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/com/pictures/help.png"))); // NOI18N
+        jMenu2.setText("Ayuda");
+        jMenu2.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -378,10 +388,15 @@ public class Principal extends javax.swing.JFrame {
                     // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
         // TODO add your handling code here:
-        //mostrarVentanasInternas(new reporte_detallado(), "Detalle de Tickets Generados por Turno");
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+        try {
+            File path = new File("src/docs/manual.pdf");
+            Desktop.getDesktop().open(path);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jMenu2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -422,11 +437,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem ganancia_turno;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenu menu_administrador;
     private javax.swing.JMenuItem menu_apertura;
