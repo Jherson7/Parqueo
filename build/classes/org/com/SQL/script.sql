@@ -328,7 +328,24 @@ values(10,6,0,'7:00','17:00',1);
 insert into tarifa(precio,precio_media_hora,tarifa_unica,hora_inicio_tarifa,hora_fin_tarifa,fparqueo)
 values(30,0,1,'18:00','23:00',1);
 
-select * from ticket;
+
+insert into dias_tarifa (dia_cod,dia_nombre,fk_tarifa) 
+values(1,'lunes',1),
+(2,'martes',1),
+(3,'miercoles',1),
+(4,'jueves',1),
+(5,'viernes',1),
+(6,'sabado',1),
+(7,'domingo',1),
+(1,'lunes',2),
+(2,'martes',2),
+(3,'miercoles',2),
+(4,'jueves',2),
+(5,'viernes',2),
+(6,'sabado',2),
+(7,'domingo',2);
+
+
 
 
 
