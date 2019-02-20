@@ -321,8 +321,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        impresion_de_ticket.insertar_y_obtener_codigo();
-       // System.exit(0);
+        //impresion_de_ticket.insertar_y_obtener_codigo();
+        System.exit(0);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private static String centrar_texto(String mensaje) {
