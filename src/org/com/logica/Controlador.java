@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.Properties;
+import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -20,6 +21,7 @@ import org.com.bens.turno;
 import org.com.bens.usuario;
 import org.com.db.cobro_db;
 import org.com.vistas.Principal;
+import org.com.correo.envio_de_correo;
 
 public class Controlador {
     
@@ -33,10 +35,17 @@ public class Controlador {
     public static boolean puerto;
     private static String cod_puerto;
     private static String servidor_cliente;
+    //para el envio del correo
+    private static Timer timer;
+    public static String usuario_email;
+    public static String contraseña;
+    public static String destinatario;
+    
     //public static  SerialPort serialPort;
     static LinkedList<ticket> pendientes = new LinkedList<>();
     
     public static Principal actual;
+    
     
     
     public static void iniciar_serial() {
@@ -76,6 +85,11 @@ public class Controlador {
         
         if (servidor_cliente.equalsIgnoreCase("si")) {
             //es servidor no utiliza el puerto serial
+            timer = new Timer();
+            //tarea que se va a ejecutar despues de un segundo
+            //y lo va a ejecutar hasta que sean las 4 am
+            //y despues periodicamente cada 24 hrs
+            timer.schedule(new envio_de_correo(), get_frecuencia_de_envio(),86400000);
         } else {
             
             iniciar_serial();
@@ -179,6 +193,9 @@ public class Controlador {
             
             cod_puerto = prop.getProperty("com").trim();
             servidor_cliente = prop.getProperty("server").trim();
+            usuario_email    = prop.getProperty("usuario");
+            destinatario     = prop.getProperty("destinatario");
+            contraseña       = prop.getProperty("password");
             
             System.out.println("Codigo Recibido:>"+cod_puerto+"<");
             
@@ -234,6 +251,21 @@ public class Controlador {
 
     public static void setPrincipal(Principal aThis) {
         actual=aThis;
+    }
+    
+    private static Long get_frecuencia_de_envio(){
+        Timestamp ahora = new Timestamp(System.currentTimeMillis());
+        Timestamp hora_destino = new Timestamp(System.currentTimeMillis());
+        hora_destino.setHours(23);
+        hora_destino.setMinutes(59);
+        hora_destino.setSeconds(59);
+        
+        
+        
+        Long diferencia = Math.abs(ahora.getTime()-hora_destino.getTime());
+        diferencia += 14400000;
+        System.out.println(diferencia);
+        return diferencia;
     }
     
 }

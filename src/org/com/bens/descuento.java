@@ -1,5 +1,6 @@
 package org.com.bens;
 
+import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -12,6 +13,8 @@ public class descuento {
     int tipo;
     double valor;
     Date fecha;
+    Time hora_inicio;
+    Time hora_fin;
 
     public descuento() {
     }
@@ -24,6 +27,34 @@ public class descuento {
         this.fecha = fecha;
     }
 
+    public descuento(int id_descuento, String nombre_descuento, int tipo, double valor, Date fecha, Time hora_inicio, Time hora_fin) {
+        this.id_descuento = id_descuento;
+        this.nombre_descuento = nombre_descuento;
+        this.tipo = tipo;
+        this.valor = valor;
+        this.fecha = fecha;
+        this.hora_inicio = hora_inicio;
+        this.hora_fin = hora_fin;
+    }
+
+    public Time getHora_inicio() {
+        return hora_inicio;
+    }
+
+    public void setHora_inicio(Time hora_inicio) {
+        this.hora_inicio = hora_inicio;
+    }
+
+    public Time getHora_fin() {
+        return hora_fin;
+    }
+
+    public void setHora_fin(Time hora_fin) {
+        this.hora_fin = hora_fin;
+    }
+
+    
+    
     public int getId_descuento() {
         return id_descuento;
     }

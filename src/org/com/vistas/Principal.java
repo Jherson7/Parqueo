@@ -27,7 +27,7 @@ public class Principal extends javax.swing.JFrame {
         this.setIconImage(img.getImage());
         setLocationRelativeTo(null);
         setExtendedState(MAXIMIZED_BOTH);
-        //Controlador.iniciar_programa();
+        Controlador.iniciar_programa();
         impresion_de_ticket.obtener_parametros_del_parqueo();
        
         if (Controlador.getUsuarioActual().getfRol()!=1){

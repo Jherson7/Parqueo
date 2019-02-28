@@ -2,6 +2,7 @@ package org.com.vistas;
 
 import java.awt.event.KeyEvent;
 import java.sql.Date;
+import java.sql.Time;
 import javax.swing.JOptionPane;
 import org.com.bens.descuento;
 import org.com.controler.descuento_controller;
@@ -29,6 +30,9 @@ public class descuentos extends javax.swing.JInternalFrame {
                 chk_min.setSelected(true);
             }else
                 chk_dinero.setSelected(true);
+            
+            set_horario_inicio(aux.getHora_inicio());
+            set_horario_fin(aux.getHora_fin());
             
         }
     }
@@ -64,7 +68,10 @@ public class descuentos extends javax.swing.JInternalFrame {
                 chk_porcentaje.setEnabled(false);
                 chk_dinero.setEnabled(false);
                 spinner_cantidad.setEnabled(false);
-                                
+                       
+                combo_hora_inicio.setEnabled(false);
+                combo_hora_fin.setEnabled(false);
+                
                 btnNuevo.setEnabled(true);
                 btnEditar.setEnabled(false);
                 btnGuardar.setEnabled(false);
@@ -84,7 +91,9 @@ public class descuentos extends javax.swing.JInternalFrame {
                 chk_dinero.setEnabled(false);
                 spinner_cantidad.setEnabled(false);
                 
-                                
+                combo_hora_inicio.setEnabled(false);
+                combo_hora_fin.setEnabled(false);
+                
                 btnNuevo.setEnabled(true);
                 btnEditar.setEnabled(true);
                 btnGuardar.setEnabled(false);
@@ -104,7 +113,13 @@ public class descuentos extends javax.swing.JInternalFrame {
                 chk_dinero.setEnabled(true);
                 spinner_cantidad.setEnabled(true);
                
-                                           
+                
+                combo_hora_inicio.setEnabled(true);
+                combo_hora_fin.setEnabled(true);
+                
+                combo_hora_inicio.setSelectedItem("7");
+                combo_hora_fin.setSelectedItem("20");
+                
                 btnNuevo.setEnabled(false);
                 btnEditar.setEnabled(false);
                 btnGuardar.setEnabled(true);
@@ -123,6 +138,9 @@ public class descuentos extends javax.swing.JInternalFrame {
                 chk_dinero.setEnabled(false);
                 spinner_cantidad.setEnabled(false);
                 
+                
+                combo_hora_inicio.setEnabled(false);
+                combo_hora_fin.setEnabled(false);
                 
                 btnNuevo.setEnabled(true);
                 btnEditar.setEnabled(false);
@@ -148,12 +166,13 @@ public class descuentos extends javax.swing.JInternalFrame {
                 btnEliminar.setEnabled(true);
                 btnSalir.setEnabled(true);
                 
+                
+                combo_hora_inicio.setEnabled(true);
+                combo_hora_fin.setEnabled(true);
                 break;    
             
             case BORRAR:
                 txt_descuento.setText(null);
-                
-               
                 
                 txt_descuento.setEnabled(false);
                 txt_descuento.setEnabled(false);
@@ -169,6 +188,9 @@ public class descuentos extends javax.swing.JInternalFrame {
                 btnEliminar.setEnabled(false);
                 btnSalir.setEnabled(true);
                 
+                combo_hora_inicio.setEnabled(false);
+                combo_hora_fin.setEnabled(false);               
+
                 break;
         }
     }
@@ -193,6 +215,11 @@ public class descuentos extends javax.swing.JInternalFrame {
         btnEliminar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        combo_hora_fin = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        combo_hora_inicio = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 12)); // NOI18N
         jLabel1.setText("Empresa y/o nombre del descuento:");
@@ -281,16 +308,15 @@ public class descuentos extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(chk_porcentaje)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(chk_min)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(chk_dinero))
+                        .addComponent(chk_min))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spinner_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(spinner_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chk_dinero)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Descuentos existentes"));
@@ -376,35 +402,82 @@ public class descuentos extends javax.swing.JInternalFrame {
             }
         });
 
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Horario Descuento"));
+
+        combo_hora_fin.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
+        combo_hora_fin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "23", "24" }));
+
+        jLabel4.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
+        jLabel4.setText("Horario de Finalizacion:");
+
+        combo_hora_inicio.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
+        combo_hora_inicio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "23", "24" }));
+
+        jLabel3.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
+        jLabel3.setText("Hora Inicio Descuento:");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(combo_hora_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(combo_hora_fin, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(combo_hora_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(combo_hora_fin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnNuevo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnGuardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSalir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnNuevo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEditar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEliminar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnGuardar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSalir))
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txt_descuento, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_descuento)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -415,8 +488,10 @@ public class descuentos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(txt_descuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -452,6 +527,7 @@ public class descuentos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        
         descuento_modelo_tabla modelo = (descuento_modelo_tabla) tabla_descuento.getModel();
 
         String nombre = txt_descuento.getText();
@@ -464,13 +540,19 @@ public class descuentos extends javax.swing.JInternalFrame {
         }else{
             tipo =3;
         }
+        Object val  = spinner_cantidad.getValue();
+        System.out.println(val.getClass().getTypeName()+", tipo");
         
-        valor = (double)((int) spinner_cantidad.getValue());
+        if(val.getClass().getTypeName().equals("java.lang.Integer"))
+            valor = (double)((int) spinner_cantidad.getValue());
+        else
+            valor = (double)spinner_cantidad.getValue();
             
         if(nuevo==1){
-            descuento des = new descuento(0, nombre, tipo,  valor ,new java.util.Date());
+            //descuento des = new descuento(0, nombre, tipo,  valor ,new java.util.Date());
+            descuento des = new descuento(0, nombre, tipo,  valor ,new java.util.Date(),get_time_inicio(),get_time_fin());
             modelo.agregar_descuento(des);
-            //Integer idUSUARIO, long DPI, String Nombre, String Apellidos, String Password, Integer fPARQUEO, Integer fRol, String parqueo, String rol
+            
         } else {
             if (indice > -1) {
                 descuento des = modelo.getElementAt(indice);
@@ -478,7 +560,10 @@ public class descuentos extends javax.swing.JInternalFrame {
                 des.setTipo(tipo);
                 des.setValor(valor);
                 des.setFecha(new java.util.Date());
-
+                
+                des.setHora_inicio(get_time_inicio());
+                des.setHora_fin(get_time_fin());
+                
                 modelo.modificar_descuento(des);
             }
         }
@@ -566,6 +651,54 @@ public class descuentos extends javax.swing.JInternalFrame {
             mostrar_registro();
         }
     }//GEN-LAST:event_tabla_descuentoKeyReleased
+    private Time get_time_inicio() {
+        Integer hora_inicio = Integer.parseInt(combo_hora_inicio.getSelectedItem().toString());
+
+        Time time = new Time(hora_inicio, 0, 0);
+        System.out.println(time);
+
+        return time;
+    }
+
+    private Time get_time_fin() {
+        Integer hora_fin = Integer.parseInt(combo_hora_fin.getSelectedItem().toString());
+
+        Time time = new Time(hora_fin, 0, 0);
+        System.out.println(time);
+
+        return time;
+    }
+
+    private void set_horario_inicio(Time hora_inicio) {
+        if(hora_inicio == null)
+            return;
+        
+        Integer hora = hora_inicio.getHours();
+
+        
+        for (int i = 0; i < combo_hora_inicio.getItemCount(); i++) {
+            Integer aux = Integer.parseInt((String) combo_hora_inicio.getItemAt(i));
+            if (aux == hora) {
+                combo_hora_inicio.setSelectedIndex(i);
+            }
+        }
+    }
+
+    private void set_horario_fin(Time hora_fin) {
+        
+        if(hora_fin == null)
+            return;
+        
+        Integer hora = hora_fin.getHours();
+
+        for (int i = 0; i < combo_hora_fin.getItemCount(); i++) {
+            Integer aux = Integer.parseInt((String) combo_hora_fin.getItemAt(i));
+            if (aux == hora) {
+                combo_hora_fin.setSelectedIndex(i);
+            }
+        }
+
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -577,10 +710,15 @@ public class descuentos extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox chk_dinero;
     private javax.swing.JCheckBox chk_min;
     private javax.swing.JCheckBox chk_porcentaje;
+    private javax.swing.JComboBox combo_hora_fin;
+    private javax.swing.JComboBox combo_hora_inicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner spinner_cantidad;
     private javax.swing.JTable tabla_descuento;

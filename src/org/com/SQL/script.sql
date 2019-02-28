@@ -96,6 +96,8 @@ CREATE TABLE  DESCUENTO  (
    tipo_descuento  INT NULL,-- 1 porcentaje 2 minutos 3 dinero
    valor  double  not null NULL,
    fecha  DATE NULL,
+   hora_inicio time,
+   hora_fin    time,
   PRIMARY KEY ( idDESCUENTO ))
 ENGINE = InnoDB;
 

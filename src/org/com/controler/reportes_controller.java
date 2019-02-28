@@ -38,10 +38,6 @@ public class reportes_controller {
         return new reporte_ganancia_turno(desde, hasta, parqueo);
     }
     
-    
-    
-    
-    
     public static reporte_ticket_pendient_table get_table_tickets(int parqueo){
         return new reporte_ticket_pendient_table(parqueo);
     }

@@ -51,6 +51,7 @@ public class reportes_db {
         return lista;
     }
     
+    
     public List<reporte_hora_fecha_beans> retornar_por_fechas(Date desde,Date hasta){
         List<reporte_hora_fecha_beans> lista = new LinkedList<>();
         
@@ -183,8 +184,31 @@ public class reportes_db {
         return lista;
     }
 
-    public List<reporte_turno_detallado> retornar_reporte_por_turno_detallado(int parqueo, int turno) {
-        String query ="";
-        return null;
+    public List<reporte_hora_fecha_beans> retornar_reporte_email(){
+        List<reporte_hora_fecha_beans> lista = new LinkedList<>();
+        
+       /* String query ="select  hour(hora_salida) as 'Hora  Salida', sum(total) as total,hora_ingreso  \n" +
+                        "as fecha from ticket where CAST(hora_ingreso as date) = ? \n" +
+                        "group by hour(hora_salida), day(hora_salida)";*/
+        
+        String query ="select  hour(hora_salida) as 'Hora  Salida', sum(total) as total,hora_ingreso  \n" +
+                        "as 'Hora Ingreso' from ticket where hora_salida between SUBDATE(NOW(),1) and NOW() \n" +
+                        "group by hour(hora_salida), day(hora_salida)";
+        
+        try {
+            con.setPreparado(con.getConn().prepareStatement(query));
+            //con.getPreparado().setDate(1, new java.sql.Date(date.getTime()));
+            
+            res=con.getPreparado().executeQuery();
+            while(res.next()){
+                reporte_hora_fecha_beans par= new reporte_hora_fecha_beans(res.getInt(1),  res.getDouble(2),res.getTimestamp(3));
+                lista.add(par);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+     
+        return lista;
     }
+    
 }

@@ -18,7 +18,7 @@ public class descuento_modelo_combo {
         modelo = new DefaultComboBoxModel<>();
         descuento = new descuento_db();
         
-       lista = (LinkedList<descuento>) descuento.retornarLista();
+       lista = (LinkedList<descuento>) descuento.retornarListaHorario();
        descuento aux = new descuento();
        aux.setNombre_descuento("Seleccionar:");
        modelo.addElement(aux);
